@@ -10,17 +10,20 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
     <main class="main-area">
-        <h2>Pick your cereals</h2>
-        <button>Restart</button>
-        <button id="doneButton">Done</button>
-
         <div class="shelves">
             <div class="shelf" id="shelf-1"><div class="rail"></div></div>
             <div class="shelf" id="shelf-2"><div class="rail"></div></div>
             <div class="shelf" id="shelf-3"><div class="rail"></div></div>
         </div>
 
-        <div id="cart">
+        <aside>
+            <div id="menu1">
+                <h2>Pick your cereals</h2>
+                <div class="button-container">
+                    <button>Restart</button>
+                    <button id="doneButton">Done</button>
+                </div>
+            </div>
             <svg id="carrinho" xmlns="http://www.w3.org/2000/svg" width="783" height="375" viewBox="0 0 1383 975" fill="none">
                 <line x1="1209.49" y1="162.615" x2="1278.89" y2="107.93" stroke="black" stroke-width="29.8946"/>
                 <path d="M1137.33 734.429L1204.75 836.607" stroke="black" stroke-width="29.8946"/>
@@ -45,7 +48,7 @@
                 <ellipse cx="1109" cy="896.931" rx="74.4697" ry="72.8682" fill="black"/>
                 <ellipse cx="264.476" cy="896.931" rx="74.4697" ry="72.8682" fill="black"/>
             </svg>
-        </div>
+        </aside>
     </main>
 
     <script src="js/script.js"></script>
