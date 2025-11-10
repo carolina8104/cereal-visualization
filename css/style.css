@@ -1,5 +1,43 @@
+@font-face {
+  font-family: font;
+  src: url("../data/CEREAL KILLERZ.otf");
+}
+
+body {
+  font-family: Arial;
+  font-size: 3rem;
+}
+
 #carrinho{
     position: absolute;
     right:0%;
     bottom:0%;
+}
+
+.shelves{
+    width:720px;
+    max-width:72vw;
+}
+
+.shelf{
+    margin: 20vh 5vw;
+    background: black;
+    border-radius: 6px;
+    padding: 14px 24px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.rail{
+    position: absolute;
+    left: 0; 
+    right: 0; 
+    bottom: 16px;
+    height: 6px; 
+    background: #111;
+    transform: translateY(6px);
 }
