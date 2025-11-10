@@ -1,5 +1,26 @@
-#carrinho{
-    position: absolute;
-    right:0%;
-    bottom:0%;
+aside {
+    position: fixed; 
+    bottom: 0;
+    right: 0;
+}
+
+button{
+    background: none;
+    border-radius: 15px;
+    padding:0.5rem;
+}
+
+#menu1 {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 0.5rem; 
+    position:absolute;
+    bottom:60vh;
+    right:20vw;
+}
+
+#menu1 .button-container {
+    display: flex;   
+    gap: 1rem;       
 }
