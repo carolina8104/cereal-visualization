@@ -10,19 +10,19 @@ body {
 }
 
 .shelves{
-    width:720px;
+    width:80vw;
     max-width:72vw;
 }
 
 .shelf{
-    margin: 20vh 5vw;
-    background: black;
+    margin: 5vh 0vw;
+    background: rgba(152, 0, 0, 0);
     border-radius: 6px;
     padding: 14px 24px;
     position: relative;
     display: flex;
     align-items: flex-end;
-    gap: 8px;
+    gap: 2px;
     overflow-x: auto;
     scroll-behavior: smooth;
 }
@@ -64,3 +64,38 @@ button{
     gap: 1rem;       
 }
 
+.cereal {
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  border-radius:4px;
+  box-shadow:var(--card-shadow);
+  border:1px solid rgba(0,0,0,0.12);
+  background-color: rgb(97, 97, 217);
+  flex-shrink:0;
+  cursor:pointer;
+  transition: transform 300ms, box-shadow 200ms;
+  color:white;
+  overflow:visible;
+}
+
+.name-vertical{
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-weight:700;
+  font-size:12px;
+  padding:6px 2px;
+  white-space:nowrap;
+}
+
+.protein-bar{
+  position:absolute;
+  left:6px;
+  right:6px;
+  top:8px;
+  background:rgba(255,255,255,0.92);
+  border-radius:2px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12) inset;
+}
