@@ -8,6 +8,7 @@ body {
   font-family: Arial;
     overflow-x: hidden; 
     overflow-y: hidden; 
+    font-size: 3rem;
 }
 
 h2{
@@ -27,14 +28,14 @@ main {
 }
 
 .shelves {
-    width: 720px;               
-    max-width: 70vw;              
+    width:80vw;
+    max-width:72vw;            
     flex-shrink: 0;        
 }
 
 .shelf {
-    margin: 20vh 5vw;
-    background: black;
+    margin: 5vh 0vw;
+    background: rgba(152, 0, 0, 0);
     border-radius: 6px;
     padding: 14px 24px;
     position: relative;
