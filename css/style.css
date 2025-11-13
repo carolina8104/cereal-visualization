@@ -6,17 +6,35 @@
 
 body {
   font-family: Arial;
-  font-size: 3rem;
+    overflow-x: hidden; 
+    overflow-y: hidden; 
 }
 
-.shelves{
-    width:80vw;
-    max-width:72vw;
+h2{
+    font-size: 2.5rem;
 }
 
-.shelf{
-    margin: 5vh 0vw;
-    background: rgba(152, 0, 0, 0);
+button{
+    font-size: 1.5rem;
+}
+
+main {
+    display: flex;                
+    align-items: flex-start;      
+    gap: 2rem;                  
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.shelves {
+    width: 720px;               
+    max-width: 70vw;              
+    flex-shrink: 0;        
+}
+
+.shelf {
+    margin: 20vh 5vw;
+    background: black;
     border-radius: 6px;
     padding: 14px 24px;
     position: relative;
@@ -27,7 +45,7 @@ body {
     scroll-behavior: smooth;
 }
 
-.rail{
+.rail {
     position: absolute;
     left: 0; 
     right: 0; 
@@ -38,30 +56,37 @@ body {
 }
 
 aside {
-    position: fixed; 
-    bottom: 0;
-    right: 0;
-}
-
-button{
-    background: none;
-    border-radius: 15px;
-    padding:0.5rem;
-}
-
-#menu1 {
+    flex: 1;                    
+    height: 100vh;                 
     display: flex;
-    flex-direction: column; 
-    align-items: flex-start; 
-    gap: 0.5rem; 
-    position:absolute;
-    bottom:60vh;
-    right:20vw;
+    flex-direction: column;        
+    justify-content: space-between;
+    align-items: center;          
+    padding: 10vh 2vw;
+    box-sizing: border-box;
 }
 
-#menu1 .button-container {
-    display: flex;   
-    gap: 1rem;       
+h2 {
+    margin: 0;
+}
+
+.button-container {
+    display: flex;
+    gap: 3rem;
+    margin-left:4vh;
+    margin-top:1vw;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    background: none;
+    cursor: pointer;
+}
+
+#carrinho {
+    max-width: 100%;
+    height: auto;
 }
 
 .cereal {
