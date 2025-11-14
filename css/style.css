@@ -85,8 +85,9 @@ button {
 }
 
 #carrinho {
-    max-width: 100%;
+    max-width: 150%;
     height: auto;
+    z-index: 1;
 }
 
 .cereal {
@@ -137,6 +138,7 @@ button {
   justify-content: center;
   align-items: center;
   padding: 20px;
+  z-index: 2;
 }
 
 .modal-box {
@@ -146,8 +148,7 @@ button {
 
 .modal-title {
   font-size: 5rem;
-  text-align: center;
-  margin-bottom: 30px;
+  text-align: left;
 }
 
 .modal-columns {
@@ -163,6 +164,27 @@ button {
 #modalName {
   font-size: 5rem;
 }
+
+.modal-rating {
+  display: inline-block;
+  font-size: 3rem;
+}
+
+.modal-rating span {
+  display: inline-block;
+  position: relative;
+  width: 1em;
+  color: #ccc; 
+}
+
+.modal-rating span::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  overflow: hidden;
+  width: 0; /* será ajustado via JS */
+}
+
 
 .cereal-image-placeholder {
   width: 100%;

@@ -210,6 +210,30 @@ document.addEventListener("DOMContentLoaded", () => {
     cerealData = cerealData || {};
     modalName.textContent = cerealData.name || "Cereal";
 
+    const starsTotal = 10;
+const ratingPercent = safeNum(cerealData.rating); // ex: 68.4
+const starFraction = (ratingPercent / 100) * starsTotal; // ex: 6.84
+
+const modalRating = document.getElementById("modalRating");
+modalRating.innerHTML = ""; // limpa
+
+for (let i = 0; i < starsTotal; i++) {
+  const span = document.createElement("span");
+  let fill = Math.min(Math.max(starFraction - i, 0), 1); // 0 a 1
+  span.style.setProperty("--fill", fill); // guarda fração
+  modalRating.appendChild(span);
+}
+
+// Ajusta width da estrela cheia com JS
+modalRating.querySelectorAll("span").forEach((s, i) => {
+  const fill = Math.min(Math.max(starFraction - i, 0), 1);
+  s.querySelector?.("::before"); // não funciona via querySelector, então usamos inline style
+  s.style.setProperty("width", "1em");
+  s.style.setProperty("position", "relative");
+  s.innerHTML = `<span style="width:${fill*100}%; overflow:hidden; display:inline-block; position:absolute; color:black;">★</span>★`;
+});
+
+
     // Dados por dose (os valores do dataset)
     const dose = {
       calories: safeNum(cerealData.calories),
@@ -305,3 +329,4 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === modal) modal.style.display = "none";
   });
 });
+
