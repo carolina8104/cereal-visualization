@@ -153,30 +153,155 @@ function applyFiltersAndRender(){
           return `rgba(${c.r}, ${c.g}, ${c.b}, ${alpha})`;
       })
 
-
-
-
-    merged.select(".protein-bar")
+      merged.select(".protein-bar")
       .transition().duration(300)
       .style("height", d => proteinScale(d.protein) + "px")
       .style("background", d => {
       const c = brandColors_bar[d.mfr]; 
       return `rgba(${c.r}, ${c.g}, ${c.b}, 1)`; 
-  });
+      });
 
       merged.select(".name-vertical")
       .style("color", d => {
-          const c = brandColors_bar[d.mfr]; 
-          return `rgba(${c.r}, ${c.g}, ${c.b}, 1)`; 
+      const c = brandColors_bar[d.mfr]; 
+      return `rgba(${c.r}, ${c.g}, ${c.b}, 1)`; 
+      });
+    
+      merged.on("click", (event, d) => {
+        openModal(d);
       });
 
-
   })
-
-
-  renderSelectedList()
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("cerealModal");
+  const modalClose = document.getElementById("modalClose");
+  const modalCloseButton = document.getElementById("modalCloseButton");
+  const modalName = document.getElementById("modalName");
+  const modalNutrition = document.getElementById("modalNutrition");
 
+  if (!modal || !modalNutrition || !modalName) {
+    console.error("Modal elements not found. Verifica os IDs: cerealModal, modalNutrition, modalName.");
+    return;
+  }
 
+  function safeNum(v) {
+    const n = Number(v);
+    return Number.isFinite(n) ? n : 0;
+  }
 
+  function format(v) {
+    // mostra inteiro quando >=1, uma casa decimal quando <1
+    return (Math.abs(v) >= 1) ? Math.round(v) : Math.round(v * 10) / 10;
+  }
+
+  function nutritionRow(name, per100g, perDose) {
+    return `
+      <div class="row">
+        <span class="label">${name}</span>
+        <span class="value">${per100g}</span>
+        <span class="value">${perDose}</span>
+      </div>`;
+  }
+
+  function openModal(cerealData) {
+    // defensivas
+    cerealData = cerealData || {};
+    modalName.textContent = cerealData.name || "Cereal";
+
+    // Dados por dose (os valores do dataset)
+    const dose = {
+      calories: safeNum(cerealData.calories),
+      protein: safeNum(cerealData.protein),
+      fat: safeNum(cerealData.fat),
+      sodium: safeNum(cerealData.sodium),
+      fiber: safeNum(cerealData.fiber),
+      carbs: safeNum(cerealData.carbo),
+      sugars: safeNum(cerealData.sugars),
+      potass: safeNum(cerealData.potass),
+      vitamins: safeNum(cerealData.vitamins)
+    };
+
+    // Determina gramos por dose:
+    // dataset de cereais costuma usar "weight" em ounces por serving.
+    let servingGrams = 0;
+    if (cerealData.weight) {
+      servingGrams = safeNum(cerealData.weight) * 28.3495; // oz -> g
+    } else if (cerealData.cups) {
+      // fallback: tenta inferir (assume 1 cup ~ 240 g) — APENAS fallback
+      servingGrams = parseFloat(cerealData.cups) * 240;
+      console.warn("weight ausente: inferido servingGrams a partir de cups (fallback).");
+    } else {
+      // default: 30g
+      servingGrams = 30;
+      console.warn("weight e cups ausentes: usado fallback 30g por serving.");
+    }
+
+    // factor para converter valores por dose -> por 100g
+    const factor = 100 / servingGrams;
+
+    // calcula per100g com formatação
+    const per100g = {};
+    for (let k in dose) {
+      per100g[k] = format(dose[k] * factor) + (k === "sodium" || k === "potass" ? (dose[k] ? " mg" : "") : "");
+    }
+
+    // prepara strings por dose (com unidades)
+    const doseStrings = {
+      calories: format(dose.calories) + " kcal",
+      fat: format(dose.fat) + " g",
+      carbs: format(dose.carbs) + " g",
+      sugars: format(dose.sugars) + " g",
+      fiber: format(dose.fiber) + " g",
+      protein: format(dose.protein) + " g",
+      sodium: format(dose.sodium) + " mg",
+      potass: format(dose.potass) + " mg",
+      vitamins: format(dose.vitamins)
+    };
+
+    // monta HTML (duas colunas: Per 100g | Per Dose)
+    modalNutrition.innerHTML = `
+      <div class="nutrition-facts">
+        <h2>Nutrition Facts</h2>
+        <p class="serving">Serving Size: ${cerealData.cups} cups (${Math.round(cerealData.weight * 28.35)} g)</p>
+        <div class="line thick"></div>
+
+        <div class="row header">
+          <span class="label"></span>
+          <span class="value">Per 100g</span>
+          <span class="value">Per Dose</span>
+        </div>
+
+        ${nutritionRow("Calories", per100g.calories ? per100g.calories + " kcal" : "0 kcal", doseStrings.calories)}
+        ${nutritionRow("Total Fat", per100g.fat ? per100g.fat : "0 g", doseStrings.fat)}
+        ${nutritionRow("Carbohydrates", per100g.carbs ? per100g.carbs : "0 g", doseStrings.carbs)}
+        ${nutritionRow("Sugars", per100g.sugars ? per100g.sugars : "0 g", doseStrings.sugars)}
+        ${nutritionRow("Fiber", per100g.fiber ? per100g.fiber : "0 g", doseStrings.fiber)}
+        ${nutritionRow("Protein", per100g.protein ? per100g.protein : "0 g", doseStrings.protein)}
+        ${nutritionRow("Sodium", per100g.sodium ? per100g.sodium : "0 mg", doseStrings.sodium)}
+        ${nutritionRow("Potassium", per100g.potass ? per100g.potass : "0 mg", doseStrings.potass)}
+        ${nutritionRow("Vitamins", per100g.vitamins ? per100g.vitamins : "0", doseStrings.vitamins)}
+
+        <div class="line thick"></div>
+        <p class="note">
+          *Percent Daily Values are based on a 2,000 calorie diet.
+        </p>
+      </div>
+    `;
+
+    // mostra modal (assegura que existe estilo para display flex)
+    modal.style.display = "flex";
+  }
+
+  // expos para uso externo (ex: chamar no console)
+  window.openModal = openModal;
+
+  // handlers de fechar (seguro: só atribui se os elementos existem)
+  if (modalClose) modalClose.onclick = () => modal.style.display = "none";
+  if (modalCloseButton) modalCloseButton.onclick = () => modal.style.display = "none";
+
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) modal.style.display = "none";
+  });
+});
