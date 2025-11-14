@@ -175,6 +175,7 @@ button {
   position: relative;
   width: 1em;
   color: #ccc; 
+  margin-bottom:2.5vh;
 }
 
 .modal-rating span::before {

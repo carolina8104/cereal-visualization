@@ -316,13 +316,31 @@ modalRating.querySelectorAll("span").forEach((s, i) => {
 
     // mostra modal (assegura que existe estilo para display flex)
     modal.style.display = "flex";
+
+    const yesButton = modal.querySelector(".yes");
+  if (yesButton) {
+    yesButton.onclick = () => {
+      let savedCereals = JSON.parse(localStorage.getItem("savedCereals")) || [];
+
+      // evita duplicados
+      if (!savedCereals.some(c => c.name === cerealData.name)) {
+        savedCereals.unshift(cerealData);
+      }
+
+      // mantém no máximo 5 cereais
+      savedCereals = savedCereals.slice(0, 5);
+
+      localStorage.setItem("savedCereals", JSON.stringify(savedCereals));
+
+      modal.style.display = "none";
+      console.log("Cereais guardados:", savedCereals);
+    };
+  } 
   }
 
-  // expos para uso externo (ex: chamar no console)
   window.openModal = openModal;
 
-  // handlers de fechar (seguro: só atribui se os elementos existem)
-  if (modalClose) modalClose.onclick = () => modal.style.display = "none";
+    if (modalClose) modalClose.onclick = () => modal.style.display = "none";
   if (modalCloseButton) modalCloseButton.onclick = () => modal.style.display = "none";
 
   window.addEventListener("click", (e) => {
@@ -330,3 +348,12 @@ modalRating.querySelectorAll("span").forEach((s, i) => {
   });
 });
 
+
+
+const restartButton = document.querySelector("#menu1 .button-container button");
+if (restartButton) {
+  restartButton.onclick = () => {
+    localStorage.setItem("savedCereals", JSON.stringify([]));
+    console.log("Cereais reiniciados: []");
+  };
+}
