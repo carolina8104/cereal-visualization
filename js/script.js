@@ -25,6 +25,26 @@ const shelf = {
   3: d3.select("#shelf-3")
 }
 
+const brandColors = { 
+"A": {r:150, g:250, b:100},  
+"G": {r:70, g:100, b:194}, 
+"K": {r:218, g:53, b:53},  
+"N": {r:214, g:110, b:19},  
+"P": {r:153, g:110, b:254}, 
+"Q": {r:240, g:203, b:16},  
+"R": {r:196, g:129, b:222},  
+};
+
+const brandColors_bar = {
+"A": {r:245, g:209, b:209},
+"G": {r:245, g:209, b:209},
+"K": {r:245, g:209, b:209},
+"N": {r:12, g:33, b:171},
+"P": {r:245, g:209, b:209},
+"Q": {r:69, g:44, b:10},
+"R": {r:245, g:209, b:209},
+};
+
 const calValueEl = d3.select("#cal-value")
 const sugarValueEl = d3.select("#sugar-value")
 const proteinValueEl = d3.select("#protein-value")
@@ -37,8 +57,8 @@ d3.json(DATA_PATH).then(arr => {
 
   const kcalMax = d3.max(data, d => d.calories) || 500
   filters.kcalMax = Math.round(kcalMax)
-  filters.sugarMax = Math.ceil(d3.median(data, d => d.sugar) || 10)
-  filters.proteinMax = Math.ceil(d3.median(data, d => d.protein) || 6)
+  filters.sugarMax = d3.max(data, d => d.sugars);
+filters.proteinMax = d3.max(data, d => d.protein);
 
   initScales()
   applyFiltersAndRender()
@@ -47,17 +67,17 @@ d3.json(DATA_PATH).then(arr => {
 function initScales(){
   const kcalExtent = d3.extent(data, d => d.calories)
   const fatExtent = d3.extent(data, d => d.fat)
-  const sugarExtent = d3.extent(data, d => d.sugar)
+  const sugarExtent = d3.extent(data, d => d.sugars)
   const proteinExtent = d3.extent(data, d => d.protein)
 
   heightScale = d3.scaleLinear()
     .domain(kcalExtent)
-    .range([70, 250]) 
+    .range([55, 200]) 
     .clamp(true)
 
   widthScale = d3.scaleLinear()
     .domain(fatExtent)
-    .range([20, 60])
+    .range([20, 55])
     .clamp(true)
 
   sugarColorScale = d3.scaleLinear()
@@ -74,7 +94,7 @@ function applyFiltersAndRender(){
 
   let filtered = data.filter(d => {
     if (d.calories > filters.kcalMax) return false
-    if (d.sugar > filters.sugarMax) return false
+    if (d.sugars > filters.sugarMax) return false
     if (d.protein > filters.proteinMax) return false
     if (d.carbs > filters.carbsMax) return false
     if (d.fat > filters.fatMax) return false
@@ -119,14 +139,40 @@ function applyFiltersAndRender(){
       .style("height", d => heightScale(d.calories) + "px") 
       .style("width", d => widthScale(d.fat) + "px")
       .style("background", d => {
-        const light = sugarColorScale(d.sugar)
-        return `hsl(15 80% ${light}%)`
+          const c = brandColors[d.mfr];
+
+          // alpha entre 0.7 (pouco açúcar) e 1 (muito açúcar)
+          const minAlpha = 0.6;
+          const maxAlpha = 1;
+
+          // normaliza sugars entre 0 e 1 usando o máximo da escala
+          const normalized = d.sugars / sugarColorScale.domain()[1];
+
+          const alpha = minAlpha + (maxAlpha - minAlpha) * normalized;
+
+          return `rgba(${c.r}, ${c.g}, ${c.b}, ${alpha})`;
       })
+
+
+
 
     merged.select(".protein-bar")
       .transition().duration(300)
       .style("height", d => proteinScale(d.protein) + "px")
+      .style("background", d => {
+      const c = brandColors_bar[d.mfr]; 
+      return `rgba(${c.r}, ${c.g}, ${c.b}, 1)`; 
+  });
+
+      merged.select(".name-vertical")
+      .style("color", d => {
+          const c = brandColors_bar[d.mfr]; 
+          return `rgba(${c.r}, ${c.g}, ${c.b}, 1)`; 
+      });
+
+
   })
+
 
   renderSelectedList()
 }

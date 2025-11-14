@@ -9,6 +9,7 @@ body {
     overflow-x: hidden; 
     overflow-y: hidden; 
     font-size: 3rem;
+    background-color: #DAEFFA;
 }
 
 h2{
@@ -23,13 +24,12 @@ main {
     display: flex;                
     align-items: flex-start;      
     gap: 2rem;                  
-    padding: 20px;
     box-sizing: border-box;
 }
 
 .shelves {
     width:80vw;
-    max-width:72vw;            
+    max-width:76vw;            
     flex-shrink: 0;        
 }
 
@@ -37,11 +37,10 @@ main {
     margin: 5vh 0vw;
     background: rgba(152, 0, 0, 0);
     border-radius: 6px;
-    padding: 14px 24px;
+    padding: 13px 10px;
     position: relative;
     display: flex;
     align-items: flex-end;
-    gap: 2px;
     overflow-x: auto;
     scroll-behavior: smooth;
 }
@@ -51,7 +50,7 @@ main {
     left: 0; 
     right: 0; 
     bottom: 16px;
-    height: 6px; 
+    height: 3px; 
     background: #111;
     transform: translateY(6px);
 }
@@ -95,7 +94,6 @@ button {
   display:flex;
   align-items:flex-end;
   justify-content:center;
-  border-radius:4px;
   box-shadow:var(--card-shadow);
   border:1px solid rgba(0,0,0,0.12);
   background-color: rgb(97, 97, 217);
@@ -109,19 +107,16 @@ button {
 .name-vertical{
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  transform: rotate(180deg);
   font-weight:700;
   font-size:12px;
   padding:6px 2px;
   white-space:nowrap;
 }
 
-.protein-bar{
-  position:absolute;
-  left:6px;
-  right:6px;
-  top:8px;
-  background:rgba(255,255,255,0.92);
-  border-radius:2px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.12) inset;
+.protein-bar {
+  position: absolute;
+  left: 0;
+  right: 0;  
+  top: 8px;
+  height: 10px;  
 }
