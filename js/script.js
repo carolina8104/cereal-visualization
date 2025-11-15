@@ -1,7 +1,3 @@
-document.getElementById("doneButton").addEventListener("click", function() {
-  window.location.href = "bowl.html";
-})
-
 const DATA_PATH = "../data/data.json"
 let data = []
 let heightScale, widthScale, sugarColorScale, proteinScale
@@ -357,3 +353,23 @@ if (restartButton) {
     console.log("Cereais reiniciados: []");
   };
 }
+
+document.getElementById("doneButton").addEventListener("click", function() {
+  const savedCereals = JSON.parse(localStorage.getItem("savedCereals")) || [];
+  
+  let messageEl = document.getElementById("doneMessage");
+  if (!messageEl) {
+    messageEl = document.createElement("p");
+    messageEl.id = "doneMessage";
+    document.getElementById("menu1").appendChild(messageEl);
+  }
+
+  if (savedCereals.length === 0) {
+    messageEl.textContent = "First add some cereals to cart";
+    messageEl.style.display = "block";
+  } else {
+    messageEl.style.display = "none"; 
+    window.location.href = "bowl.html"; 
+  }
+});
+
