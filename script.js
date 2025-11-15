@@ -2,7 +2,7 @@ const DATA_PATH = "../data/data.json"
 let data = []
 let heightScale, widthScale, sugarColorScale, proteinScale
 
-let selected = new Set();
+let selected = new Set()
 
 const filters = {
   kcalMax: 600,
@@ -13,7 +13,7 @@ const filters = {
   fibreMax: 10,
   brand: "all",
   order: "none"
-};
+}
 
 const shelf = {
   1: d3.select("#shelf-1"),
@@ -29,7 +29,7 @@ const brandColors = {
 "P": {r:153, g:110, b:254}, 
 "Q": {r:240, g:203, b:16},  
 "R": {r:196, g:129, b:222},  
-};
+}
 
 const brandColors_bar = {
 "A": {r:245, g:209, b:209},
@@ -39,7 +39,7 @@ const brandColors_bar = {
 "P": {r:245, g:209, b:209},
 "Q": {r:69, g:44, b:10},
 "R": {r:245, g:209, b:209},
-};
+}
 
 const calValueEl = d3.select("#cal-value")
 const sugarValueEl = d3.select("#sugar-value")
@@ -53,8 +53,8 @@ d3.json(DATA_PATH).then(arr => {
 
   const kcalMax = d3.max(data, d => d.calories) || 500
   filters.kcalMax = Math.round(kcalMax)
-  filters.sugarMax = d3.max(data, d => d.sugars);
-filters.proteinMax = d3.max(data, d => d.protein);
+  filters.sugarMax = d3.max(data, d => d.sugars)
+  filters.proteinMax = d3.max(data, d => d.protein)
 
   initScales()
   applyFiltersAndRender()
@@ -79,13 +79,14 @@ function initScales(){
   sugarColorScale = d3.scaleLinear()
     .domain(sugarExtent)
     .range([70, 30]) 
-    .clamp(true);
+    .clamp(true)
 
   proteinScale = d3.scaleLinear()
     .domain(proteinExtent)
     .range([3, 14]) 
     .clamp(true)
 }
+
 function applyFiltersAndRender(){
 
   let filtered = data.filter(d => {
@@ -111,23 +112,23 @@ function applyFiltersAndRender(){
 
   [1,2,3].forEach(shelfNum => {
 
-    const shelfData = filtered.filter(d => d.shelf === shelfNum);
+    const shelfData = filtered.filter(d => d.shelf === shelfNum)
 
     const sel = shelf[shelfNum] 
       .selectAll(".cereal")
-      .data(shelfData, d => d.id);
+      .data(shelfData, d => d.id)
 
-    sel.exit().remove();
+    sel.exit().remove()
 
     const enter = sel.enter()
       .append("div")
       .attr("class", "cereal")
-      .style("opacity", 0);
+      .style("opacity", 0)
 
     enter.append("div").attr("class", "protein-bar");
-    enter.append("div").attr("class", "name-vertical").text(d => d.name);
+    enter.append("div").attr("class", "name-vertical").text(d => d.name)
 
-    const merged = enter.merge(sel);
+    const merged = enter.merge(sel)
 
     merged.transition()
       .duration(450)
@@ -135,61 +136,61 @@ function applyFiltersAndRender(){
       .style("height", d => heightScale(d.calories) + "px") 
       .style("width", d => widthScale(d.fat) + "px")
       .style("background", d => {
-          const c = brandColors[d.mfr];
+          const c = brandColors[d.mfr]
 
           // alpha entre 0.7 (pouco açúcar) e 1 (muito açúcar)
-          const minAlpha = 0.6;
-          const maxAlpha = 1;
+          const minAlpha = 0.6
+          const maxAlpha = 1
 
           // normaliza sugars entre 0 e 1 usando o máximo da escala
-          const normalized = d.sugars / sugarColorScale.domain()[1];
+          const normalized = d.sugars / sugarColorScale.domain()[1]
 
-          const alpha = minAlpha + (maxAlpha - minAlpha) * normalized;
+          const alpha = minAlpha + (maxAlpha - minAlpha) * normalized
 
-          return `rgba(${c.r}, ${c.g}, ${c.b}, ${alpha})`;
+          return `rgba(${c.r}, ${c.g}, ${c.b}, ${alpha})`
       })
 
       merged.select(".protein-bar")
       .transition().duration(300)
       .style("height", d => proteinScale(d.protein) + "px")
       .style("background", d => {
-      const c = brandColors_bar[d.mfr]; 
-      return `rgba(${c.r}, ${c.g}, ${c.b}, 1)`; 
-      });
+      const c = brandColors_bar[d.mfr]
+      return `rgba(${c.r}, ${c.g}, ${c.b}, 1)`
+      })
 
       merged.select(".name-vertical")
       .style("color", d => {
-      const c = brandColors_bar[d.mfr]; 
-      return `rgba(${c.r}, ${c.g}, ${c.b}, 1)`; 
-      });
+      const c = brandColors_bar[d.mfr] 
+      return `rgba(${c.r}, ${c.g}, ${c.b}, 1)`
+      })
     
       merged.on("click", (event, d) => {
-        openModal(d);
-      });
+        openModal(d)
+      })
 
   })
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const modal = document.getElementById("cerealModal");
-  const modalClose = document.getElementById("modalClose");
-  const modalCloseButton = document.getElementById("modalCloseButton");
-  const modalName = document.getElementById("modalName");
-  const modalNutrition = document.getElementById("modalNutrition");
+  const modal = document.getElementById("cerealModal")
+  const modalClose = document.getElementById("modalClose")
+  const modalCloseButton = document.getElementById("modalCloseButton")
+  const modalName = document.getElementById("modalName")
+  const modalNutrition = document.getElementById("modalNutrition")
 
   if (!modal || !modalNutrition || !modalName) {
-    console.error("Modal elements not found. Verifica os IDs: cerealModal, modalNutrition, modalName.");
+    console.error("Modal elements not found. Verifica os IDs: cerealModal, modalNutrition, modalName.")
     return;
   }
 
   function safeNum(v) {
-    const n = Number(v);
-    return Number.isFinite(n) ? n : 0;
+    const n = Number(v)
+    return Number.isFinite(n) ? n : 0
   }
 
   function format(v) {
     // mostra inteiro quando >=1, uma casa decimal quando <1
-    return (Math.abs(v) >= 1) ? Math.round(v) : Math.round(v * 10) / 10;
+    return (Math.abs(v) >= 1) ? Math.round(v) : Math.round(v * 10) / 10
   }
 
   function nutritionRow(name, per100g, perDose) {
@@ -198,37 +199,36 @@ document.addEventListener("DOMContentLoaded", () => {
         <span class="label">${name}</span>
         <span class="value">${per100g}</span>
         <span class="value">${perDose}</span>
-      </div>`;
+      </div>`
   }
 
   function openModal(cerealData) {
     // defensivas
-    cerealData = cerealData || {};
-    modalName.textContent = cerealData.name || "Cereal";
+    cerealData = cerealData || {}
+    modalName.textContent = cerealData.name || "Cereal"
 
-    const starsTotal = 10;
-const ratingPercent = safeNum(cerealData.rating); // ex: 68.4
-const starFraction = (ratingPercent / 100) * starsTotal; // ex: 6.84
+const starsTotal = 10;
+const ratingPercent = safeNum(cerealData.rating) // ex: 68.4
+const starFraction = (ratingPercent / 100) * starsTotal // ex: 6.84
 
-const modalRating = document.getElementById("modalRating");
-modalRating.innerHTML = ""; // limpa
+const modalRating = document.getElementById("modalRating")
+modalRating.innerHTML = "" // limpa
 
 for (let i = 0; i < starsTotal; i++) {
-  const span = document.createElement("span");
-  let fill = Math.min(Math.max(starFraction - i, 0), 1); // 0 a 1
-  span.style.setProperty("--fill", fill); // guarda fração
-  modalRating.appendChild(span);
+  const span = document.createElement("span")
+  let fill = Math.min(Math.max(starFraction - i, 0), 1) // 0 a 1
+  span.style.setProperty("--fill", fill) // guarda fração
+  modalRating.appendChild(span)
 }
 
 // Ajusta width da estrela cheia com JS
 modalRating.querySelectorAll("span").forEach((s, i) => {
-  const fill = Math.min(Math.max(starFraction - i, 0), 1);
-  s.querySelector?.("::before"); // não funciona via querySelector, então usamos inline style
-  s.style.setProperty("width", "1em");
-  s.style.setProperty("position", "relative");
-  s.innerHTML = `<span style="width:${fill*100}%; overflow:hidden; display:inline-block; position:absolute; color:black;">★</span>★`;
-});
-
+  const fill = Math.min(Math.max(starFraction - i, 0), 1)
+  s.querySelector?.("::before") // não funciona via querySelector, então usamos inline style
+  s.style.setProperty("width", "1em")
+  s.style.setProperty("position", "relative")
+  s.innerHTML = `<span style="width:${fill*100}%; overflow:hidden; display:inline-block; position:absolute; color:black;">★</span>★`
+})
 
     // Dados por dose (os valores do dataset)
     const dose = {
@@ -241,30 +241,30 @@ modalRating.querySelectorAll("span").forEach((s, i) => {
       sugars: safeNum(cerealData.sugars),
       potass: safeNum(cerealData.potass),
       vitamins: safeNum(cerealData.vitamins)
-    };
+    }
 
     // Determina gramos por dose:
     // dataset de cereais costuma usar "weight" em ounces por serving.
-    let servingGrams = 0;
+    let servingGrams = 0
     if (cerealData.weight) {
-      servingGrams = safeNum(cerealData.weight) * 28.3495; // oz -> g
+      servingGrams = safeNum(cerealData.weight) * 28.3495 // oz -> g
     } else if (cerealData.cups) {
       // fallback: tenta inferir (assume 1 cup ~ 240 g) — APENAS fallback
-      servingGrams = parseFloat(cerealData.cups) * 240;
-      console.warn("weight ausente: inferido servingGrams a partir de cups (fallback).");
+      servingGrams = parseFloat(cerealData.cups) * 240
+      console.warn("weight ausente: inferido servingGrams a partir de cups (fallback).")
     } else {
       // default: 30g
-      servingGrams = 30;
-      console.warn("weight e cups ausentes: usado fallback 30g por serving.");
+      servingGrams = 30
+      console.warn("weight e cups ausentes: usado fallback 30g por serving.")
     }
 
     // factor para converter valores por dose -> por 100g
-    const factor = 100 / servingGrams;
+    const factor = 100 / servingGrams
 
     // calcula per100g com formatação
-    const per100g = {};
+    const per100g = {}
     for (let k in dose) {
-      per100g[k] = format(dose[k] * factor) + (k === "sodium" || k === "potass" ? (dose[k] ? " mg" : "") : "");
+      per100g[k] = format(dose[k] * factor) + (k === "sodium" || k === "potass" ? (dose[k] ? " mg" : "") : "")
     }
 
     // prepara strings por dose (com unidades)
@@ -307,125 +307,123 @@ modalRating.querySelectorAll("span").forEach((s, i) => {
         <p class="note">
           *Percent Daily Values are based on a 2,000 calorie diet.
         </p>
-      </div>
-    `;
+      </div>`
 
     // mostra modal (assegura que existe estilo para display flex)
-    modal.style.display = "flex";
+    modal.style.display = "flex"
 
-    const yesButton = modal.querySelector(".yes");
+    const yesButton = modal.querySelector(".yes")
 if (yesButton) {
   yesButton.onclick = () => {
-    let savedCereals = JSON.parse(localStorage.getItem("savedCereals")) || [];
+    let savedCereals = JSON.parse(localStorage.getItem("savedCereals")) || []
 
     if (savedCereals.length >= 5) {
-      let maxMessage = document.getElementById("maxCerealMessage");
+      let maxMessage = document.getElementById("maxCerealMessage")
       if (!maxMessage) {
-        maxMessage = document.createElement("p");
-        maxMessage.id = "maxCerealMessage";
-        document.getElementById("menu1").appendChild(maxMessage);
+        maxMessage = document.createElement("p")
+        maxMessage.id = "maxCerealMessage"
+        document.getElementById("menu1").appendChild(maxMessage)
       }
-      maxMessage.textContent = "You can only add up to 5 cereals!";
-      maxMessage.style.display = "block";
+      maxMessage.textContent = "You can only add up to 5 cereals!"
+      maxMessage.style.display = "block"
       return; // não adiciona o cereal
     } else {
       const maxMessage = document.getElementById("maxCerealMessage");
-      if (maxMessage) maxMessage.style.display = "none";
+      if (maxMessage) maxMessage.style.display = "none"
     }
 
     if (!savedCereals.some(c => c.name === cerealData.name)) {
-      savedCereals.unshift(cerealData);
+      savedCereals.unshift(cerealData)
     }
 
-    localStorage.setItem("savedCereals", JSON.stringify(savedCereals));
+    localStorage.setItem("savedCereals", JSON.stringify(savedCereals))
 
-    modal.style.display = "none";
-    console.log("Cereais guardados:", savedCereals);
-    updateCartSummary();
-  };
+    modal.style.display = "none"
+    console.log("Cereais guardados:", savedCereals)
+    updateCartSummary()
+  }
 }
   }
 
-  window.openModal = openModal;
+  window.openModal = openModal
 
-    if (modalClose) modalClose.onclick = () => modal.style.display = "none";
-  if (modalCloseButton) modalCloseButton.onclick = () => modal.style.display = "none";
+  if (modalClose) modalClose.onclick = () => modal.style.display = "none"
+  if (modalCloseButton) modalCloseButton.onclick = () => modal.style.display = "none"
 
   window.addEventListener("click", (e) => {
-    if (e.target === modal) modal.style.display = "none";
-  });
-});
+    if (e.target === modal) modal.style.display = "none"
+  })
+})
 
 
 
-const restartButton = document.querySelector("#menu1 .button-container button");
+const restartButton = document.querySelector("#menu1 .button-container button")
 if (restartButton) {
   restartButton.onclick = () => {
-    localStorage.setItem("savedCereals", JSON.stringify([]));
-    console.log("Cereais reiniciados: []");
+    localStorage.setItem("savedCereals", JSON.stringify([]))
+    console.log("Cereais reiniciados: []")
     updateCartSummary()
-  };
+  }
 }
 
 document.getElementById("doneButton").addEventListener("click", function() {
-  const savedCereals = JSON.parse(localStorage.getItem("savedCereals")) || [];
+  const savedCereals = JSON.parse(localStorage.getItem("savedCereals")) || []
   
-  let messageEl = document.getElementById("doneMessage");
+  let messageEl = document.getElementById("doneMessage")
   if (!messageEl) {
-    messageEl = document.createElement("p");
-    messageEl.id = "doneMessage";
-    document.getElementById("menu1").appendChild(messageEl);
+    messageEl = document.createElement("p")
+    messageEl.id = "doneMessage"
+    document.getElementById("menu1").appendChild(messageEl)
   }
 
   if (savedCereals.length === 0) {
     messageEl.textContent = "First add some cereals to cart";
-    messageEl.style.display = "block";
+    messageEl.style.display = "block"
   } else {
-    messageEl.style.display = "none"; 
+    messageEl.style.display = "none"
     
     const carrinho = document.getElementById("carrinho");
-    carrinho.style.position = "fixed";
-    carrinho.style.left = "0vh";
-    carrinho.style.transition = "all 2s ease"; 
+    carrinho.style.position = "fixed"
+    carrinho.style.left = "0vh"
+    carrinho.style.transition = "all 2s ease"
 
-    carrinho.getBoundingClientRect();
+    carrinho.getBoundingClientRect()
 
-    carrinho.style.right = "90%"; 
+    carrinho.style.right = "90%"
 
     setTimeout(() => {
-      window.location.href = "bowl.html";
-    }, 1000);
+      window.location.href = "bowl.html"
+    }, 1000)
   }
-});
-
+})
 
 
 function updateCartSummary() {
-  const savedCereals = JSON.parse(localStorage.getItem("savedCereals")) || [];
+  const savedCereals = JSON.parse(localStorage.getItem("savedCereals")) || []
 
-  let summaryEl = document.getElementById("cartSummary");
+  let summaryEl = document.getElementById("cartSummary")
   if (!summaryEl) {
-    summaryEl = document.createElement("div");
-    summaryEl.id = "cartSummary";
-    summaryEl.style.fontSize = "15px";
-    document.getElementById("menu1").appendChild(summaryEl);
+    summaryEl = document.createElement("div")
+    summaryEl.id = "cartSummary"
+    summaryEl.style.fontSize = "15px"
+    document.getElementById("menu1").appendChild(summaryEl)
   }
 
   if (savedCereals.length === 0) {
-    summaryEl.textContent = "Your cart is empty";
-    return;
+    summaryEl.textContent = "Your cart is empty"
+    return
   }
-  const counts = {};
+  const counts = {}
   savedCereals.forEach(c => {
-    counts[c.name] = (counts[c.name] || 0) + 1;
-  });
+    counts[c.name] = (counts[c.name] || 0) + 1
+  })
 
-  let msg = `There are ${savedCereals.length} cereal box${savedCereals.length > 1 ? "es" : ""} in your cart:\n`;
+  let msg = `There are ${savedCereals.length} cereal box${savedCereals.length > 1 ? "es" : ""} in your cart:\n`
   Object.entries(counts).forEach(([name, qty]) => {
-    msg += `- ${name} \n`;
-  });
+    msg += `- ${name} \n`
+  })
 
-  summaryEl.innerText = msg;
+  summaryEl.innerText = msg
 }
 
-updateCartSummary();
+updateCartSummary()

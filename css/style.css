@@ -29,11 +29,12 @@ main {
 
 .shelves {
     width:80vw;
-    max-width:76vw;            
+    max-width:76vw;          
     flex-shrink: 0;        
 }
 
 .shelf {
+    height: 23vh;
     margin: 5vh 0vw;
     background: rgba(152, 0, 0, 0);
     border-radius: 6px;
@@ -126,10 +127,10 @@ button {
 }
 
 .cereal:hover {
-    transform: translateY(-20px);
+    transform: translateY(-10px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
-/* --- MODAL BASE --- */
+
 .modal {
   display: none; 
   position: fixed;
@@ -146,7 +147,7 @@ button {
 
 .modal-box {
   display: flex;
-  flex-direction: column; /* Agora título em cima, colunas em baixo */
+  flex-direction: column; 
 }
 
 .modal-title {
@@ -186,9 +187,7 @@ button {
   position: absolute;
   left: 0;
   overflow: hidden;
-  width: 0; /* será ajustado via JS */
 }
-
 
 .cereal-image-placeholder {
   width: 100%;
@@ -294,4 +293,18 @@ button {
 .note {
   font-size: 0.75rem;
   margin-top: 6px;
+}
+
+/*---------------------------// Caixa ao lado do rotulo  //---------*/
+.cereal-box-container {
+    position: relative;
+    width: 200px;
+    height: 250px;
+    margin: 20px auto;
+    perspective: 600px;
+}
+
+.cereal-box-container svg{
+  scale: 0.15;
+  margin: -155vh -45vw;
 }
