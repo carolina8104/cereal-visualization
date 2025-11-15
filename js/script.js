@@ -314,24 +314,36 @@ modalRating.querySelectorAll("span").forEach((s, i) => {
     modal.style.display = "flex";
 
     const yesButton = modal.querySelector(".yes");
-  if (yesButton) {
-    yesButton.onclick = () => {
-      let savedCereals = JSON.parse(localStorage.getItem("savedCereals")) || [];
+if (yesButton) {
+  yesButton.onclick = () => {
+    let savedCereals = JSON.parse(localStorage.getItem("savedCereals")) || [];
 
-      // evita duplicados
-      if (!savedCereals.some(c => c.name === cerealData.name)) {
-        savedCereals.unshift(cerealData);
+    if (savedCereals.length >= 5) {
+      let maxMessage = document.getElementById("maxCerealMessage");
+      if (!maxMessage) {
+        maxMessage = document.createElement("p");
+        maxMessage.id = "maxCerealMessage";
+        document.getElementById("menu1").appendChild(maxMessage);
       }
+      maxMessage.textContent = "You can only add up to 5 cereals!";
+      maxMessage.style.display = "block";
+      return; // não adiciona o cereal
+    } else {
+      const maxMessage = document.getElementById("maxCerealMessage");
+      if (maxMessage) maxMessage.style.display = "none";
+    }
 
-      // mantém no máximo 5 cereais
-      savedCereals = savedCereals.slice(0, 5);
+    if (!savedCereals.some(c => c.name === cerealData.name)) {
+      savedCereals.unshift(cerealData);
+    }
 
-      localStorage.setItem("savedCereals", JSON.stringify(savedCereals));
+    localStorage.setItem("savedCereals", JSON.stringify(savedCereals));
 
-      modal.style.display = "none";
-      console.log("Cereais guardados:", savedCereals);
-    };
-  } 
+    modal.style.display = "none";
+    console.log("Cereais guardados:", savedCereals);
+    updateCartSummary();
+  };
+}
   }
 
   window.openModal = openModal;
@@ -351,6 +363,7 @@ if (restartButton) {
   restartButton.onclick = () => {
     localStorage.setItem("savedCereals", JSON.stringify([]));
     console.log("Cereais reiniciados: []");
+    updateCartSummary()
   };
 }
 
@@ -369,7 +382,50 @@ document.getElementById("doneButton").addEventListener("click", function() {
     messageEl.style.display = "block";
   } else {
     messageEl.style.display = "none"; 
-    window.location.href = "bowl.html"; 
+    
+    const carrinho = document.getElementById("carrinho");
+    carrinho.style.position = "fixed";
+    carrinho.style.left = "0vh";
+    carrinho.style.transition = "all 2s ease"; 
+
+    carrinho.getBoundingClientRect();
+
+    carrinho.style.right = "90%"; 
+
+    setTimeout(() => {
+      window.location.href = "bowl.html";
+    }, 1000);
   }
 });
 
+
+
+function updateCartSummary() {
+  const savedCereals = JSON.parse(localStorage.getItem("savedCereals")) || [];
+
+  let summaryEl = document.getElementById("cartSummary");
+  if (!summaryEl) {
+    summaryEl = document.createElement("div");
+    summaryEl.id = "cartSummary";
+    summaryEl.style.fontSize = "15px";
+    document.getElementById("menu1").appendChild(summaryEl);
+  }
+
+  if (savedCereals.length === 0) {
+    summaryEl.textContent = "Your cart is empty";
+    return;
+  }
+  const counts = {};
+  savedCereals.forEach(c => {
+    counts[c.name] = (counts[c.name] || 0) + 1;
+  });
+
+  let msg = `There are ${savedCereals.length} cereal box${savedCereals.length > 1 ? "es" : ""} in your cart:\n`;
+  Object.entries(counts).forEach(([name, qty]) => {
+    msg += `- ${name} \n`;
+  });
+
+  summaryEl.innerText = msg;
+}
+
+updateCartSummary();

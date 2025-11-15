@@ -85,10 +85,13 @@ button {
 }
 
 #carrinho {
-    max-width: 150%;
-    height: auto;
-    z-index: 1;
+    position: fixed;
+    bottom: 1vh;       
+    left: 130vh;    
+    width: 100vh;  
+    height: auto;   
 }
+
 
 .cereal {
   position:relative;
