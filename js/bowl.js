@@ -103,8 +103,8 @@ function updateNutrients() {
     const factor = c.amount / 100
     acc.calories += (c.calories || 0) * factor
     acc.protein += (c.protein || 0) * factor
-    acc.carbs += (c.carbs || 0) * factor
-    acc.sugar += (c.sugar || 0) * factor
+    acc.carbs += (c.carbo || 0) * factor
+    acc.sugar += (c.sugars || 0) * factor
     acc.totalGrams += c.amount
     return acc
   }, { calories: 0, protein: 0, carbs: 0, sugar: 0, totalGrams: 0 })
@@ -181,3 +181,25 @@ function addCerealToBowl(cereal) {
 }
 
 renderList()
+
+//-------------------------------------------------// Restart da taça de cereais (tudo a 0's)
+console.log(savedCereals)
+
+const resetBtn = document.getElementById("resetBowl")
+function resetBowl() {
+  bowlCereals = []
+
+  caloriesEl.textContent = "0"
+  proteinEl.textContent = "0"
+  carbsEl.textContent = "0"
+  sugarEl.textContent = "0"
+  totalGramsEl.textContent = "0"
+
+  document.querySelectorAll(".cerealGramBadge").forEach(b => {
+    b.textContent = "0 g"
+  })
+
+  bowlEl.querySelectorAll(".bowlShape, .floatingAmount").forEach(el => el.remove())
+}
+
+resetBtn.addEventListener("click", resetBowl)

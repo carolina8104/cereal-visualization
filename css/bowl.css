@@ -35,6 +35,7 @@ h1 {
     flex-direction:column;
     gap:10px;
 }
+
 .cerealItem {
     display:flex;
     align-items:center;
