@@ -4,14 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cereal Visualization</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bowl.css">
   </head>
   <body>
+      <main class="container">
+        <h1>Taça de cereais!!! :))</h1>
+        <h3>Pick your cereal</h3>
 
-    <div>
-      <h2>Taça de cereais!!!</h2>
-    </div>
+        <section id="selectorSection">
+          <div id="cerealSelector" class="selector"></div>
+            <div id="container" style="display: flex; height: 100vh;">
 
-    <script src="js/script.js"></script>
+              <div id="leftColumn" style="width: 300px; padding: 20px; border-right: 1px solid #ccc;">
+                 <div id="statusBar">
+                  <span id="status">No cereal selected</span>
+                </div>
+                <div id="cerealSelector"></div>    
+
+                <h3>Nutricional Values</h3>
+                <div id="nutrients">
+                  <p>Calories: <span id="calories">0</span> kcal</p>
+                  <p>Protein: <span id="protein">0</span> g</p>
+                  <p>Carbs: <span id="carbs">0</span> g</p>
+                  <p>Sugar: <span id="sugar">0</span> g</p>
+                  <p>Total: <span id="totalGrams">0</span> g</p>
+                </div>
+
+                <h3>Amount per cereal</h3>
+                <div id="cerealAmounts"></div>
+              </div>
+
+              <div id="bowlArea">
+                <h2 style="position: absolute; top: 10px; left: 10px; color: #555;">Taça</h2>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script type="module" src="js/bowl.js"></script>
   </body>
 </html>

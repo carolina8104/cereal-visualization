@@ -1,0 +1,146 @@
+/* Layout simples */
+:root{
+    --bg: #f6f8fb;
+    --panel: #ffffff;
+    --muted: #6b7280;
+}
+*{
+    box-sizing:border-box
+}
+
+body {
+     margin:0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    background:var(--bg);
+    color:#111827;
+    min-height:100vh;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:36px;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+}
+
+h1 {     
+    margin: 0 0 18px 0; 
+    font-size: 50px; 
+}
+
+.selector {
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+.cerealItem {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:10px 12px;
+    border-radius:10px;
+    background:var(--panel);
+    box-shadow: 0 4px 14px rgba(12,14,20,0.06);
+    cursor:pointer;
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+
+.cerealItem:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 8px 22px rgba(12,14,20,0.08); 
+}
+
+.shapeIndicator{
+    width:36px;
+    height:28px;
+    border-radius:6px;
+    flex-shrink:0;
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(0,0,0,0.06);
+}
+
+.cerealName{
+    font-weight:600;
+    font-size:15px;
+    color:#0f172a;
+}
+
+.cerealGramBadge{
+    margin-left:auto;
+    font-size:13px;
+    color:var(--muted);
+}
+
+.cerealItem.selected{
+    outline: 2px solid rgba(76,99,255,0.14);
+    transform: scale(1.01);
+}
+
+#statusBar{
+    margin-top:16px;
+    color:var(--muted);
+    font-size:14px;
+}
+
+.cerealItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.cerealItem.selected {
+  background: #ddd;
+}
+
+.shapeIndicator {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.cerealName {
+  flex: 1;
+}
+
+.cerealGramBadge {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.bowlShape {
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  position: absolute;
+  top: -60px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.floatingAmount {
+  position: absolute;
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+  pointer-events: none;
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  transition: all 1s linear;
+}
+
+#bowlArea {
+    flex: 1; 
+    position: relative; 
+    overflow: hidden;
+    width: 100%;
+    height: 60vh;
+    background: #dcf6f9; 
+    border-radius: 35px ;
+    cursor: pointer;
+}
