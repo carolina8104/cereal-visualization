@@ -100,12 +100,15 @@ function updateCerealAmounts() {
 //-------------------------------------------// Atualizar valores nutricionais
 function updateNutrients() {
   const totals = bowlCereals.reduce((acc, c) => {
-    const factor = c.amount / 100
+    const gramsPerServing = c.weight * 28.3495
+    const factor = c.amount / gramsPerServing
+
     acc.calories += (c.calories || 0) * factor
     acc.protein += (c.protein || 0) * factor
     acc.carbs += (c.carbo || 0) * factor
     acc.sugar += (c.sugars || 0) * factor
     acc.totalGrams += c.amount
+
     return acc
   }, { calories: 0, protein: 0, carbs: 0, sugar: 0, totalGrams: 0 })
 
