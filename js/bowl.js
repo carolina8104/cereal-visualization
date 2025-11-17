@@ -26,11 +26,11 @@ let bowlCereals = []
 function renderList() {
   listEl.innerHTML = ""
 
-  if (!savedCereals.length) {
+  /*if (!savedCereals.length) {
     listEl.innerHTML = "<p>No cereal saved!</p>"
     statusEl.textContent = "No cereal available!"
     return
-  }
+  }*/
 
   savedCereals.forEach(c => {
     const item = document.createElement("div")
@@ -61,6 +61,7 @@ function renderList() {
     item.appendChild(indicator)
     item.appendChild(name)
     item.appendChild(badge)
+    item.style.zIndex = 150
 
     // Seleção do cereal
     item.addEventListener("click", (ev) => {
@@ -85,7 +86,6 @@ function selectItem(id){
   })
 
   const c = savedCereals.find(x => x.id == id)
-  statusEl.textContent = c ? `Selecionado: ${c.name}` : "Nenhum cereal selecionado"
 }
 
 // ------------------------------------------// Atualiza badges dos cereais na lista

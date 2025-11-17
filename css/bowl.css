@@ -17,10 +17,15 @@ body {
     display:flex;
     align-items:flex-start;
     justify-content:center;
-    padding:36px;
+    padding: 50px; 
+    height: 100vh;
+    overflow: hidden;
 }
 
 .container {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
 }
@@ -34,6 +39,8 @@ h1 {
     display:flex;
     flex-direction:column;
     gap:10px;
+    width: 20%;
+    z-index: 200;
 }
 
 .cerealItem {
@@ -137,11 +144,29 @@ h1 {
 
 #bowlArea {
     flex: 1; 
-    position: relative; 
+    position: absolute; 
     overflow: hidden;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 60vh;
+    height: 100vh;
     background: #dcf6f9; 
-    border-radius: 35px ;
     cursor: pointer;
+    z-index: 100;
+}
+
+#leftColumn{
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 15px;
+  z-index: 110;
+}
+
+#leftColumn #statusBar{
+  margin: 15vh 0;
+}
+
+#selectorSection {
+  padding: 0 2%;
 }
