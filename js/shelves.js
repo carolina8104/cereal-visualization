@@ -25,7 +25,17 @@ export function renderShelves() {
             .style("opacity", 0)
 
         enter.append("div").attr("class", "protein-bar")
-        enter.append("div").attr("class", "name-vertical").text(d => d.name)
+        enter.append("div").attr("class", "name-vertical").text(d => {
+            const partes = d.name.trim().split(" ");  
+
+            const primeiro = partes[0];               
+            const segundoInicial = partes[1]          
+                ? partes[1][0] + "."                  
+                : "";                              
+
+            return primeiro + " " + segundoInicial;
+})
+
 
         const merged = enter.merge(sel)
 
