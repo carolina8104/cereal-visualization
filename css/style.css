@@ -20,6 +20,12 @@ button{
     font-size: 1.5rem;
 }
 
+button:hover{
+  background-color: #a59d9d;
+  transform: scale(1.1);
+  transition: 0.1s;
+}
+
 main {
     display: flex;                
     align-items: flex-start;      
@@ -30,12 +36,13 @@ main {
 .shelves {
     width:80vw;
     max-width:76vw;          
-    flex-shrink: 0;        
+    flex-shrink: 0;  
+    margin-top: 7vh;      
 }
 
 .shelf {
     height: 23vh;
-    margin: 5vh 0vw;
+    margin: 0vh 4vw 0vh 10vh;
     background: rgba(152, 0, 0, 0);
     border-radius: 6px;
     padding: 13px 10px;
@@ -113,7 +120,7 @@ button {
   writing-mode: vertical-rl;
   text-orientation: mixed;
   font-weight:700;
-  font-size:12px;
+  font-size:10px;
   padding:6px 2px;
   white-space:nowrap;
 }
