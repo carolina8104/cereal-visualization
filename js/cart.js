@@ -5,7 +5,6 @@ export function updateCartSummary() {
     if (!summaryEl) {
         summaryEl = document.createElement("div")
         summaryEl.id = "cartSummary"
-        summaryEl.style.fontSize = "15px"
         document.getElementById("menu1").appendChild(summaryEl)
     }
 

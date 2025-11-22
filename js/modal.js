@@ -134,10 +134,9 @@ export function openModal(cerealData) {
             if (!maxMessage) {
                 maxMessage = document.createElement("p")
                 maxMessage.id = "maxCerealMessage"
-                document.getElementById("menu1").appendChild(maxMessage)
+                document.getElementById("popup").appendChild(maxMessage)
             }
             maxMessage.textContent = "You can only add up to 5 cereals!"
-            maxMessage.style.display = "block"
             return
         } else {
             const maxMessage = document.getElementById("maxCerealMessage")

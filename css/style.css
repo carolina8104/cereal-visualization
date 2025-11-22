@@ -13,11 +13,11 @@ body {
 }
 
 h2{
-    font-size: 2.5rem;
+    font-size: 2.3rem;
 }
 
 button{
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 button:hover{
@@ -27,22 +27,20 @@ button:hover{
 }
 
 main {
-    display: flex;                
-    align-items: flex-start;      
-    gap: 2rem;                  
-    box-sizing: border-box;
+  display: flex;                
+  align-items: flex-start;                   
+  box-sizing: border-box;
 }
 
 .shelves {
-    width:80vw;
-    max-width:76vw;          
+    width:67vw;
     flex-shrink: 0;  
-    margin-top: 7vh;      
+    margin-top: 10vh;      
 }
 
 .shelf {
     height: 23vh;
-    margin: 0vh 4vw 0vh 10vh;
+    margin: 0vh 0vw 0vh 6vh;
     background: rgba(152, 0, 0, 0);
     border-radius: 6px;
     padding: 13px 10px;
@@ -70,7 +68,7 @@ aside {
     flex-direction: column;        
     justify-content: space-between;
     align-items: center;          
-    padding: 10vh 2vw;
+    padding: 13vh 0vw;
     box-sizing: border-box;
 }
 
@@ -81,9 +79,14 @@ h2 {
 .button-container {
     display: flex;
     gap: 3rem;
-    margin-left:4vh;
+    margin-left:2vh;
     margin-top:1vw;
 }
+
+.button-container button{
+  width:15vh;
+}
+
 
 button {
     padding: 0.5rem 1rem;
@@ -96,8 +99,29 @@ button {
     position: fixed;
     bottom: 1vh;       
     left: 130vh;    
-    width: 100vh;  
+    width: 70vh;  
     height: auto;   
+}
+
+#cartSummary {
+    font-size: 1.1rem;
+    width: 40vh;
+    margin-top: 3vw;
+    padding:2vh;
+    border-radius: 10px;
+    background-color:#e5dfbd;
+}
+
+#popup{
+margin-left:6vh;
+position: fixed;
+}
+
+#maxCerealMessage{
+  font-size:1.6rem;
+  background-color:#e5dfbd;
+  padding: 4vh;
+  border-radius: 15px;
 }
 
 
