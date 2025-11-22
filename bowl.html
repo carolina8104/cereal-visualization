@@ -8,32 +8,38 @@
   </head>
   <body>
       <main class="container">
-        <h1>Taça de cereais!!! :))</h1>
-        <h3>Pick your cereal</h3>
-        <button id="resetBowl">Restart</button>
 
         <div id="bowlArea"></div>
 
         <section id="selectorSection">
-          <div id="cerealSelector" class="selector"></div>
-            <div id="container" style="display: flex; height: 100vh;">
-              
+          
+            <div id="container">
+                <a href="index.html" class="back-btn">
+                  <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6"></path>
+                  </svg>
+                  Back
+                </a>
+              <div id="leftColumn">
+                <h3>Pick your cereal</h3>
+                <!--<button id="resetBowl">Restart</button>-->
+                <div id="nutrientsBox">
+                  <h3>Nutricional Values</h3>
+                  <div id="nutrients">
+                    <p>Calories: <span id="calories">0</span> kcal</p>
+                    <p>Protein: <span id="protein">0</span> g</p>
+                    <p>Carbs: <span id="carbs">0</span> g</p>
+                    <p>Sugar: <span id="sugar">0</span> g</p>
+                    <p>Total: <span id="totalGrams">0</span> g</p>
+                  </div>
+                </div>
 
-              <div id="leftColumn" style="width: 300px; padding: 20px; border-right: 1px solid #ccc;">
-                <!--<div id="statusBar">
-                  <span id="status"></span>
-                </div>-->
-                <div id="cerealSelector"></div>    
+                
+                <div id="radarChart" class="graph"></div>
+                <h3>Add to your bowl</h3>
+                <div id="cerealSelector" class="selector"></div>
 
-                <h3>Nutricional Values</h3>
-                <div id="nutrients">
-                  <p>Calories: <span id="calories">0</span> kcal</p>
-                  <p>Protein: <span id="protein">0</span> g</p>
-                  <p>Carbs: <span id="carbs">0</span> g</p>
-                  <p>Sugar: <span id="sugar">0</span> g</p>
-                  <p>Total: <span id="totalGrams">0</span> g</p>
-                </div>  
-              </div>
+            </div>
             </div>
           </div>
         </section>

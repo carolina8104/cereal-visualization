@@ -2,6 +2,7 @@
 :root{
     --bg: #f6f8fb;
     --panel: #ffffff;
+    --hover: #b9b9b9;
     --muted: #6b7280;
 }
 *{
@@ -36,16 +37,17 @@ h1 {
 }
 
 .selector {
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    width: 20%;
-    z-index: 200;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
 }
+
 
 .cerealItem {
     display:flex;
     align-items:center;
+    text-align: center;
+    flex-direction: column;
     gap:12px;
     padding:10px 12px;
     border-radius:10px;
@@ -93,15 +95,6 @@ h1 {
     font-size:14px;
 }
 
-.cerealItem {
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
-  cursor: pointer;
-  padding: 5px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
 .cerealItem.selected {
   background: #ddd;
 }
@@ -114,6 +107,7 @@ h1 {
 }
 
 .cerealName {
+  font-size: 14px;
   flex: 1;
 }
 
@@ -155,13 +149,26 @@ h1 {
     z-index: 100;
 }
 
-#leftColumn{
+#leftColumn {
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
+  justify-content: space-between;
+  height: calc(100vh - 100px); 
+  width: 500px;
+
+  background-color: #ffffff95;
   border-radius: 15px;
+  padding: 20px;
+  position: absolute;
+  bottom: 1%;
   z-index: 110;
 }
+
+#nutrientsBox {
+  flex: 1;
+  padding-bottom: 20px;
+}
+
 
 #leftColumn #statusBar{
   margin: 15vh 0;
@@ -169,4 +176,47 @@ h1 {
 
 #selectorSection {
   padding: 0 2%;
+}
+
+.back-btn {
+  position: absolute;
+  top: 2%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 200;
+  width: 120px;
+
+  background: var(--panel);
+  padding: 10px 16px;
+  border-radius: 14px;
+  border: 2px solid black;
+
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #222;
+
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: all 0.3s ease-in-out
+}
+
+.back-btn:hover {
+  background: var(--hover);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+}
+
+#resetBowl {
+  position: absolute;
+  z-index: 300;  
+}
+
+.graph {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  margin: 10px 500px;
+  z-index: 1500;
+  padding: 5%;
 }
