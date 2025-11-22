@@ -26,6 +26,8 @@ async function main() {
     // 6. Configura botão Restart
     const restartButton = document.querySelector("#menu1 .button-container button")
     if (restartButton) restartButton.onclick = () => {
+        const maxMessage = document.getElementById("maxCerealMessage")
+        if (maxMessage) maxMessage.remove()
         localStorage.setItem("savedCereals", JSON.stringify([]))
         console.log("Cereais reiniciados: []")
         updateCartSummary()
