@@ -1,4 +1,5 @@
 import { brandColors, brandColors_bar } from "./brandColors.js"
+import { drawRadar } from "./radarChart.js";
 
 const savedCereals = JSON.parse(localStorage.getItem("savedCereals")) || []
 
@@ -97,6 +98,7 @@ function updateCerealAmounts() {
   })
 }
 
+  
 //-------------------------------------------// Atualizar valores nutricionais
 function updateNutrients() {
   const totals = bowlCereals.reduce((acc, c) => {
@@ -117,6 +119,8 @@ function updateNutrients() {
   carbsEl.textContent = totals.carbs.toFixed(1)
   sugarEl.textContent = totals.sugar.toFixed(1)
   totalGramsEl.textContent = totals.totalGrams
+
+  drawRadar(bowlCereals, savedCereals[0])
 }
 
 //----------------------------------------------// Adicionar cereal ao clicar na taça
@@ -146,8 +150,8 @@ function addCerealToBowl(cereal) {
   const floating = document.createElement("div")
   floating.className = "floatingAmount"
   floating.textContent = `+${amount}g`
-  floating.style.left = `${bowlEl.clientWidth / 2}px`
-  floating.style.top = `${bowlEl.clientHeight / 2}px`
+  floating.style.left = `${bowlEl.clientWidth * 0.6}px`
+  floating.style.top = `${bowlEl.clientHeight * 0.5}px`
   bowlEl.appendChild(floating)
 
   setTimeout(() => {
@@ -205,4 +209,4 @@ function resetBowl() {
   bowlEl.querySelectorAll(".bowlShape, .floatingAmount").forEach(el => el.remove())
 }
 
-resetBtn.addEventListener("click", resetBowl)
+//resetBtn.addEventListener("click", resetBowl)
