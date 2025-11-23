@@ -116,8 +116,8 @@ export function drawRadar(bowlCereals, recommendedCereal) {
   nutrientKeys.forEach((k,i)=>{
     const angle = i*angleSlice - Math.PI/2;
     svg.append("text")
-      .attr("x", Math.cos(angle)*(radius+10))
-      .attr("y", Math.sin(angle)*(radius+10))
+      .attr("x", Math.cos(angle)*(radius + 10))
+      .attr("y", Math.sin(angle)*(radius + 10))
       .attr("text-anchor","middle")
       .attr("alignment-baseline","middle")
       .style("font-size","10px")

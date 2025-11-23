@@ -26,6 +26,7 @@ let bowlCereals = []
 //-------------------------------------// Renderiza tudo
 function renderList() {
   listEl.innerHTML = ""
+  drawRadar(bowlCereals, savedCereals[0])
 
   /*if (!savedCereals.length) {
     listEl.innerHTML = "<p>No cereal saved!</p>"
@@ -114,11 +115,11 @@ function updateNutrients() {
     return acc
   }, { calories: 0, protein: 0, carbs: 0, sugar: 0, totalGrams: 0 })
 
-  caloriesEl.textContent = totals.calories.toFixed(1)
+  /*caloriesEl.textContent = totals.calories.toFixed(1)
   proteinEl.textContent = totals.protein.toFixed(1)
   carbsEl.textContent = totals.carbs.toFixed(1)
   sugarEl.textContent = totals.sugar.toFixed(1)
-  totalGramsEl.textContent = totals.totalGrams
+  totalGramsEl.textContent = totals.totalGrams*/
 
   drawRadar(bowlCereals, savedCereals[0])
 }
@@ -162,7 +163,7 @@ function addCerealToBowl(cereal) {
   }, 10)
 
   //-------------------------------------------------// Forma a cair do topo
-  const shape = document.createElement("div")
+  /*const shape = document.createElement("div")
   shape.className = "bowlShape"
   shape.style.left = `${Math.random() * (bowlEl.clientWidth - 50)}px`
   shape.style.background = `linear-gradient(135deg,
@@ -185,7 +186,50 @@ function addCerealToBowl(cereal) {
       shape.remove()
     }
   }, 20)
+
+}*/
+const shapeCount = 4 // number of pieces falling each click
+
+for (let i = 0; i < shapeCount; i++) {
+  const shape = document.createElement("div")
+  shape.className = "bowlShape"
+
+  // random horizontal start
+  shape.style.left = `${Math.random() * (bowlEl.clientWidth - 50)}px`
+
+  // color
+  shape.style.background = `linear-gradient(135deg,
+    rgba(${brandColors[cereal.mfr].r},${brandColors[cereal.mfr].g},${brandColors[cereal.mfr].b},1) 0%,
+    rgba(${brandColors_bar[cereal.mfr].r},${brandColors_bar[cereal.mfr].g},${brandColors_bar[cereal.mfr].b},1) 100%)`
+
+  bowlEl.appendChild(shape)
+
+  // independent animation variables per shape
+  let top = -60
+  let left = parseFloat(shape.style.left)
+  let rotation = 0
+
+  // slight random falling speed variation
+  const speed = 8 + Math.random() * 4
+
+  const fall = setInterval(() => {
+    top += speed
+    left += Math.sin(top / 20) * 2
+    rotation += 12 + Math.random() * 6
+
+    shape.style.top = top + "px"
+    shape.style.left = left + "px"
+    shape.style.transform = `rotate(${rotation}deg)`
+
+    if (top >= bowlEl.clientHeight) {
+      clearInterval(fall)
+      shape.remove()
+    }
+  }, 20)
 }
+}
+
+
 
 renderList()
 
