@@ -1,3 +1,7 @@
+#filters{
+  font-size: 12px;
+}
+
 
 @font-face {
   font-family: font;
@@ -35,7 +39,7 @@ main {
 .shelves {
     width:67vw;
     flex-shrink: 0;  
-    margin-top: 10vh;      
+    margin-top: 2vh;     
 }
 
 .shelf {
@@ -68,7 +72,7 @@ aside {
     flex-direction: column;        
     justify-content: space-between;
     align-items: center;          
-    padding: 13vh 0vw;
+    padding: 3vh 0vw;
     box-sizing: border-box;
 }
 
@@ -327,4 +331,37 @@ width: 10vh;
 .cereal-box-container svg{
   scale: 0.15;
   margin: -155vh -45vw;
+}
+
+#filters {
+  padding: 20px;           
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+  width: 100%;
+  display: block;
+  z-index:100;
+}
+
+.filter-row:first-child {
+  gap: 5vh;               
+}
+
+#filters input[type="number"] {
+  width: 5vh; 
+  margin-bottom: 2vh;
+}
+
+.filter-row {
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+}
+
+#brandContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+}
+
+#orderSelect{
+  margin-left:10vh;
 }

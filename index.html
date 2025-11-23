@@ -9,6 +9,49 @@
   <body>
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
+  <div id="filters">
+  <div class="filter-row">
+    <label>Proteína ≤ <input id="proteinInput" type="number" min="0" placeholder="g"></label>
+    <label>Açúcar ≤ <input id="sugarInput" type="number" min="0" placeholder="g"></label>
+    <label>Carbos ≤ <input id="carboInput" type="number" min="0" placeholder="g"></label>
+    <label>Fiber ≤ <input id="fiberInput" type="number" min="0" placeholder="g"></label>
+    <label>Fat ≤ <input id="fatInput" type="number" min="0" placeholder="g"></label>
+    <label>Potassium ≤ <input id="potassInput" type="number" min="0" placeholder="mg"></label>
+    <label>Sodium ≤ <input id="sodiumInput" type="number" min="0" placeholder="mg"></label>
+    <label>Calorias ≤ <input id="kcalInput" type="number" min="0" placeholder="kcal"></label>
+  </div>
+
+  <div class="filter-row">
+    <label>Marca:</label>
+    <div id="brandContainer">
+      <label><input type="checkbox" value="American Home Food Products"> American Home Food Products</label>
+      <label><input type="checkbox" value="General Mills"> General Mills</label>
+      <label><input type="checkbox" value="Kelloggs"> Kelloggs</label>
+      <label><input type="checkbox" value="Nabisco"> Nabisco</label>
+      <label><input type="checkbox" value="Post"> Post</label>
+      <label><input type="checkbox" value="Quaker Oats"> Quaker Oats</label>
+      <label><input type="checkbox" value="Ralston"> Ralston</label>
+    </div>
+
+    <label  id="orderSelect" >Ordenar:
+      <select>
+        <option value="none">None</option>
+        <option value="protein-asc">Protein ↑</option>
+        <option value="protein-desc">Protein ↓</option>
+        <option value="kcal-asc">Calories ↑</option>
+        <option value="kcal-desc">Calories ↓</option>
+        <option value="fat-asc">Fat ↑</option>
+        <option value="fat-desc">Fat ↓</option>
+        <option value="sugar-asc">Sugar ↑</option>
+        <option value="sugar-desc">Sugar ↓</option>
+
+      </select>
+    </label>
+
+      <!--  <button id="resetFilters">Reset</button> -->
+  </div>
+</div>
+
     <main class="main-area">
         <div class="shelves">
             <div class="shelf" id="shelf-1"><div class="rail"></div></div>

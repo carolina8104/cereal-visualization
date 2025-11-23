@@ -74,11 +74,16 @@ export function renderShelves() {
             })
 
         merged.select(".name-vertical")
-            .style("color", d => {
-                const c = brandColors_bar[d.mfr]
-                return `rgba(${c.r}, ${c.g}, ${c.b}, 1)`
+            .text(d => {
+                const partes = d.name.trim().split(" ");  
+                const primeiro = partes[0];               
+                const segundoInicial = partes[1] ? partes[1][0] + "." : "";                              
+                return primeiro + " " + segundoInicial;
             })
-        
+            .style("color", d => {
+                const c = brandColors_bar[d.mfr];
+                return `rgba(${c.r}, ${c.g}, ${c.b}, 1)`;
+            });
         merged.on("click", (event, d) => openModal(d))
 
         merged
