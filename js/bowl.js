@@ -188,7 +188,7 @@ function addCerealToBowl(cereal) {
   }, 20)
 
 }*/
-const shapeCount = 4 // number of pieces falling each click
+const shapeCount =Math.floor(Math.random() * (5 - 2 + 1)) + 2 // number of pieces falling each click
 
 for (let i = 0; i < shapeCount; i++) {
   const shape = document.createElement("div")

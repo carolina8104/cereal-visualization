@@ -17,7 +17,6 @@ function render() {
     if (resultEl) {
         resultEl.textContent = `Showing ${filteredData.length} cereals`
     }
-
 }
 
 async function main() {
@@ -107,8 +106,6 @@ async function main() {
         updateFilter("fatMax", e.target.value)
         render()
     })
-
-
 
     document.getElementById("potassInput")?.addEventListener("input", e => {
         updateFilter("potassiumMax", e.target.value)
