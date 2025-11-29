@@ -371,11 +371,9 @@ width: 10vh;
 
 .flying-box {
   position: absolute;
-  background-color: orange;
   transition: top 0.9s ease-in-out; /* só animamos top */
 }
 
 #cartItems {
     display: flex;
-    gap: 6px; /* espaçamento entre caixas */
 }

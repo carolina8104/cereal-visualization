@@ -71,15 +71,19 @@ async function main() {
                 messageEl.style.display = "none"
                 const carrinho = document.getElementById("carrinho")
             
-
-                const caixinhas = document.querySelector("flying-box")
-
                 carrinho.style.position = "fixed"
                 carrinho.style.left = "0vh"
                 carrinho.style.transition = "all 2s ease"
                 carrinho.getBoundingClientRect()
                 carrinho.style.right = "90%"
 
+
+            const flyingBoxes = document.querySelectorAll(".flying-box");
+            flyingBoxes.forEach(box => {
+                box.style.left = "0vh"
+                box.style.transition = "all 2.4s ease"
+                box.style.right = "90%"
+            });
 
                 setTimeout(() => {
                     window.location.href = "bowl.html"

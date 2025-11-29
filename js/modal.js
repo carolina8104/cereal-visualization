@@ -164,6 +164,7 @@ export function openModal(cerealData) {
     })
 }
 
+
 let availableLefts = [70, 75, 80, 82, 90];
 
 export function createFlyingBoxAnimation(cerealData) {
@@ -182,10 +183,14 @@ export function createFlyingBoxAnimation(cerealData) {
 
     box.dataset.cerealId = cerealData.id;
 
+    const colorObj = brandColors && brandColors[cerealData.mfr] ? brandColors[cerealData.mfr] : null;
+    const colorStr = colorObj ? `rgb(${colorObj.r}, ${colorObj.g}, ${colorObj.b})` : "gray";
+    box.style.backgroundColor = colorStr;
+
     document.body.appendChild(box);
 
     setTimeout(() => {
-        box.style.bottom = "17vh"; 
+        box.style.bottom = "17vh";
     }, 50);
 
     let flyingBoxes = JSON.parse(localStorage.getItem("flyingBoxes")) || [];
@@ -195,19 +200,34 @@ export function createFlyingBoxAnimation(cerealData) {
         height: box.style.height,
         left: box.style.left,
         bottom: box.style.bottom,
-        color: box.style.background
+        color: colorObj 
     });
     localStorage.setItem("flyingBoxes", JSON.stringify(flyingBoxes));
 }
 
 
-const flyingBoxes = JSON.parse(localStorage.getItem("flyingBoxes")) || [];
-flyingBoxes.forEach(b => {
-    const box = document.createElement("div");
-    box.classList.add("flying-box");
-    box.style.width = b.width;
-    box.style.height = b.height;
-    box.style.left = b.left;
-    box.dataset.cerealId = b.id;
-    document.body.appendChild(box);
+export function renderFlyingBoxesFromStorage() {
+    const flyingBoxes = JSON.parse(localStorage.getItem("flyingBoxes")) || [];
+    flyingBoxes.forEach(b => {
+        const box = document.createElement("div");
+        box.classList.add("flying-box");
+        box.style.width = b.width;
+        box.style.height = b.height;
+        box.style.left = b.left;
+        box.style.bottom = "15vh"; 
+        box.dataset.cerealId = b.id;
+
+        if (b.color) {
+            box.style.backgroundColor = `rgb(${b.color.r}, ${b.color.g}, ${b.color.b})`;
+        } else {
+            box.style.backgroundColor = "gray";
+        }
+
+        document.body.appendChild(box);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    renderFlyingBoxesFromStorage();
+    updateCartSummary();
 });
