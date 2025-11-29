@@ -104,7 +104,8 @@ button {
     bottom: 1vh;       
     left: 130vh;    
     width: 70vh;  
-    height: auto;   
+    height: auto;
+    z-index: 1;   
 }
 
 #cartSummary {
@@ -364,4 +365,17 @@ width: 10vh;
 
 #orderSelect{
   margin-left:10vh;
+}
+
+
+
+.flying-box {
+  position: absolute;
+  background-color: orange;
+  transition: top 0.9s ease-in-out; /* só animamos top */
+}
+
+#cartItems {
+    display: flex;
+    gap: 6px; /* espaçamento entre caixas */
 }

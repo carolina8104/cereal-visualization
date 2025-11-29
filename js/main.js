@@ -38,10 +38,17 @@ async function main() {
         restartButton.onclick = () => {
             const maxMessage = document.getElementById("maxCerealMessage")
             if (maxMessage) maxMessage.remove()
+
+            // limpa cereais
             localStorage.setItem("savedCereals", JSON.stringify([]))
+
+            // remove caixas do carrinho
+            document.querySelectorAll(".flying-box").forEach(el => el.remove())
+            localStorage.removeItem("flyingBoxes") // limpa do storage
+
             console.log("Cereais reiniciados: []")
             updateCartSummary()
-            render() 
+            render()
         }
     }
 
@@ -63,11 +70,16 @@ async function main() {
             } else {
                 messageEl.style.display = "none"
                 const carrinho = document.getElementById("carrinho")
+            
+
+                const caixinhas = document.querySelector("flying-box")
+
                 carrinho.style.position = "fixed"
                 carrinho.style.left = "0vh"
                 carrinho.style.transition = "all 2s ease"
                 carrinho.getBoundingClientRect()
                 carrinho.style.right = "90%"
+
 
                 setTimeout(() => {
                     window.location.href = "bowl.html"
