@@ -160,3 +160,57 @@ document.addEventListener("DOMContentLoaded", main)
 
 // 11. Expondo openModal globalmente para uso por render.js
 window.openModal = openModal
+
+
+
+
+
+//não sabia onde por isto
+const infoBox = document.getElementById('info');
+
+document.getElementById('info-circle').addEventListener('click', (event) => {
+    event.stopPropagation(); // Impede que o clique no "i" feche imediatamente
+    infoBox.style.display =
+        infoBox.style.display === 'block' ? 'none' : 'block';
+});
+
+document.addEventListener('click', () => {
+    infoBox.style.display = 'none';
+});
+
+
+
+
+document.getElementById("resetFilters")?.addEventListener("click", () => {
+
+    // 1. Limpar inputs numéricos
+    const numericInputs = document.querySelectorAll("#filters input[type=number]");
+    numericInputs.forEach(input => {
+        input.value = "";
+    });
+
+    // 0 nos filtros internos
+    updateFilter("proteinMax", null);
+    updateFilter("kcalMax", null);
+    updateFilter("sugarMax", null);
+    updateFilter("carboMax", null);
+    updateFilter("fiberMax", null);
+    updateFilter("fatMax", null);
+    updateFilter("potassiumMax", null);
+    updateFilter("sodiumMax", null);
+
+    // 2. Desmarcar todas as marcas
+    const checkboxes = document.querySelectorAll("#brandContainer input[type=checkbox]");
+    checkboxes.forEach(cb => cb.checked = false);
+    setBrand([]); // Sem marcas escolhidas
+
+    // 3. Voltar o select de ordenação para "None"
+    const orderSelect = document.querySelector("#orderSelect select");
+    if (orderSelect) {
+        orderSelect.value = "none";
+        setOrder("none");
+    }
+
+    // 4. Renderizar outra vez
+    render();
+});
