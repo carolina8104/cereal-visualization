@@ -148,6 +148,9 @@ export function openModal(cerealData) {
         }
 
         localStorage.setItem("savedCereals", JSON.stringify(savedCereals))
+
+        createFlyingBoxAnimation(cerealData)
+
         modal.style.display = "none"
         updateCartSummary()
     }
@@ -160,3 +163,71 @@ export function openModal(cerealData) {
         if (e.target === modal) modal.style.display = "none"
     })
 }
+
+
+let availableLefts = [70, 75, 80, 82, 90];
+
+export function createFlyingBoxAnimation(cerealData) {
+    const box = document.createElement("div");
+    box.classList.add("flying-box");
+
+    box.style.width = widthScale(cerealData.fat) + "px";
+    box.style.height = heightScale(cerealData.calories) + "px";
+
+    box.style.bottom = "70vh";
+
+    if (availableLefts.length === 0) availableLefts = [70, 75, 80, 85, 90];
+    const index = Math.floor(Math.random() * availableLefts.length);
+    const leftValue = availableLefts.splice(index, 1)[0];
+    box.style.left = leftValue + "vw";
+
+    box.dataset.cerealId = cerealData.id;
+
+    const colorObj = brandColors && brandColors[cerealData.mfr] ? brandColors[cerealData.mfr] : null;
+    const colorStr = colorObj ? `rgb(${colorObj.r}, ${colorObj.g}, ${colorObj.b})` : "gray";
+    box.style.backgroundColor = colorStr;
+
+    document.body.appendChild(box);
+
+    setTimeout(() => {
+        box.style.bottom = "17vh";
+    }, 50);
+
+    let flyingBoxes = JSON.parse(localStorage.getItem("flyingBoxes")) || [];
+    flyingBoxes.push({
+        id: cerealData.id,
+        width: box.style.width,
+        height: box.style.height,
+        left: box.style.left,
+        bottom: box.style.bottom,
+        color: colorObj 
+    });
+    localStorage.setItem("flyingBoxes", JSON.stringify(flyingBoxes));
+}
+
+
+export function renderFlyingBoxesFromStorage() {
+    const flyingBoxes = JSON.parse(localStorage.getItem("flyingBoxes")) || [];
+    flyingBoxes.forEach(b => {
+        const box = document.createElement("div");
+        box.classList.add("flying-box");
+        box.style.width = b.width;
+        box.style.height = b.height;
+        box.style.left = b.left;
+        box.style.bottom = "15vh"; 
+        box.dataset.cerealId = b.id;
+
+        if (b.color) {
+            box.style.backgroundColor = `rgb(${b.color.r}, ${b.color.g}, ${b.color.b})`;
+        } else {
+            box.style.backgroundColor = "gray";
+        }
+
+        document.body.appendChild(box);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    renderFlyingBoxesFromStorage();
+    updateCartSummary();
+});

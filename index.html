@@ -11,18 +11,18 @@
 
   <div id="filters">
   <div class="filter-row">
-    <label>Proteína ≤ <input id="proteinInput" type="number" min="0" placeholder="g"></label>
-    <label>Açúcar ≤ <input id="sugarInput" type="number" min="0" placeholder="g"></label>
+    <label>Protein ≤ <input id="proteinInput" type="number" min="0" placeholder="g"></label>
+    <label>Sugar ≤ <input id="sugarInput" type="number" min="0" placeholder="g"></label>
     <label>Carbos ≤ <input id="carboInput" type="number" min="0" placeholder="g"></label>
     <label>Fiber ≤ <input id="fiberInput" type="number" min="0" placeholder="g"></label>
     <label>Fat ≤ <input id="fatInput" type="number" min="0" placeholder="g"></label>
     <label>Potassium ≤ <input id="potassInput" type="number" min="0" placeholder="mg"></label>
     <label>Sodium ≤ <input id="sodiumInput" type="number" min="0" placeholder="mg"></label>
-    <label>Calorias ≤ <input id="kcalInput" type="number" min="0" placeholder="kcal"></label>
+    <label>Calories ≤ <input id="kcalInput" type="number" min="0" placeholder="kcal"></label>
   </div>
 
   <div class="filter-row">
-    <label>Marca:</label>
+    <label>Brand:</label>
     <div id="brandContainer">
       <label><input type="checkbox" value="American Home Food Products"> American Home Food Products</label>
       <label><input type="checkbox" value="General Mills"> General Mills</label>
@@ -33,7 +33,7 @@
       <label><input type="checkbox" value="Ralston"> Ralston</label>
     </div>
 
-    <label  id="orderSelect" >Ordenar:
+    <label  id="orderSelect" >Order:
       <select>
         <option value="none">None</option>
         <option value="protein-asc">Protein ↑</option>
@@ -47,10 +47,9 @@
 
       </select>
     </label>
-
-      <!--  <button id="resetFilters">Reset</button> -->
   </div>
 </div>
+
 
     <main class="main-area">
         <div class="shelves">
@@ -63,10 +62,11 @@
             <div id="menu1">
                 <h2>Pick your cereals</h2>
                 <div class="button-container">
-                    <button>Restart</button>
-                    <button id="doneButton">Done</button>
+                    <button>restart</button>
+                    <button id="doneButton">done</button>
                 </div>
             </div>
+              <div id="cartItems"></div>
             <svg id="carrinho" xmlns="http://www.w3.org/2000/svg" width="130" height="100" viewBox="0 0 1383 975" fill="none">
                 <line x1="1209.49" y1="162.615" x2="1278.89" y2="107.93" stroke="black" stroke-width="29.8946"/>
                 <path d="M1137.33 734.429L1204.75 836.607" stroke="black" stroke-width="29.8946"/>
@@ -92,6 +92,11 @@
                 <ellipse cx="264.476" cy="896.931" rx="74.4697" ry="72.8682" fill="black"/>
             </svg>
         </aside>
+      <button class="buttontop" id="resetFilters">⟳</button>
+      <div class="buttontop" id="info-circle">ℹ</div>
+      <div id="info" >
+        <img src="info.jpg" alt="Descrição da imagem">
+      </div>
     </main>
 
 <div id="cerealModal" class="modal">
@@ -136,7 +141,6 @@
   </div>
 <div id="popup"></div>
 </div>
-
     <script type="module" src="js/main.js"></script>
   </body>
 </html>

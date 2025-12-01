@@ -61,7 +61,7 @@ export function renderShelves() {
             .style("width", d => widthScale(d.fat) + "px")
             .style("background", d => {
                 const c = brandColors[d.mfr];
-                const alpha = 0.6 + 0.4 * (d.sugars / sugarColorScale.domain()[1])
+                const alpha = 0.5 + 0.3 * (d.sugars / sugarColorScale.domain()[1])
                 return `rgba(${c.r}, ${c.g}, ${c.b}, ${alpha})`
             })
 

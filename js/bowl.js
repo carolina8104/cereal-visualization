@@ -339,9 +339,11 @@ function addCerealToBowl(cereal) {
     requestAnimationFrame(animate)
   }
 
+
   // Update amounts and radar AFTER adding
   updateCerealAmounts()
   updateNutrients()
+
 }
 
 renderList()

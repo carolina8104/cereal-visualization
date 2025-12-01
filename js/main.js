@@ -17,7 +17,6 @@ function render() {
     if (resultEl) {
         resultEl.textContent = `Showing ${filteredData.length} cereals`
     }
-
 }
 
 async function main() {
@@ -39,10 +38,17 @@ async function main() {
         restartButton.onclick = () => {
             const maxMessage = document.getElementById("maxCerealMessage")
             if (maxMessage) maxMessage.remove()
+
+            // limpa cereais
             localStorage.setItem("savedCereals", JSON.stringify([]))
+
+            // remove caixas do carrinho
+            document.querySelectorAll(".flying-box").forEach(el => el.remove())
+            localStorage.removeItem("flyingBoxes") // limpa do storage
+
             console.log("Cereais reiniciados: []")
             updateCartSummary()
-            render() 
+            render()
         }
     }
 
@@ -64,11 +70,20 @@ async function main() {
             } else {
                 messageEl.style.display = "none"
                 const carrinho = document.getElementById("carrinho")
+            
                 carrinho.style.position = "fixed"
                 carrinho.style.left = "0vh"
                 carrinho.style.transition = "all 2s ease"
                 carrinho.getBoundingClientRect()
                 carrinho.style.right = "90%"
+
+
+            const flyingBoxes = document.querySelectorAll(".flying-box");
+            flyingBoxes.forEach(box => {
+                box.style.left = "0vh"
+                box.style.transition = "all 2.4s ease"
+                box.style.right = "90%"
+            });
 
                 setTimeout(() => {
                     window.location.href = "bowl.html"
@@ -108,8 +123,6 @@ async function main() {
         render()
     })
 
-
-
     document.getElementById("potassInput")?.addEventListener("input", e => {
         updateFilter("potassiumMax", e.target.value)
         render()
@@ -147,3 +160,57 @@ document.addEventListener("DOMContentLoaded", main)
 
 // 11. Expondo openModal globalmente para uso por render.js
 window.openModal = openModal
+
+
+
+
+
+//não sabia onde por isto
+const infoBox = document.getElementById('info');
+
+document.getElementById('info-circle').addEventListener('click', (event) => {
+    event.stopPropagation(); // Impede que o clique no "i" feche imediatamente
+    infoBox.style.display =
+        infoBox.style.display === 'block' ? 'none' : 'block';
+});
+
+document.addEventListener('click', () => {
+    infoBox.style.display = 'none';
+});
+
+
+
+
+document.getElementById("resetFilters")?.addEventListener("click", () => {
+
+    // 1. Limpar inputs numéricos
+    const numericInputs = document.querySelectorAll("#filters input[type=number]");
+    numericInputs.forEach(input => {
+        input.value = "";
+    });
+
+    // 0 nos filtros internos
+    updateFilter("proteinMax", null);
+    updateFilter("kcalMax", null);
+    updateFilter("sugarMax", null);
+    updateFilter("carboMax", null);
+    updateFilter("fiberMax", null);
+    updateFilter("fatMax", null);
+    updateFilter("potassiumMax", null);
+    updateFilter("sodiumMax", null);
+
+    // 2. Desmarcar todas as marcas
+    const checkboxes = document.querySelectorAll("#brandContainer input[type=checkbox]");
+    checkboxes.forEach(cb => cb.checked = false);
+    setBrand([]); // Sem marcas escolhidas
+
+    // 3. Voltar o select de ordenação para "None"
+    const orderSelect = document.querySelector("#orderSelect select");
+    if (orderSelect) {
+        orderSelect.value = "none";
+        setOrder("none");
+    }
+
+    // 4. Renderizar outra vez
+    render();
+});
