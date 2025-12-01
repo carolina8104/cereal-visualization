@@ -9,7 +9,9 @@
   <body>
       <main class="container">
 
-        <div id="bowlArea"></div>
+        <div id="bowlArea">
+            
+        </div>
 
         <section id="selectorSection">
           
@@ -22,15 +24,23 @@
                 </a>
               <div id="leftColumn">
                 <!--<button id="resetBowl">Restart</button>-->
+
                 <div id="nutrientsBox">
                   <h3>Nutricional Values</h3>
+                  
+                  <div id="chartFilters">
+                    <button class="filterBtn" data-mode="dose">Dose</button>
+                    <button class="filterBtn" data-mode="all">All</button>
+                    <button class="filterBtn" data-mode="total">Your bowl</button>
+                  </div>
+                  
                   <div id="radarChart" class="graph"></div>
                   <div id="nutrients">
                     <!--<p>Calories: <span id="calories">0</span> kcal</p>
                     <p>Protein: <span id="protein">0</span> g</p>
                     <p>Carbs: <span id="carbs">0</span> g</p>
-                    <p>Sugar: <span id="sugar">0</span> g</p>
-                    <p>Total: <span id="totalGrams">0</span> g</p>-->
+                    <p>Sugar: <span id="sugar">0</span> g</p>-->
+                    <p>Total: <span id="totalGrams">0</span> g</p>
                   </div>
                 </div>
 

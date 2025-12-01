@@ -1,12 +1,24 @@
-import { brandColors } from "./brandColors.js";
+import { brandColors } from "./brandColors.js"
 
 // Nutrient keys & labels
 export const nutrientKeys = [
   "calories","protein","fat","carbo","sugars","sodium","potass","vitamins"
-];
+]
 export const nutrientLabels = [
   "Calories","Protein","Fat","Carbs","Sugar","Sodium","Potassium","Vitamins"
-];
+]
+
+export const milkNutrition = {
+  name: "Milk",
+  calories: 42,  // per 100ml
+  protein: 3.4,
+  fat: 1,
+  carbo: 5,
+  sugars: 5,
+  sodium: 50,
+  potass: 150,
+  vitamins: 5
+}
 
 // Max values per nutrient for scaling
 export const maxValues = {
@@ -18,109 +30,163 @@ export const maxValues = {
   sodium: 500,    
   potass: 400,    
   vitamins: 100    
-};
+}
+
 
 export function getRecommended(cereal) {
-  const gramsPerServing = cereal.weight ? cereal.weight*28.3495 : cereal.cups ? cereal.cups*240 : 30;
+  const gramsPerServing = cereal.weight ? cereal.weight*28.3495 : cereal.cups ? cereal.cups*240 : 30
   return nutrientKeys.map(k => cereal[k] || 0);
 }
 
-export function getTotalNutrients(bowlCereals) {
-  return nutrientKeys.map(k => 
+export function getTotalNutrients(bowlCereals, milkAmount = 0) {
+  const cerealTotals = nutrientKeys.map(k => 
     bowlCereals.reduce((sum, c) => {
-      const gramsPerServing = c.weight ? c.weight*28.3495 : c.cups ? c.cups*240 : 30;
-      const factor = c.amount / gramsPerServing;
-      return sum + (c[k] || 0) * factor;
+      const gramsPerServing = c.weight ? c.weight*28.3495 : c.cups ? c.cups*240 : 30
+      const factor = c.amount / gramsPerServing
+      return sum + (c[k] || 0) * factor
     }, 0)
-  );
+  )
+
+  if (milkAmount > 0) {
+    const factor = milkAmount / 100 // milkNutrition per 100ml
+    nutrientKeys.forEach((k,i)=>{
+      cerealTotals[i] += milkNutrition[k] * factor || 0
+    })
+  }
+
+  // Clamp to max values
+  nutrientKeys.forEach((k,i)=>{
+    if (cerealTotals[i] > maxValues[k]) cerealTotals[i] = maxValues[k]
+  })
+
+  return cerealTotals
 }
 
-export function drawRadar(bowlCereals, recommendedCereal) {
-  const chartDiv = d3.select("#radarChart");
-  chartDiv.selectAll("*").remove();
+export function drawRadar(bowlCereals, savedCereals, milkAmount = 0, mode = "total", selectedId = null) {
 
-  const width = chartDiv.node().clientWidth || 250;
-  const height = chartDiv.node().clientHeight || 250;
-  const radius = Math.min(width, height) / 2 - 20;
-  const angleSlice = (2*Math.PI) / nutrientKeys.length;
+  const chartDiv = d3.select("#radarChart")
+  chartDiv.selectAll("*").remove()
 
-  const total = getTotalNutrients(bowlCereals);
-  const recommended = getRecommended(recommendedCereal);
-
-  // per-axis scale
-  const scales = nutrientKeys.map(k => d3.scaleLinear().domain([0,maxValues[k] * 2]).range([0,radius]));
-
-  const radarLine = d3.lineRadial()
-    .radius((d,i)=> scales[i](d))
-    .angle((d,i)=> i*angleSlice)
-    .curve(d3.curveCardinalClosed);
+  const width = chartDiv.node().clientWidth || 250
+  const height = chartDiv.node().clientHeight || 250
+  const radius = Math.min(width, height) / 2 - 20
+  const angleSlice = (2*Math.PI) / nutrientKeys.length
 
   const svg = chartDiv.append("svg")
     .attr("width", width)
     .attr("height", height)
     .append("g")
-    .attr("transform", `translate(${width/2},${height/2})`);
+    .attr("transform", `translate(${width/2},${height/2})`)
 
-  // Draw axes
+  const radarLine = d3.lineRadial()
+    .radius((d,i)=> d)
+    .angle((d,i)=> i*angleSlice)
+    .curve(d3.curveCardinalClosed)
+
+  // ---------- AXIS + GRID ----------
   nutrientKeys.forEach((k,i)=>{
-    const angle = i*angleSlice - Math.PI/2;
+    const angle = i*angleSlice - Math.PI/2
     svg.append("line")
       .attr("x1",0).attr("y1",0)
-      .attr("x2", Math.cos(angle)*radius)
-      .attr("y2", Math.sin(angle)*radius)
-      .attr("stroke","#ccc");
-  });
+      .attr("x2",Math.cos(angle)*radius)
+      .attr("y2",Math.sin(angle)*radius)
+      .attr("stroke","#ccc")
+  })
 
-  // Draw grid circles
-  for(let lvl=1; lvl<=4; lvl++){
-    const r = radius/4*lvl;
+  for(let l=1;l<=4;l++){
     svg.append("circle")
-      .attr("cx",0).attr("cy",0)
-      .attr("r",r)
-      .attr("fill","none").attr("stroke","#eee");
+      .attr("r", (radius/4)*l)
+      .attr("fill","none")
+      .attr("stroke","#eee")
   }
 
-  // Recommended polygon (lighter)
-  svg.append("path")
-    .datum(recommended)
-    .attr("d", radarLine)
-    .attr("fill","rgba(200,200,200,0.2)")
-    .attr("stroke","gray")
-    .attr("stroke-width",1)
-    .attr("stroke-dasharray","4,4");
+  // Helper: convert nutrient values to radial distances
+  function scaleValues(arr) {
+    return arr.map((v,i)=>{
+      return (v / maxValues[nutrientKeys[i]]) * radius
+    })
+  }
 
-  // Total polygon
-  svg.append("path")
-    .datum(total)
-    .attr("d", radarLine)
-    .attr("fill","rgba(128,0,128,0.2)")
-    .attr("stroke","purple")
-    .attr("stroke-width",2);
+  // ---------- MODE: DOSE ----------
+  if (mode === "dose" && selectedId) {
 
-  // Individual cereals
-  bowlCereals.forEach(c=>{
-    const gramsPerServing = c.weight?c.weight*28.3495:c.cups?c.cups*240:30;
-    const factor = c.amount / gramsPerServing;
-    const data = nutrientKeys.map(k=> (c[k]||0)*factor );
-    const color = brandColors[c.mfr] || {r:100,g:100,b:200};
+    const cereal = savedCereals.find(c => c.id == selectedId);
+    if (!cereal) return;
+
+    const recommended = getRecommended(cereal)
+    const scaled = scaleValues(recommended)
 
     svg.append("path")
-      .datum(data)
+      .datum(scaled)
       .attr("d", radarLine)
-      .attr("fill",`rgba(${color.r},${color.g},${color.b},0.5)`)
-      .attr("stroke",`rgb(${color.r},${color.g},${color.b})`)
-      .attr("stroke-width",2);
-  });
+      .attr("fill","rgba(150,150,150,0.25)")
+      .attr("stroke","gray")
+      .attr("stroke-width",2)
+  }
 
-  // Labels
+  // ---------- MODE: ALL ----------
+  // if (mode === "all") {
+    bowlCereals.forEach(c => {
+      const gramsPerServing = c.weight ? c.weight*28.3495 : c.cups ? c.cups*240 : 30
+      const factor = c.amount / gramsPerServing
+
+      let data = nutrientKeys.map(k => (c[k] || 0) * factor)
+
+      // CLAMP INDIVIDUAL CEREAL
+      data = data.map((v, i) => Math.min(v, maxValues[nutrientKeys[i]]))
+
+      const scaled = scaleValues(data)
+
+      const color = brandColors[c.mfr] || {r:120,g:120,b:200}
+
+      svg.append("path")
+        .datum(scaled)
+        .attr("d", radarLine)
+        .attr("fill",`rgba(${color.r},${color.g},${color.b},0.35)`)
+        .attr("stroke",`rgb(${color.r},${color.g},${color.b})`)
+        .attr("stroke-width",2);
+    })
+
+    // Add MILK
+    if (milkAmount > 0) {
+      const factor = milkAmount / 100
+      let milkData = nutrientKeys.map(k => milkNutrition[k] * factor)
+
+      // CLAMP MILK TOO
+      milkData = milkData.map((v, i) => Math.min(v, maxValues[nutrientKeys[i]]))
+
+      const scaled = scaleValues(milkData)
+
+      svg.append("path")
+        .datum(scaled)
+        .attr("d", radarLine)
+        .attr("fill","rgba(255,255,255,0.35)")
+        .attr("stroke","white")
+        .attr("stroke-width",2)
+    }
+  // }
+
+  // ---------- MODE: TOTAL ----------
+  if (mode === "total") {
+    const totalData = getTotalNutrients(bowlCereals, milkAmount)
+    const scaled = scaleValues(totalData)
+
+    svg.append("path")
+      .datum(scaled)
+      .attr("d", radarLine)
+      .attr("fill","rgba(128,0,128,0.25)")
+      .attr("stroke","purple")
+      .attr("stroke-width",3)
+  }
+
+  // ---------- LABELS ----------
   nutrientKeys.forEach((k,i)=>{
     const angle = i*angleSlice - Math.PI/2;
     svg.append("text")
-      .attr("x", Math.cos(angle)*(radius + 10))
-      .attr("y", Math.sin(angle)*(radius + 10))
+      .attr("x",Math.cos(angle)*(radius+12))
+      .attr("y",Math.sin(angle)*(radius+12))
       .attr("text-anchor","middle")
-      .attr("alignment-baseline","middle")
-      .style("font-size","10px")
-      .text(nutrientLabels[i]);
-  });
+      .attr("font-size","10px")
+      .text(`${nutrientLabels[i]} (max ${maxValues[k]})`)
+  })
 }

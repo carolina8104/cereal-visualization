@@ -62,21 +62,14 @@ h1 {
     box-shadow: 0 8px 22px rgba(12,14,20,0.08); 
 }
 
-.shapeIndicator{
-    width:36px;
-    height:28px;
-    border-radius:6px;
-    flex-shrink:0;
-    position:relative;
-    overflow:hidden;
-    border:1px solid rgba(0,0,0,0.06);
+.cerealName{
+      text-align: center;
+  white-space: normal;
+  word-break: break-word;
+  max-width: 80px;
+  margin: 0 auto;
 }
 
-.cerealName{
-    font-weight:600;
-    font-size:15px;
-    color:#0f172a;
-}
 
 .cerealGramBadge{
     margin-left:auto;
@@ -106,9 +99,12 @@ h1 {
   border-radius: 5px;
 }
 
-.cerealName {
-  font-size: 14px;
-  flex: 1;
+.cerealItem span {
+  display: block;
+  text-align: center;
+  max-width: 30px;
+  margin: 0 auto;
+  white-space: normal;
 }
 
 .cerealGramBadge {
@@ -119,7 +115,7 @@ h1 {
 .bowlShape {
   width: 50px;
   height: 50px;
-  border-radius: 15px;
+  /*border-radius: 15px;*/
   position: absolute;
   top: -60px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.2);
@@ -144,9 +140,15 @@ h1 {
     left: 0;
     width: 100%;
     height: 100vh;
-    background: #dcf6f9; 
+    background: linear-gradient(180deg, #dcf6f9 0%, #c8f0f5 100%); 
     cursor: pointer;
     z-index: 100;
+}
+
+
+.cerealParticle {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    z-index: 102;
 }
 
 #leftColumn {
@@ -214,9 +216,56 @@ h1 {
 
 .graph {
   position: absolute;
-  width: 300px;
+  width: 360px;
   height: 270px;
   margin: 0 auto;
   z-index: 1500;
   padding: 5%;
 }
+
+#chartFilters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.filterBtn {
+  padding: 6px 14px;
+  border-radius: 12px;
+  background: #eee;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.filterBtn.active {
+  background: #000;
+  color: white;
+}
+
+.cerealShapeItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.25s;
+  opacity: 0.6;
+  transform: scale(0.8);
+}
+
+.cerealShapeItem.selected {
+  opacity: 1;
+  transform: scale(1);
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+}
+
+.shapeIcon {
+  transition: 0.25s;
+}
+
+.cerealShapeName {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
