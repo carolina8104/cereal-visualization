@@ -70,6 +70,7 @@ function assignUniqueShape(cereal) {
 }
 
 const listEl = document.getElementById("cerealSelector")
+let currentId = null
 let selectedCerealId = null
 
 const bowlEl = document.getElementById("bowlArea")
@@ -338,7 +339,6 @@ function addCerealToBowl(cereal) {
     }
     requestAnimationFrame(animate)
   }
-
 
   // Update amounts and radar AFTER adding
   updateCerealAmounts()
