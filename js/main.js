@@ -65,8 +65,8 @@ async function main() {
             }
 
             if (savedCereals.length === 0) {
-                messageEl.textContent = "First add some cereals to cart"
-                messageEl.style.display = "block"
+                messageEl.textContent = "First add some cereals to cart!"
+                messageEl.classList.add("error")
             } else {
                 messageEl.style.display = "none"
                 const carrinho = document.getElementById("carrinho")

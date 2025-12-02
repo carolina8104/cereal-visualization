@@ -436,3 +436,6 @@ width: 10vh;
   z-index: 11;
 }
 
+.error{
+font-size: 3vh;
+}
