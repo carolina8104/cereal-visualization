@@ -234,30 +234,101 @@ bowlEl.addEventListener("click", (e) => {
     if (!selectedCerealId) return
 
     // --- MILK SELECTED --- //
-    if (selectedCerealId === "milk") {
-        savedMilkAmount += 50
+if (selectedCerealId === "milk" && savedMilkAmount <= 400) {
+  const gif = document.createElement("img");
+  gif.src = "milk.gif?" + new Date().getTime(); 
+  gif.classList.add("milkGif");
 
-        const milkItem = listEl.querySelector(".cerealItem[data-id='milk'] .cerealMilkBadge")
-        milkItem.textContent = `${savedMilkAmount} ml`
+  bowlEl.appendChild(gif);
+}
+
+  const milkMessages = [
+    "Milk overload! Your cereal can't handle it!",
+    "It's not possible to add more milk!",
+    "The milk will overflow!",
+    "Careful! The bowl is full!",
+    "Remember: even calcium has its limits!",
+    "Slow down! The cereal is drowning in milk!",
+];
+
+if (selectedCerealId === "milk") {
+
+ if (savedMilkAmount >= 450) {
+
+        const msgDiv = document.createElement("div");
+        msgDiv.classList.add("milkWarning");
+        const randomIndex = Math.floor(Math.random() * milkMessages.length);
+        msgDiv.textContent = milkMessages[randomIndex];
+
+        document.body.appendChild(msgDiv);
 
         setTimeout(() => {
-            floating.style.top = `${bowlEl.clientHeight / 2 - 100}px`
-            floating.style.opacity = 0
-            floating.style.fontSize = "24px"
-            setTimeout(() => floating.remove(), 1000)
-        }, 10)
-        updateCerealAmounts()
-        updateNutrients()
+            msgDiv.style.opacity = 1;
+            msgDiv.style.top = "15%";
+        }, 10);
 
-        return
+        // desaparece após 2s
+        setTimeout(() => {
+            msgDiv.style.opacity = 0;
+            msgDiv.style.top = "10%";
+            setTimeout(() => msgDiv.remove(), 500);
+        }, 2000);
+
+        return; // impede adicionar mais leite
     }
 
-    // --- CEREAL SELECTED --- //
-    const cereal = savedCereals.find(c => c.id === selectedCerealId)
-    if (!cereal) return
+    savedMilkAmount += 50;
 
-    addCerealToBowl(cereal)
-})
+    // Atualiza badge do leite
+    const milkItem = listEl.querySelector(".cerealItem[data-id='milk'] .cerealMilkBadge");
+    milkItem.textContent = `${savedMilkAmount} ml`;
+
+    const bowlEl = document.getElementById("bowlEl");
+
+    // Cria leite se não existir
+    let milkLiquid = bowlEl.querySelector(".milkLiquid");
+    if (!milkLiquid) {
+        milkLiquid = document.createElement("div");
+        milkLiquid.classList.add("milkLiquid");
+        bowlEl.appendChild(milkLiquid);
+    }
+
+    // Faz leite crescer
+    setTimeout(() => {
+    const maxHeight = bowlEl.clientHeight * 0.9;
+    const heightPer50ml = 25;
+    let newHeight = milkLiquid.clientHeight + heightPer50ml;
+    if (newHeight > maxHeight) newHeight = maxHeight;
+    milkLiquid.style.height = newHeight + "px";
+        }, 800);
+
+    // +50ml flutuante
+    const floating = document.createElement("div");
+    floating.className = "floatingAmount";
+    floating.textContent = "+50ml";
+    floating.style.left = `${bowlEl.clientWidth * 0.6}px`;
+    floating.style.top = `${bowlEl.clientHeight * 0.5}px`;
+    bowlEl.appendChild(floating);
+
+    setTimeout(() => {
+        floating.style.top = `${bowlEl.clientHeight / 2 - 100}px`;
+        floating.style.opacity = 0;
+    }, 20);
+    setTimeout(() => floating.remove(), 1000);
+
+    updateCerealAmounts();
+    updateNutrients();
+    return;
+}
+
+
+
+      // --- CEREAL SELECTED --- //
+      const cereal = savedCereals.find(c => c.id === selectedCerealId)
+      if (!cereal) return
+
+      addCerealToBowl(cereal)
+  })
 
 //--------------------------------------------// Animação dos cerais a cair
 function addCerealToBowl(cereal) {
@@ -288,7 +359,7 @@ function addCerealToBowl(cereal) {
 
   // Animate falling shapes
   const config = cereal.shape;
-  const shapeCount = 4; // pieces per click
+  const shapeCount = 2; // pieces per click
   for (let i = 0; i < shapeCount; i++) {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
     svg.setAttribute("width", config.size)
@@ -303,9 +374,10 @@ function addCerealToBowl(cereal) {
     svg.appendChild(path)
     bowlEl.appendChild(svg)
 
-    const startX = Math.random() * (bowlEl.clientWidth - config.size)
-    const bowlMargin = 30
-    let x = bowlMargin + Math.random() * (bowlEl.clientWidth - config.size - bowlMargin * 2)
+    const leftLimit = bowlEl.clientWidth * 0.55;
+    const rightLimit = bowlEl.clientWidth * 0.8;
+    let x = leftLimit + Math.random() * (rightLimit - leftLimit - config.size);
+
     let y = 0
     let rotation = Math.random() * 360
     const fallSpeed = 2 + Math.random() * 3
@@ -317,7 +389,7 @@ function addCerealToBowl(cereal) {
       svg.style.top = y + "px"
       svg.style.left = x + "px"
       svg.style.transform = `rotate(${rotation}deg)`
-      const bowlRimY = bowlEl.clientHeight * 0.98 //---------// Fundo
+      const bowlRimY = bowlEl.clientHeight * 0.88 //---------// Fundo
 
       if (y >= bowlRimY) {
         y = bowlRimY

@@ -129,19 +129,44 @@ export function openModal(cerealData) {
         let savedCereals = JSON.parse(localStorage.getItem("savedCereals")) || [];
 
         // Limite máximo 5 cereais
-        if (savedCereals.length >= 5) {
-            let maxMessage = document.getElementById("maxCerealMessage");
-            if (!maxMessage) {
-                maxMessage = document.createElement("p")
-                maxMessage.id = "maxCerealMessage"
-                document.getElementById("popup").appendChild(maxMessage)
-            }
-            maxMessage.textContent = "You can only add up to 5 cereals!"
-            return
-        } else {
-            const maxMessage = document.getElementById("maxCerealMessage")
-            if (maxMessage) maxMessage.style.display = "none"
+    const cerealMessages = [
+        "You can only add up to 5 cereals!",
+        "That's enough cereal for today!",
+        "No more cereals allowed!"
+    ];
+
+    if (savedCereals.length >= 5) {
+        let maxMessage = document.getElementById("maxCerealMessage");
+
+        if (!maxMessage) {
+            maxMessage = document.createElement("p");
+            maxMessage.id = "maxCerealMessage";
+            maxMessage.classList.add("maxMessage"); 
+            document.getElementById("popup").appendChild(maxMessage);
         }
+
+        const randomIndex = Math.floor(Math.random() * cerealMessages.length);
+        maxMessage.textContent = cerealMessages[randomIndex];
+
+        maxMessage.style.opacity = 0;
+        maxMessage.style.display = "block";
+        setTimeout(() => {
+            maxMessage.style.opacity = 1;
+            maxMessage.style.top = "15%";
+        }, 10);
+
+        setTimeout(() => {
+            maxMessage.style.opacity = 0;
+            maxMessage.style.top = "10%";
+            setTimeout(() => maxMessage.remove(), 500);
+        }, 2000);
+
+        return;
+    } else {
+        const maxMessage = document.getElementById("maxCerealMessage");
+        if (maxMessage) maxMessage.remove();
+    }
+
 
         if (!savedCereals.some(c => c.name === cerealData.name)) {
             savedCereals.unshift(cerealData)

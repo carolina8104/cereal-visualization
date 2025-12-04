@@ -10,7 +10,7 @@
 }
 
 body {
-     margin:0;
+    margin:0;
     font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
     background:var(--bg);
     color:#111827;
@@ -140,7 +140,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 100vh;
-    background: linear-gradient(180deg, #dcf6f9 0%, #c8f0f5 100%); 
+    background-color: #DAEFFA;
     cursor: pointer;
     z-index: 100;
 }
@@ -267,5 +267,57 @@ h1 {
 .cerealShapeName {
   font-size: 12px;
   margin-top: 5px;
+}
+
+.milkGif {
+    position: absolute;
+    left:45vw;
+    height: 115vh;
+    width:auto;
+    pointer-events: none;
+    user-select: none;
+    z-index: 10; 
+}
+
+#bowlEl {
+  width: 35vw;
+  height: 27vh;
+  border-bottom-left-radius: 200px;
+  border-bottom-right-radius: 200px;
+  border-top: none;
+  position: relative;
+  left: 101vh;
+  top: 70vh;
+  background: rgba(78, 75, 75, 0.5);
+  z-index: 111;
+  overflow: hidden; 
+  }
+
+.milkLiquid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: rgba(255, 255, 255, 0.75); 
+  transition: height 0.3s ease; 
+  clip-path: polygon(
+    10% 100%, 0% 0%, 100% 0%, 90% 100%
+  ); /* máscara da taça */
+  z-index: 0;
+}
+
+
+.milkWarning { /* isto é quase igual ao #maxCerealMessage mas estão em css diferentes */
+  position: absolute;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 14px 23px;
+  border-radius: 10px;
+  font-weight: bold;
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.5s ease, top 0.5s ease;
+  transform: translate(34vh, 15vh);
+  border:2px solid black;
 }
 

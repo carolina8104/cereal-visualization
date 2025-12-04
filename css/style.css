@@ -138,9 +138,15 @@ position: fixed;
 
 #maxCerealMessage{
   font-size:1.6rem;
-  background-color:#e5dfbd;
   padding: 4vh;
-  border-radius: 15px;
+  background: rgba(255, 255, 255, 1);
+  border:2px solid black;
+  padding: 14px 23px;
+  border-radius: 10px;
+  font-weight: bold;
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.5s ease, top 0.5s ease;
 }
 
 
