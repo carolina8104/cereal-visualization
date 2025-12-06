@@ -97,16 +97,21 @@ button:hover{
   transition: 0.1s;
 }
 
-
 #carrinho {
-  position: fixed;
-  bottom: 1vh;       
-  left: 130vh;    
-  width: 70vh;  
-  height: auto;
+  position: relative;
+  top: 38vh;
+  left: 5vh;
+  width: 70vh;
+  height: 70vh;
   z-index: 1;   
-  transition: bottom 0.3s ease;
 }
+
+.flying-box {
+  position: absolute;
+  border-radius: 4px;
+  transition: top 0.9s ease-in-out; 
+}
+
 
 #carrinho:hover {
   bottom: 2vh;       
@@ -394,18 +399,6 @@ width: 10vh;
 
 #orderSelect{
   margin-left:7vh;
-}
-
-
-
-.flying-box {
-  position: absolute;
-  transition: top 0.9s ease-in-out;
-  border-radius: 4px;
-}
-
-#cartItems {
-    display: flex;
 }
 
 .buttontop {
