@@ -90,3 +90,13 @@ export function applyFilters(data) {
 
     return filtered
 }
+
+
+
+
+const filterButton = document.querySelector(".hideFilter");
+const filters_box = document.querySelector("#filters");
+
+filterButton.addEventListener("click", () => {
+  filters_box.classList.toggle("hidden");
+});

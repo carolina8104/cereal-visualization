@@ -5,7 +5,7 @@ export function updateCartSummary() {
     if (!summaryEl) {
         summaryEl = document.createElement("div")
         summaryEl.id = "cartSummary"
-        document.getElementById("menu1").appendChild(summaryEl)
+        document.getElementById("cartSummary").appendChild(summaryEl)
     }
 
     if (savedCereals.length === 0) {

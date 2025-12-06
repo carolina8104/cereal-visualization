@@ -9,7 +9,7 @@
   <body>
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
-  <div id="filters">
+  <div id="filters" class="hidden">
   <div class="filter-row">
     <label>Protein ≤ <input id="proteinInput" type="number" min="0" placeholder="g"></label>
     <label>Sugar ≤ <input id="sugarInput" type="number" min="0" placeholder="g"></label>
@@ -58,7 +58,7 @@
             <div class="shelf" id="shelf-3"><div class="rail"></div></div>
         </div>
 
-        <aside>
+            <div id="cartSummary"></div>
             <div id="menu1">
                 <h2>Pick your cereals</h2>
                 <div class="button-container">
@@ -91,9 +91,11 @@
                 <ellipse cx="1109" cy="896.931" rx="74.4697" ry="72.8682" fill="black"/>
                 <ellipse cx="264.476" cy="896.931" rx="74.4697" ry="72.8682" fill="black"/>
             </svg>
-        </aside>
-      <button class="buttontop" id="resetFilters">⟳</button>
-      <div class="buttontop" id="info-circle">ℹ</div>
+      <div id="button_content">
+        <button class="hideFilter"> Filters</button>
+        <button class="buttontop" id="resetFilters">↻</button>
+        <button class="buttontop" id="info-circle">ℹ</button>
+      </div>
       <div id="info" >
         <img src="info.jpg" alt="Descrição da imagem">
       </div>
