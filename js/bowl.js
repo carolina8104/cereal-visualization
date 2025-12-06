@@ -332,6 +332,15 @@ if (selectedCerealId === "milk") {
       addCerealToBowl(cereal)
   })
 
+  // Mensagens aleatórias para limite de cereais
+const cerealWarnings = [
+  "Cereal overload! A taça já não aguenta mais!",
+  "Demasiados cereais! Está a ultrapassar o limite!",
+  "O cereal está a transbordar!",
+  "Calma! Isso são cereais a mais!",
+  "A taça já está cheia de cereais!"
+];
+
 //--------------------------------------------// Animação dos cerais a cair
 function addCerealToBowl(cereal) {
   assignUniqueShape(cereal)
@@ -366,11 +375,40 @@ function addCerealToBowl(cereal) {
     return newTotal > maxValues[nutrient]
   })
 
-  // Se algum nutriente excederia o máximo, bloquear
+    // -------------------- Aviso quando atingir o limite --------------------
   if (wouldExceedMax) {
-    console.log("Bloqueado: um nutriente atingiu o máximo!")
-    return
+    const cerealWarnings = [
+      "Cereal overload! The bowl can't take any more!",
+      "Too many cereals! You're exceeding the limit!",
+      "The cereal is overflowing!",
+      "Careful! That's too much cereal!",
+      "The bowl is already full of cereal!"
+    ]
+
+    const msgDiv = document.createElement("div");
+    msgDiv.classList.add("cerealWarning");
+
+    // Texto aleatório
+    const randomIndex = Math.floor(Math.random() * cerealWarnings.length);
+    msgDiv.textContent = cerealWarnings[randomIndex];
+
+    // Anexa e anima
+    document.body.appendChild(msgDiv);
+    // Forçar reflow para a animação CSS funcionar
+    void msgDiv.offsetWidth;
+    msgDiv.style.opacity = 1;
+    msgDiv.style.top = "15%";
+
+    // Desaparece após 2s
+    setTimeout(() => {
+      msgDiv.style.opacity = 0;
+      msgDiv.style.top = "10%";
+      setTimeout(() => msgDiv.remove(), 400);
+    }, 2000);
+
+    return; // impede adicionar mais cereais
   }
+  // ---------------------------------------------------------------------
 
   // Find or add cereal in bowl
   const existing = bowlCereals.find(c => c.id === cereal.id)
@@ -498,3 +536,47 @@ function resetBowl() {
 if (resetBtn) {
   resetBtn.addEventListener("click", resetBowl)
 }
+
+// -------------------- dica de clique --------------------
+function showInitialCerealTip() {
+  const tipDiv = document.createElement("div");
+  tipDiv.classList.add("cerealTip");
+
+
+  const text = document.createElement("div");
+  text.textContent = "Click to add cereals!";
+  tipDiv.appendChild(text);
+
+
+  const handSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  handSVG.setAttribute("width", 40);
+  handSVG.setAttribute("height", 40);
+  handSVG.setAttribute("viewBox", "0 0 24 24");
+
+  const path = document.createElementNS(handSVG.namespaceURI, "path");
+  path.setAttribute("d", "M12 2C10.8954 2 10 2.89543 10 4V12.5858L8.70711 11.2929C8.31658 10.9024 7.68342 10.9024 7.29289 11.2929C6.90237 11.6834 6.90237 12.3166 7.29289 12.7071L12 17.4142L16.7071 12.7071C17.0976 12.3166 17.0976 11.6834 16.7071 11.2929C16.3166 10.9024 15.6834 10.9024 15.2929 11.2929L14 12.5858V4C14 2.89543 13.1046 2 12 2Z");
+  path.setAttribute("fill", "#ffb84d");
+  handSVG.appendChild(path);
+
+  tipDiv.appendChild(handSVG);
+
+  document.body.appendChild(tipDiv);
+
+
+  let direction = 1;
+  const interval = setInterval(() => {
+    const translateY = direction * 5;
+    handSVG.style.transform = `translateY(${translateY}px)`;
+    direction *= -1;
+  }, 400);
+
+
+  setTimeout(() => {
+    clearInterval(interval);
+    tipDiv.remove();
+  }, 5000);
+}
+
+
+showInitialCerealTip();
+

@@ -360,3 +360,43 @@ h1 {
   border:2px solid black;
 }
 
+.cerealWarning {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg,#ffd86b,#ffb84d);
+  color: #5a3d00;
+  padding: 12px 18px;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 10px;
+  opacity: 0;
+  transition: top 0.3s ease, opacity 0.3s ease;
+  z-index: 9999;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  pointer-events: none;
+}
+
+.cerealTip {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translateX(67%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 12px 20px;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  z-index: 9999;
+}
+
+.cerealTip svg {
+  margin-top: 8px;
+  transition: transform 0.3s ease;
+}
