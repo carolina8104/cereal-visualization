@@ -86,7 +86,7 @@ async function main() {
             });
 
                 setTimeout(() => {
-                    window.location.href = "bowl.html"
+                    navigateToBowl()
                 }, 1000)
             }
         })

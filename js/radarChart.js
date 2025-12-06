@@ -38,6 +38,13 @@ export function getRecommended(cereal) {
   return nutrientKeys.map(k => cereal[k] || 0);
 }
 
+export function getRecommendedMilk() {
+  // Dose recomendada de leite: 200ml (padrão)
+  const recommendedMlMilk = 200
+  const factor = recommendedMlMilk / 100
+  return nutrientKeys.map(k => milkNutrition[k] * factor || 0)
+}
+
 export function getTotalNutrients(bowlCereals, milkAmount = 0) {
   const cerealTotals = nutrientKeys.map(k => 
     bowlCereals.reduce((sum, c) => {
@@ -90,14 +97,15 @@ export function drawRadar(bowlCereals, savedCereals, milkAmount = 0, mode = "tot
       .attr("x1",0).attr("y1",0)
       .attr("x2",Math.cos(angle)*radius)
       .attr("y2",Math.sin(angle)*radius)
-      .attr("stroke","#ccc")
+      .attr("stroke","#4b4b4b57")
   })
 
   for(let l=1;l<=4;l++){
     svg.append("circle")
       .attr("r", (radius/4)*l)
       .attr("fill","none")
-      .attr("stroke","#eee")
+      .attr("stroke","#4b4b4b57")
+
   }
 
   // Helper: convert nutrient values to radial distances
@@ -110,18 +118,32 @@ export function drawRadar(bowlCereals, savedCereals, milkAmount = 0, mode = "tot
   // ---------- MODE: DOSE ----------
   if (mode === "dose" && selectedId) {
 
-    const cereal = savedCereals.find(c => c.id == selectedId);
-    if (!cereal) return;
+    if (selectedId === "milk") {
+      // Mostrar dose recomendada do leite
+      const recommendedMilk = getRecommendedMilk()
+      const scaled = scaleValues(recommendedMilk)
 
-    const recommended = getRecommended(cereal)
-    const scaled = scaleValues(recommended)
+      svg.append("path")
+        .datum(scaled)
+        .attr("d", radarLine)
+        .attr("fill","rgba(150,150,150,0.25)")
+        .attr("stroke","gray")
+        .attr("stroke-width",2)
+    } else {
+      // Mostrar dose do cereal
+      const cereal = savedCereals.find(c => c.id == selectedId);
+      if (!cereal) return;
 
-    svg.append("path")
-      .datum(scaled)
-      .attr("d", radarLine)
-      .attr("fill","rgba(150,150,150,0.25)")
-      .attr("stroke","gray")
-      .attr("stroke-width",2)
+      const recommended = getRecommended(cereal)
+      const scaled = scaleValues(recommended)
+
+      svg.append("path")
+        .datum(scaled)
+        .attr("d", radarLine)
+        .attr("fill","rgba(150,150,150,0.25)")
+        .attr("stroke","gray")
+        .attr("stroke-width",2)
+    }
   }
 
   // ---------- MODE: ALL ----------

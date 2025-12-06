@@ -4,6 +4,7 @@
     --panel: #ffffff;
     --hover: #b9b9b9;
     --muted: #6b7280;
+    --muted2: #6b728045;
 }
 *{
     box-sizing:border-box
@@ -51,7 +52,7 @@ h1 {
     gap:12px;
     padding:10px 12px;
     border-radius:10px;
-    background:var(--panel);
+    background:var(--muted2);
     box-shadow: 0 4px 14px rgba(12,14,20,0.06);
     cursor:pointer;
     transition: transform .12s ease, box-shadow .12s ease;
@@ -78,7 +79,6 @@ h1 {
 }
 
 .cerealItem.selected{
-    outline: 2px solid rgba(76,99,255,0.14);
     transform: scale(1.01);
 }
 
@@ -90,6 +90,7 @@ h1 {
 
 .cerealItem.selected {
   background: #ddd;
+  background-color: #ddd;
 }
 
 .shapeIndicator {
@@ -111,6 +112,21 @@ h1 {
   margin-left: 10px;
   font-weight: bold;
 }
+
+.cerealMilkBadge {
+  font-size: 13px;
+  color: #000;
+  font-weight: bold;
+  color: var(--muted);
+  transition: all 0.12s ease;
+}
+
+.cerealItem.selected  {
+  background-color: var(--panel);
+  color: var(--muted);
+  font-weight: normal;
+}
+
 
 .bowlShape {
   width: 50px;
@@ -229,6 +245,32 @@ h1 {
   margin-bottom: 8px;
 }
 
+#resetContainer {
+  margin-bottom: 20px;
+}
+
+.resetBtn {
+  width: 50%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  font-weight: 500;
+  color: #333;
+  transition: all 0.2s;
+  font-size: 13px;
+}
+
+.resetBtn:hover {
+  background: #e8e8e8;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.resetBtn:active {
+  transform: scale(0.98);
+}
+
 .filterBtn {
   padding: 6px 14px;
   border-radius: 12px;
@@ -301,9 +343,6 @@ h1 {
   height: 0;
   background: rgba(255, 255, 255, 0.75); 
   transition: height 0.3s ease; 
-  clip-path: polygon(
-    10% 100%, 0% 0%, 100% 0%, 90% 100%
-  ); /* máscara da taça */
   z-index: 0;
 }
 

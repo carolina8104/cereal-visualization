@@ -1,8 +1,8 @@
-[{"name":"100% Bran","mfr":"N","type":"C","calories":70,"protein":4,"fat":1,"sodium":130,"fiber":10,"carbo":5,"sugars":6,"potass":280,"vitamins":25,"shelf":3,"weight":1,"cups":0.33,"rating":68.402973},
+[
+{"name":"100% Bran","mfr":"N","type":"C","calories":70,"protein":4,"fat":1,"sodium":130,"fiber":10,"carbo":5,"sugars":6,"potass":280,"vitamins":25,"shelf":3,"weight":1,"cups":0.33,"rating":68.402973},
 {"name":"100% Natural Bran","mfr":"Q","type":"C","calories":120,"protein":3,"fat":5,"sodium":15,"fiber":2,"carbo":8,"sugars":8,"potass":135,"vitamins":0,"shelf":3,"weight":1,"cups":1,"rating":33.983679},
 {"name":"All-Bran","mfr":"K","type":"C","calories":70,"protein":4,"fat":1,"sodium":260,"fiber":9,"carbo":7,"sugars":5,"potass":320,"vitamins":25,"shelf":3,"weight":1,"cups":0.33,"rating":59.425505},
 {"name":"All-Bran with Extra Fiber","mfr":"K","type":"C","calories":50,"protein":4,"fat":0,"sodium":140,"fiber":14,"carbo":8,"sugars":0,"potass":330,"vitamins":25,"shelf":3,"weight":1,"cups":0.5,"rating":93.704912},
-{"name":"Almond Delight","mfr":"R","type":"C","calories":110,"protein":2,"fat":2,"sodium":200,"fiber":1,"carbo":14,"sugars":8,"potass":-1,"vitamins":25,"shelf":3,"weight":1,"cups":0.75,"rating":34.384843},
 {"name":"Apple Cinnamon Cheerios","mfr":"G","type":"C","calories":110,"protein":2,"fat":2,"sodium":180,"fiber":1.5,"carbo":10.5,"sugars":10,"potass":70,"vitamins":25,"shelf":1,"weight":1,"cups":0.75,"rating":29.509541},
 {"name":"Apple Jacks","mfr":"K","type":"C","calories":110,"protein":2,"fat":0,"sodium":125,"fiber":1,"carbo":11,"sugars":14,"potass":30,"vitamins":25,"shelf":2,"weight":1,"cups":1,"rating":33.174094},
 {"name":"Basic 4","mfr":"G","type":"C","calories":130,"protein":3,"fat":2,"sodium":210,"fiber":2,"carbo":18,"sugars":8,"potass":100,"vitamins":25,"shelf":3,"weight":1.33,"cups":0.75,"rating":37.038562},
@@ -10,7 +10,7 @@
 {"name":"Bran Flakes","mfr":"P","type":"C","calories":90,"protein":3,"fat":0,"sodium":210,"fiber":5,"carbo":13,"sugars":5,"potass":190,"vitamins":25,"shelf":3,"weight":1,"cups":0.67,"rating":53.313813},
 {"name":"Cap'n'Crunch","mfr":"Q","type":"C","calories":120,"protein":1,"fat":2,"sodium":220,"fiber":0,"carbo":12,"sugars":12,"potass":35,"vitamins":25,"shelf":2,"weight":1,"cups":0.75,"rating":18.042851},
 {"name":"Cheerios","mfr":"G","type":"C","calories":110,"protein":6,"fat":2,"sodium":290,"fiber":2,"carbo":17,"sugars":1,"potass":105,"vitamins":25,"shelf":1,"weight":1,"cups":1.25,"rating":50.764999},
-{"name":"Cinnamon Toast Crunch","mfr":"G","type":"C","calories":120,"protein":1,"fat":3,"sodium":210,"fiber":0,"carbo":13,"sugars":9,"potass":45,"vitamins":25,"shelf":2,"weight":1,"cups":"0.75","rating":19.823573},
+{"name":"Cinnamon Toast Crunch","mfr":"G","type":"C","calories":120,"protein":1,"fat":3,"sodium":210,"fiber":0,"carbo":13,"sugars":9,"potass":45,"vitamins":25,"shelf":2,"weight":1,"cups":0.75,"rating":19.823573},
 {"name":"Clusters","mfr":"G","type":"C","calories":110,"protein":3,"fat":2,"sodium":140,"fiber":2,"carbo":13,"sugars":7,"potass":105,"vitamins":25,"shelf":3,"weight":1,"cups":0.5,"rating":40.400208},
 {"name":"Cocoa Puffs","mfr":"G","type":"C","calories":110,"protein":1,"fat":1,"sodium":180,"fiber":0,"carbo":12,"sugars":13,"potass":55,"vitamins":25,"shelf":2,"weight":1,"cups":1,"rating":22.736446},
 {"name":"Corn Chex","mfr":"R","type":"C","calories":110,"protein":2,"fat":0,"sodium":280,"fiber":0,"carbo":22,"sugars":3,"potass":25,"vitamins":25,"shelf":1,"weight":1,"cups":1,"rating":41.445019},
@@ -18,7 +18,6 @@
 {"name":"Corn Pops","mfr":"K","type":"C","calories":110,"protein":1,"fat":0,"sodium":90,"fiber":1,"carbo":13,"sugars":12,"potass":20,"vitamins":25,"shelf":2,"weight":1,"cups":1,"rating":35.782791},
 {"name":"Count Chocula","mfr":"G","type":"C","calories":110,"protein":1,"fat":1,"sodium":180,"fiber":0,"carbo":12,"sugars":13,"potass":65,"vitamins":25,"shelf":2,"weight":1,"cups":1,"rating":22.396513},
 {"name":"Cracklin' Oat Bran","mfr":"K","type":"C","calories":110,"protein":3,"fat":3,"sodium":140,"fiber":4,"carbo":10,"sugars":7,"potass":160,"vitamins":25,"shelf":3,"weight":1,"cups":0.5,"rating":40.448772},
-{"name":"Cream of Wheat (Quick)","mfr":"N","type":"H","calories":100,"protein":3,"fat":0,"sodium":80,"fiber":1,"carbo":21,"sugars":0,"potass":-1,"vitamins":0,"shelf":2,"weight":1,"cups":1,"rating":64.533816},
 {"name":"Crispix","mfr":"K","type":"C","calories":110,"protein":2,"fat":0,"sodium":220,"fiber":1,"carbo":21,"sugars":3,"potass":30,"vitamins":25,"shelf":3,"weight":1,"cups":1,"rating":46.895644},
 {"name":"Crispy Wheat & Raisins","mfr":"G","type":"C","calories":100,"protein":2,"fat":1,"sodium":140,"fiber":2,"carbo":11,"sugars":10,"potass":120,"vitamins":25,"shelf":3,"weight":1,"cups":0.75,"rating":36.176196},
 {"name":"Double Chex","mfr":"R","type":"C","calories":100,"protein":2,"fat":0,"sodium":190,"fiber":1,"carbo":18,"sugars":5,"potass":80,"vitamins":25,"shelf":3,"weight":1,"cups":0.75,"rating":44.330856},
@@ -55,7 +54,6 @@
 {"name":"Puffed Rice","mfr":"Q","type":"C","calories":50,"protein":1,"fat":0,"sodium":0,"fiber":0,"carbo":13,"sugars":0,"potass":15,"vitamins":0,"shelf":3,"weight":0.5,"cups":1,"rating":60.756112},
 {"name":"Puffed Wheat","mfr":"Q","type":"C","calories":50,"protein":2,"fat":0,"sodium":0,"fiber":1,"carbo":10,"sugars":0,"potass":50,"vitamins":0,"shelf":3,"weight":0.5,"cups":1,"rating":63.005645},
 {"name":"Quaker Oat Squares","mfr":"Q","type":"C","calories":100,"protein":4,"fat":1,"sodium":135,"fiber":2,"carbo":14,"sugars":6,"potass":110,"vitamins":25,"shelf":3,"weight":1,"cups":0.5,"rating":49.511874},
-{"name":"Quaker Oatmeal","mfr":"Q","type":"H","calories":100,"protein":5,"fat":2,"sodium":0,"fiber":2.7,"carbo":-1,"sugars":-1,"potass":110,"vitamins":0,"shelf":1,"weight":1,"cups":0.67,"rating":50.828392},
 {"name":"Raisin Bran","mfr":"K","type":"C","calories":120,"protein":3,"fat":1,"sodium":210,"fiber":5,"carbo":14,"sugars":12,"potass":240,"vitamins":25,"shelf":2,"weight":1.33,"cups":0.75,"rating":39.259197},
 {"name":"Raisin Nut Bran","mfr":"G","type":"C","calories":100,"protein":3,"fat":2,"sodium":140,"fiber":2.5,"carbo":10.5,"sugars":8,"potass":140,"vitamins":25,"shelf":3,"weight":1,"cups":0.5,"rating":39.703400},
 {"name":"Raisin Squares","mfr":"K","type":"C","calories":90,"protein":2,"fat":0,"sodium":0,"fiber":2,"carbo":15,"sugars":6,"potass":110,"vitamins":25,"shelf":3,"weight":1,"cups":0.5,"rating":55.333142},
@@ -68,10 +66,10 @@
 {"name":"Special K","mfr":"K","type":"C","calories":110,"protein":6,"fat":0,"sodium":230,"fiber":1,"carbo":16,"sugars":3,"potass":55,"vitamins":25,"shelf":1,"weight":1,"cups":1,"rating":53.131324},
 {"name":"Strawberry Fruit Wheats","mfr":"N","type":"C","calories":90,"protein":2,"fat":0,"sodium":15,"fiber":3,"carbo":15,"sugars":5,"potass":90,"vitamins":25,"shelf":2,"weight":1,"cups":1,"rating":59.363993},
 {"name":"Total Corn Flakes","mfr":"G","type":"C","calories":110,"protein":2,"fat":1,"sodium":200,"fiber":0,"carbo":21,"sugars":3,"potass":35,"vitamins":100,"shelf":3,"weight":1,"cups":1,"rating":38.839746},
-{"name":"Total Raisin Bran","mfr":"G","type":"C","calories":140,"protein":3,"fat":1,"sodium":190,"fiber":4,"carbo":15,"sugars":14,"potass":230,"vitamins":100,"shelf":3,"weight":1746057600000,"cups":1,"rating":28.592785},
 {"name":"Total Whole Grain","mfr":"G","type":"C","calories":100,"protein":3,"fat":1,"sodium":200,"fiber":3,"carbo":16,"sugars":3,"potass":110,"vitamins":100,"shelf":3,"weight":1,"cups":1,"rating":46.658844},
 {"name":"Triples","mfr":"G","type":"C","calories":110,"protein":2,"fat":1,"sodium":250,"fiber":0,"carbo":21,"sugars":3,"potass":60,"vitamins":25,"shelf":3,"weight":1,"cups":0.75,"rating":39.106174},
 {"name":"Trix","mfr":"G","type":"C","calories":110,"protein":1,"fat":1,"sodium":140,"fiber":0,"carbo":13,"sugars":12,"potass":25,"vitamins":25,"shelf":2,"weight":1,"cups":1,"rating":27.753301},
 {"name":"Wheat Chex","mfr":"R","type":"C","calories":100,"protein":3,"fat":1,"sodium":230,"fiber":3,"carbo":17,"sugars":3,"potass":115,"vitamins":25,"shelf":1,"weight":1,"cups":0.67,"rating":49.787445},
 {"name":"Wheaties","mfr":"G","type":"C","calories":100,"protein":3,"fat":1,"sodium":200,"fiber":3,"carbo":17,"sugars":3,"potass":110,"vitamins":25,"shelf":1,"weight":1,"cups":1,"rating":51.592193},
-{"name":"Wheaties Honey Gold","mfr":"G","type":"C","calories":110,"protein":2,"fat":1,"sodium":200,"fiber":1,"carbo":16,"sugars":8,"potass":60,"vitamins":25,"shelf":1,"weight":1,"cups":0.75,"rating":36.187559}]
+{"name":"Wheaties Honey Gold","mfr":"G","type":"C","calories":110,"protein":2,"fat":1,"sodium":200,"fiber":1,"carbo":16,"sugars":8,"potass":60,"vitamins":25,"shelf":1,"weight":1,"cups":0.75,"rating":36.187559}
+]

@@ -158,11 +158,7 @@ function renderList() {
     badge.className = "cerealGramBadge"
     badge.textContent = "0 g"
 
-    const milkBadge = document.createElement("div")
-    milkBadge.className = "cerealMilkBadge"
-    milkBadge.textContent = "0 ml"
-
-    item.append(indicator, name, badge, milkBadge)
+    item.append(indicator, name, badge)
     item.style.zIndex = 150
 
     // Seleção do cereal
@@ -183,22 +179,28 @@ function selectItem(id) {
     selectedCerealId = id
 
     document.querySelectorAll(".cerealShapeItem").forEach(el => {
-    el.classList.toggle("selected", el.dataset.id == id)
+        el.classList.toggle("selected", el.dataset.id == id)
+    })
+    
+    document.querySelectorAll(".cerealItem").forEach(el => {
+        el.classList.toggle("selected", el.dataset.id == id)
+    })
+    
     refreshChart()
-})
 }
 
 // ------------------------------------------// Atualiza badges dos cereais na lista
 function updateCerealAmounts() {
+    // Atualizar badges de todos os cereais (não só os que estão na taça)
     savedCereals.forEach(c => {
-        const item = listEl.querySelector(`.cerealItem[data-id='${c.id}']`)
+        const item = listEl.querySelector(`.cerealShapeItem[data-id='${c.id}']`)
         if (!item) return
 
         const gramBadge = item.querySelector(".cerealGramBadge")
-        const milkBadge = item.querySelector(".cerealMilkBadge")
+        const cerealInBowl = bowlCereals.find(bc => bc.id === c.id)
+        const amount = cerealInBowl ? cerealInBowl.amount : 0
 
-        if (gramBadge) gramBadge.textContent = `${c.amount || 0} g`
-        if (milkBadge) milkBadge.textContent = `${c.milk || 0} ml`
+        if (gramBadge) gramBadge.textContent = `${amount} g`
     })
 
     const milkItem = listEl.querySelector(".cerealItem[data-id='milk'] .cerealMilkBadge")
@@ -283,19 +285,19 @@ if (selectedCerealId === "milk") {
     const milkItem = listEl.querySelector(".cerealItem[data-id='milk'] .cerealMilkBadge");
     milkItem.textContent = `${savedMilkAmount} ml`;
 
-    const bowlEl = document.getElementById("bowlEl");
+    const bowlElLocal = document.getElementById("bowlEl");
 
     // Cria leite se não existir
-    let milkLiquid = bowlEl.querySelector(".milkLiquid");
+    let milkLiquid = bowlElLocal.querySelector(".milkLiquid");
     if (!milkLiquid) {
         milkLiquid = document.createElement("div");
         milkLiquid.classList.add("milkLiquid");
-        bowlEl.appendChild(milkLiquid);
+        bowlElLocal.appendChild(milkLiquid);
     }
 
     // Faz leite crescer
     setTimeout(() => {
-    const maxHeight = bowlEl.clientHeight * 0.9;
+    const maxHeight = bowlElLocal.clientHeight * 0.9;
     const heightPer50ml = 25;
     let newHeight = milkLiquid.clientHeight + heightPer50ml;
     if (newHeight > maxHeight) newHeight = maxHeight;
@@ -334,6 +336,41 @@ if (selectedCerealId === "milk") {
 function addCerealToBowl(cereal) {
   assignUniqueShape(cereal)
   const amount = 5
+
+  // Importar os valores máximos do gráfico
+  const maxValues = {
+    calories: 600,  
+    protein: 15,   
+    fat: 12,       
+    carbo: 90,      
+    sugars: 22.5,   
+    sodium: 375,     
+    potass: 600,     
+    vitamins: 150   
+  }
+
+  // Calcular nutrientes atuais + novo cereal
+  const testBowl = [...bowlCereals, { ...cereal, amount }]
+  const gramsPerServing = cereal.weight * 28.3495
+  const factor = amount / gramsPerServing
+
+  // Verificar se algum nutriente ultrapassaria o máximo
+  const wouldExceedMax = Object.keys(maxValues).some(nutrient => {
+    const currentTotal = bowlCereals.reduce((sum, c) => {
+      const cServingGrams = c.weight * 28.3495
+      const cFactor = c.amount / cServingGrams
+      return sum + (c[nutrient] || 0) * cFactor
+    }, 0)
+    
+    const newTotal = currentTotal + (cereal[nutrient] || 0) * factor
+    return newTotal > maxValues[nutrient]
+  })
+
+  // Se algum nutriente excederia o máximo, bloquear
+  if (wouldExceedMax) {
+    console.log("Bloqueado: um nutriente atingiu o máximo!")
+    return
+  }
 
   // Find or add cereal in bowl
   const existing = bowlCereals.find(c => c.id === cereal.id)
@@ -389,7 +426,7 @@ function addCerealToBowl(cereal) {
       svg.style.top = y + "px"
       svg.style.left = x + "px"
       svg.style.transform = `rotate(${rotation}deg)`
-      const bowlRimY = bowlEl.clientHeight * 0.88 //---------// Fundo
+      const bowlRimY = bowlEl.clientHeight * 0.83 //---------// Fundo
 
       if (y >= bowlRimY) {
         y = bowlRimY
@@ -437,19 +474,27 @@ console.log(savedCereals)
 
 const resetBtn = document.getElementById("resetBowl")
 function resetBowl() {
+  // Limpar dados
   bowlCereals = []
+  savedMilkAmount = 0
 
-  caloriesEl.textContent = "0"
-  proteinEl.textContent = "0"
-  carbsEl.textContent = "0"
-  sugarEl.textContent = "0"
-  totalGramsEl.textContent = "0"
-
-  document.querySelectorAll(".cerealGramBadge").forEach(b => {
-    b.textContent = "0 g"
-  })
-
-  bowlEl.querySelectorAll(".bowlShape, .floatingAmount").forEach(el => el.remove())
+  // Limpar elementos visuais da taça
+  bowlEl.querySelectorAll("svg, .bowlShape, .floatingAmount, .milkGif").forEach(el => el.remove())
+  
+  // Limpar o líquido de leite (procurar em bowlEl)
+  const bowlElLocal = document.getElementById("bowlEl")
+  const milkLiquid = bowlElLocal.querySelector(".milkLiquid")
+  if (milkLiquid) {
+    milkLiquid.style.height = "0px"
+    milkLiquid.remove()
+  }
+  
+  // Atualizar tudo
+  updateCerealAmounts()
+  updateNutrients()
+  refreshChart()
 }
 
-//resetBtn.addEventListener("click", resetBowl)
+if (resetBtn) {
+  resetBtn.addEventListener("click", resetBowl)
+}

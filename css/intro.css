@@ -1,0 +1,127 @@
+:root {
+    --bg: #DAEFFA;
+    --text-primary: #111827;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.intro-wrapper {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    letter-spacing: -1px;
+}
+
+.subtitle {
+    font-size: 1.4rem;
+    color: var(--text-muted);
+    margin: 0 0 40px 0;
+    font-weight: 400;
+}
+
+.description {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin: 0 0 50px 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 14px 40px;
+    background-color: white;
+    color: var(--text-primary);
+    border: 2px solid #555252;
+    border-radius: 7px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 60px;
+}
+
+.cta-button:hover {
+    background-color: #f9f9f9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* About section */
+.about-section {
+    width: 100%;
+    max-width: 900px;
+    margin-top: 40px;
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+}
+
+.about-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 30px 0;
+    color: var(--text-primary);
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.about-item {
+    text-align: left;
+}
+
+.about-item h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+    color: var(--text-primary);
+}
+
+.about-item p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
