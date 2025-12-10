@@ -296,6 +296,16 @@ export function initTips() {
     ];
     createTip("proteinInput", "protein", "#tip-shelf-2", 1,2, proteinTexts2, "←", "<=");
 
+
+    const proteinTexts3 = [
+        "Notice the pattern? More protein is on the bottom shelf.",
+        "For a filling breakfast, look to the lower shelf — it’s higher in protein.",
+        "Protein-packed cereals are mostly hiding on the bottom shelf.",
+        "Looking for protein? Check the bottom shelf.",
+    ];
+    createTip("proteinInput", "protein", "#tip-shelf-2", 2,3, proteinTexts3, "↓", ">=");
+
+
     const sugarTexts1 = [
         "At 8g of sugar or less, the middle shelf is nearly empty.",
         "With less sugar allowed, the middle shelf empties quickly.",
@@ -311,6 +321,19 @@ export function initTips() {
     ];
     createTip("sugarInput", "sugar", "#tip-shelf-2", 7,7, sugarTexts2, "", "=");
     
+    const sugarTexts3 = [
+    "Cereals are generally sweetened, so sugar-free options are few.",
+    "Almost all these cereals have sugar, so truly sugar-free options are rare.",
+    "Looking for very low-sugar cereals? Most of these won’t meet that goal."
+    ];
+    createTip("sugarInput", "sugar", "#tip-shelf-2", 1,3, sugarTexts3, "", ">=");
+
+    const sugarTexts4 = [
+    "Notice how the bottom shelf emptied first? These cereals have the least sugar.",
+    "Looking for higher sugar cereals? The bottom shelf cleared quickly, since its options are lower in sugar.",
+    "Cereals on the lower shelf disappeared first: they’re lower in sugar than the rest."
+    ];
+    createTip("sugarInput", "sugar", "#tip-shelf-3", 7,9, sugarTexts4, "←", ">=");
 
     const carboTexts1 = [
     "Low-carb cereals(mostly on shelf 3): these servings are likely higher in fiber or protein.",
@@ -318,20 +341,105 @@ export function initTips() {
     "Low-carb options are ideal if you’re looking for a lighter breakfast.",
     "Low-carb cereals are mostly on the bottom shelf and are a healthy choice often overlooked."
     ];
-    createTip("carboInput", "carbo", "#tip-shelf-3", 4,10, carboTexts1, "←", "<=");
+    createTip("carboInput", "carbo", "#tip-shelf-3", 5, 10, carboTexts1, "←", "<=");
     
     const carboTexts2 = [
     "Most cereals fall into this moderate range of 11-17 g per serving.",
     "Typical breakfast cereals provide a moderate amount of carbohydrates.",
     "This range represents the most common carb content in cereals."
     ];
-    createTip("carboInput", "carbo", "#tip-shelf-2", 12,17, carboTexts2, "");
-    
+    createTip("carboInput", "carbo", "#tip-shelf-2", 12,17, carboTexts2, "", "<=");
 
     const carboTexts3 = [
     "There are high-carb cereals: these servings may give a quick energy boost.",
     "Some cereals exceed 17 g carbs per serving and are sweeter or more energy-dense options.",
     "Some cereals are high-carb and provide more energy, but also more sugar."
     ];
-    createTip("carboInput", "carbo", "#tip-shelf-2", 17,30, carboTexts3, "");
+    createTip("carboInput", "carbo", "#tip-shelf-2", 17,24, carboTexts3, "", ">=");
+
+    const carboTexts4 = [
+    "Cereals typically contain moderate to high amounts of carbs, making very low-carb choices uncommon.",
+    "If you’re aiming for a low-carb breakfast, note that most cereals are naturally carb-rich.",
+    "Looking for cereals very low in carbs? Most breakfast cereals are naturally high in carbohydrates."
+    ];
+    createTip("carboInput", "carbo", "#tip-shelf-2", 5,9, carboTexts4, "", ">=");
+
+
+    const fiberTexts1 = [
+    "Looking for more fiber? Check the cereals on the lower shelf.",
+    "Notice? The lower shelf has the cereals packed with fiber.",
+    "The bottom shelf is where you’ll find the high-fiber option."
+    ];
+    createTip("fiberInput", "fiber", "#tip-shelf-3", 3,10, fiberTexts1, "←", ">=");
+
+    const fiberTexts2 = [
+    "Most cereals are relatively low in fiber, offering limited digestive benefits.",
+    "The upper shelves are dominated by cereals low in fiber.",
+    "Fiber-rich foods are usually whole or less processed — these cereals are not.",
+    "Notice how most low-fiber cereals appear at eye level or above."
+    ];
+    createTip("fiberInput", "fiber", "#tip-shelf-2", 0,3, fiberTexts2, "", "<=");
+
+
+    const fatTexts1 = [
+    "The upper shelves are dominated by cereals low in fiber.",
+    "Contrary to what we might expect, most cereals are low in fat: cereals are made from grains, which are naturally low in fat",
+    "Not much fat?! Most of their calories come from carbohydrates rather than fat.",
+    "Despite being processed, cereals remain low in fat."
+    ];
+    createTip("fatInput", "fat", "#tip-shelf-2", 2, 4, fatTexts1, "", ">=");
+
+    const fatTexts2 = [
+    "Did you notice that cereals with less fat also tend to have fewer calories?",
+    "Lower fat cereals tend to be lower in calories due to fat’s high energy density.",
+    "Yes... cereal can be low in fat while still containing refined grains and added sugars."
+    ];
+    createTip("fatInput", "fat", "#tip-shelf-2", 1,2, fatTexts2, "", "<=");
+
+    const PotassiumTexts1 = [
+    "Potassium helps with muscle function, and these cereals contribute a small part.",
+    "Moderate potassium cereals may pair well with milk for extra minerals.",
+    ];
+    createTip("potassInput", "potassium", "#tip-shelf-2", 100,200, PotassiumTexts1, "", "<=");
+
+    const PotassiumTexts2 = [
+    "High-potassium cereals are rare but usually contain whole grains or nuts.",
+    "If you’re looking to boost potassium intake, consider fruits, vegetables, or nuts alongside cereal.",
+    ];
+    createTip("potassInput", "potassium", "#tip-shelf-3", 200,300, PotassiumTexts2, "", ">=");
+
+    const SodiumTexts1 = [
+    "Some cereals provide over 10% of your daily sodium limit in one serving.",
+    "Sodium is used for flavor and preservation, so it’s higher than you might think.",
+    "High-sodium cereals are common; keep an eye on portion size."
+    ];
+    createTip("sodiumInput", "sodium", "#tip-shelf-2", 200,300, SodiumTexts1, "", "<=");
+
+    const SodiumTexts2 = [
+    "These cereals are rare: most cereals have more sodium than this.",
+    "Low-sodium cereals are exceptions; most options contain a fair amount of salt.",
+    ];
+    createTip("sodiumInput", "sodium", "#tip-shelf-2", 0,50, SodiumTexts2, "", "<=");
+
+    const CaloriesTexts1 = [
+    "Low-calorie cereals are rare; most options provide more energy per serving.",
+    "These cereals are ideal if you want a lighter breakfast, but check sugar and fiber too.",
+    ];
+    createTip("kcalInput", "calories", "#tip-shelf-3", 0,80, CaloriesTexts1, "", "<=");
+
+    const CaloriesTexts2 = [
+    "Most cereals fall in this range, contributing a moderate amount of energy.",
+    "A single serving adds to your daily caloric intake, especially with milk or toppings.",
+    "Calories can be moderate even if sugar is high—check the nutrition facts",
+    ];
+    createTip("kcalInput", "calories", "#tip-shelf-2", 90,120, CaloriesTexts2, "", "<=");
+
+    const CaloriesTexts3 = [
+    "High-calorie cereals often combine sugar, fat, and carbs for energy-dense servings.",
+    "Even small portions can quickly add up, so portion control matters.",
+    "Don’t be fooled: bottom-shelf cereals can be calorie-rich, but these calories come from beneficial nutrients like fiber and protein.",
+    "Some of the highest-calorie cereals are on the bottom shelf, mainly due to their high fiber and protein content",
+    ];
+    createTip("kcalInput", "calories", "#tip-shelf-3", 120,150, CaloriesTexts3, "", ">=");
+
 }
