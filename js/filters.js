@@ -286,7 +286,7 @@ export function initTips() {
         "If protein is your priority, you may want to look beyond the cereal bowl.",
         "Cereals are typically low in protein. Consider adding a side of eggs or yogurt to your breakfast.",
     ];
-    createTip("proteinInput", "protein", "#tip-shelf-2", 5, 10, proteinTexts1, "");
+    createTip("proteinInput", "protein", "#tip-shelf-2", 5, 10, proteinTexts1, "", "<=");
 
     const proteinTexts2 = [
         "Did you notice how the middle shelf groups the lowest-protein cereals?",
