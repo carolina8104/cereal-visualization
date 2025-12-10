@@ -88,6 +88,7 @@ button {
     font-variant: small-caps;
     border:2px solid rgb(87, 82, 82);
     background-color: white;
+    cursor: pointer;
 }
 
 
@@ -99,22 +100,18 @@ button:hover{
 
 #carrinho {
   position: relative;
-  top: 38vh;
-  left: 5vh;
+  bottom: 53vh;
+  left: 128vh;
   width: 70vh;
   height: 70vh;
-  z-index: 1;   
+  z-index: 1;
+  cursor:pointer;
 }
 
 .flying-box {
   position: absolute;
   border-radius: 4px;
   transition: top 0.9s ease-in-out; 
-}
-
-
-#carrinho:hover {
-  bottom: 2vh;       
 }
 
 #cartSummary {
@@ -428,11 +425,12 @@ width: 10vh;
 }
 
 #info img{
-  width:68vh;
+  width: 68vh;
   pointer-events: none;
-  right:0vh;
-  position:absolute;
+  position: absolute;
   z-index: 11;
+  top: 0vh;
+  right: 0vh;
 }
 
 .error{
@@ -451,3 +449,59 @@ left:3vh;
 font-size: medium;
 border:1px solid rgb(39, 38, 38);
 }
+
+
+
+.tip1{
+  font-size: 1.5rem;
+  margin-top: 2vh;
+  margin-bottom:2vh;
+  margin-right: 2vh;
+  width: 41vh;
+  margin-left: 2vh;
+  margin-top: 2vh;
+  display: flex;             /* Coloca o conteúdo em linha */
+  align-items: center;       /* Alinha verticalmente o texto e a seta */
+}
+
+.tip1 p:first-child {
+  margin: 0;                 /* Remove margens padrão do parágrafo */
+}
+
+.tip1 p:last-child {
+  margin: 0;
+  font-size: 70px;
+  font-weight: bold;          /* Destaca a seta */
+}
+
+.tip {
+    display: flex;
+    align-items: center;  
+    gap: 3vh; 
+}
+
+.tip p:first-child {
+    font-size: 44px; 
+}
+
+#tip-shelf-1 , #tip-shelf-2 , #tip-shelf-3{
+  font-size: 1.4rem;
+  width: 44vh;
+}
+
+#tip-shelf-1 {
+  margin-right: -102vh;
+  margin-left: 58vh;
+}
+
+#tip-shelf-2 {
+  margin-right: -112vh;
+  margin-left: 68vh;
+}
+
+#tip-shelf-3{
+  margin-right: -112vh;
+  margin-left: 68vh;
+}
+
+.hide-arrow { display: none; }

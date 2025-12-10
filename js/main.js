@@ -72,7 +72,7 @@ async function main() {
                 const carrinho = document.getElementById("carrinho")
             
                 carrinho.style.left = "-200vh"
-                carrinho.style.transition = "all 2s ease"
+                carrinho.style.transition = "all 3s ease"
                 carrinho.getBoundingClientRect()
 
 
@@ -148,8 +148,7 @@ checkboxes.forEach(cb => {
     document.getElementById("orderSelect")?.addEventListener("change", e => {
         setOrder(e.target.value)
         render()
-    })
-    
+    })    
 }
 
 // 10. Inicia tudo quando DOM estiver carregado
@@ -157,8 +156,6 @@ document.addEventListener("DOMContentLoaded", main)
 
 // 11. Expondo openModal globalmente para uso por render.js
 window.openModal = openModal
-
-
 
 
 
@@ -174,7 +171,6 @@ document.getElementById('info-circle').addEventListener('click', (event) => {
 document.addEventListener('click', () => {
     infoBox.style.display = 'none';
 });
-
 
 
 
@@ -207,7 +203,107 @@ document.getElementById("resetFilters")?.addEventListener("click", () => {
         orderSelect.value = "none";
         setOrder("none");
     }
-
+    document.querySelectorAll('.tip p:nth-child(1)').forEach(firstP => {
+        firstP.innerHTML = ""; 
+        firstP.classList.add("hide-arrow");  
+    });
+    document.querySelectorAll('.tip p:nth-child(2)').forEach(secondP => {
+        secondP.innerHTML = ""; 
+    });
+    
     // 4. Renderizar outra vez
     render();
 });
+
+
+
+
+
+
+
+
+
+
+window.createTip = function(inputId, filterKey, shelfSelector, min, max, texts, arrow = "←") {
+    document.getElementById(inputId)?.addEventListener("input", e => {
+        updateFilter(filterKey, e.target.value)
+        
+        const secondP = document.querySelector(shelfSelector + " p:nth-child(2)");  
+        const firstP = document.querySelector(shelfSelector + " p:nth-child(1)");  // A seta (primeiro <p>)
+        const value = parseFloat(e.target.value) || 0;  // Garante que seja número (0 se vazio)
+        
+        console.log(`Input ${inputId}: value=${value}, min=${min}, max=${max}, secondP.innerHTML="${secondP.innerHTML}"`);  // Debugging
+        
+        if (e.target.value && value >= min && value <= max && secondP.innerHTML === "") {
+            const randomText = texts[Math.floor(Math.random() * texts.length)];
+            secondP.innerHTML = randomText;
+            firstP.innerHTML = arrow;
+            firstP.classList.remove("hide-arrow");
+        } else if (!e.target.value || value < min || value > max) {
+            
+            // Limpa sempre se sair do intervalo, mas verifica se o texto atual foi definido por este tip
+            if (secondP.innerHTML && texts.includes(secondP.innerHTML)) {
+                secondP.innerHTML = "";
+                firstP.innerHTML = "";
+                firstP.classList.add("hide-arrow");
+            }
+        }
+        render()
+    })
+}
+
+    const proteinTexts1 = [
+        "Looking for a protein-rich breakfast? Cereals might not be the best place to start.",
+        "Most cereals are great for carbs, but when it comes to protein… they fall short.",
+        "If protein is your priority, you may want to look beyond the cereal bowl.",
+        "Cereals are typically low in protein. Consider adding a side of eggs or yogurt to your breakfast.",
+    ];
+    createTip("proteinInput", "proteinMax", "#tip-shelf-2", 5, 10, proteinTexts1, "");
+
+    const proteinTexts2 = [
+        "Did you notice how the middle shelf groups the lowest-protein cereals?",
+        "You might spot a pattern: protein levels are lowest on the middle shelf.",
+        "Take a closer look: cereals in the middle shelf contain very little protein.",
+        "Looking for more protein? You may want to skip the middle shelf.",
+    ];
+    createTip("proteinInput", "proteinMax", "#tip-shelf-2", 1,2, proteinTexts2, "←");
+
+    const sugarTexts1 = [
+        "At 8g of sugar or less, the middle shelf is nearly empty.",
+        "With less sugar allowed, the middle shelf empties quickly.",
+        "The middle shelf is dominated by higher-sugar cereals.",
+        "Turns out, low sugar isn’t a middle-shelf thing.",
+    ];
+    createTip("sugarInput", "sugarMax", "#tip-shelf-2", 1,6, sugarTexts1, "←");
+
+
+    const sugarTexts2 = [
+    "7g of sugar is a sweet spot: the average for these cereals",
+    "On average, a serving of these cereals has 7g of sugar and that’s about 30% of the daily recommended limit for adults.",
+    "A typical portion of these cereals contributes roughly 1.5 teaspoons of sugar."
+    ];
+    createTip("sugarInput", "sugarMax", "#tip-shelf-2", 7,7, sugarTexts2, "");
+    
+
+    const carboTexts1 = [
+    "Low-carb cereals(mostly on shelf 3): these servings are likely higher in fiber or protein.",
+    "Few cereals on shelf 3 have such low carbohydrate content per serving.",
+    "Low-carb options are ideal if you’re looking for a lighter breakfast.",
+    "Low-carb cereals are mostly on the bottom shelf and are a healthy choice often overlooked."
+    ];
+    createTip("carboInput", "carboMax", "#tip-shelf-3", 4,10, carboTexts1, "←");
+    
+    const carboTexts2 = [
+    "Most cereals fall into this moderate range of 11-17 g per serving.",
+    "Typical breakfast cereals provide a moderate amount of carbohydrates.",
+    "This range represents the most common carb content in cereals."
+    ];
+    createTip("carboInput", "carboMax", "#tip-shelf-2", 12,17, carboTexts2, "");
+    
+
+    const carboTexts3 = [
+    "There are high-carb cereals: these servings may give a quick energy boost.",
+    "Some cereals exceed 17 g carbs per serving and are sweeter or more energy-dense options.",
+    "Some cereals are high-carb and provide more energy, but also more sugar."
+    ];
+    createTip("carboInput", "carboMax", "#tip-shelf-2", 17,30, carboTexts3, "");

@@ -85,7 +85,6 @@ export function applyFilters(data) {
         filtered.sort((a, b) => b.calories - a.calories)
     } else if (filters.order === "sugar-asc") {
         filtered.sort((a, b) => a.calories - b.calories)
-
     }
 
     return filtered

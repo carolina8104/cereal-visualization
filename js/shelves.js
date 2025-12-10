@@ -47,8 +47,7 @@ export function renderShelves() {
                 ? partes[1][0] + "."                  
                 : "";                              
 
-            return primeiro + " " + segundoInicial;
-            
+            return primeiro + " " + segundoInicial;           
 })
 
 
@@ -103,6 +102,5 @@ export function renderShelves() {
       .duration(100)
       .style("opacity", 0);
   });
-
-    })
+})
 }
