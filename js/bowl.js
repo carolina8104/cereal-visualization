@@ -342,6 +342,15 @@ const cerealWarnings = [
 ];
 
 //--------------------------------------------// Animação dos cerais a cair
+let positionIndex = 0
+const positions = []
+const leftLimit = bowlEl.clientWidth * 0.531
+const rightLimit = bowlEl.clientWidth * 0.763
+for (let p = leftLimit; p < rightLimit - 40; p += 30) {
+  positions.push(p)
+}
+const stackHeights = new Array(positions.length).fill(bowlEl.clientHeight * 0.83)
+
 function addCerealToBowl(cereal) {
   assignUniqueShape(cereal)
   const amount = 5
@@ -449,14 +458,14 @@ function addCerealToBowl(cereal) {
     svg.appendChild(path)
     bowlEl.appendChild(svg)
 
-    const leftLimit = bowlEl.clientWidth * 0.55;
-    const rightLimit = bowlEl.clientWidth * 0.8;
-    let x = leftLimit + Math.random() * (rightLimit - leftLimit - config.size);
+    const columnIndex = positionIndex % positions.length
+    let x = positions[columnIndex] + (Math.random() - 0.5) * 15
+    positionIndex++
 
     let y = 0
     let rotation = Math.random() * 360
     const fallSpeed = 2 + Math.random() * 3
-
+    const targetY = stackHeights[columnIndex]
 
     function animate() {
       y += fallSpeed
@@ -464,11 +473,11 @@ function addCerealToBowl(cereal) {
       svg.style.top = y + "px"
       svg.style.left = x + "px"
       svg.style.transform = `rotate(${rotation}deg)`
-      const bowlRimY = bowlEl.clientHeight * 0.83 //---------// Fundo
 
-      if (y >= bowlRimY) {
-        y = bowlRimY
+      if (y >= targetY) {
+        y = targetY
         svg.style.top = y + "px"
+        stackHeights[columnIndex] -= config.size * 0.8
 
         // bounce effect
         svg.animate(
@@ -526,6 +535,10 @@ function resetBowl() {
     milkLiquid.style.height = "0px"
     milkLiquid.remove()
   }
+
+  // Reset stack heights
+  stackHeights.fill(bowlEl.clientHeight * 0.83)
+  positionIndex = 0
   
   // Atualizar tudo
   updateCerealAmounts()
