@@ -16,27 +16,25 @@
         <section id="selectorSection">
           
             <div id="container">
-                <a href="index.html" class="back-btn">
-                  <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M15 18l-6-6 6-6"></path>
-                  </svg>
-                  Back
-                </a>
               <div id="leftColumn">
-                <div id="resetContainer">
-                  <button id="resetBowl" class="resetBtn">Clear Bowl</button>
-                </div>
-
-                <div id="nutrientsBox">
-                  <h3>Nutricional Values</h3>
-                  
-                  <div id="chartFilters">
+                <div class="top-row">
+                  <a href="index.html" class="back-btn">
+                    <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M15 18l-6-6 6-6"></path>
+                    </svg>
+                  </a>
+                  <div class="filter-buttons">
                     <button class="filterBtn" data-mode="dose">Dose</button>
                     <button class="filterBtn" data-mode="all">All</button>
                     <button class="filterBtn" data-mode="total">Your bowl</button>
                   </div>
+                  <button id="resetBowl" class="resetBtn">↻</button>
+                </div>
+
+                <h3>Nutricional Values</h3>
+
+                <div id="nutrientsBox">
                   
-                  <div id="radarChart" class="graph"></div>
                   <div id="nutrients">
                     <!--<p>Calories: <span id="calories">0</span> kcal</p>
                     <p>Protein: <span id="protein">0</span> g</p>
@@ -44,6 +42,7 @@
                     <p>Sugar: <span id="sugar">0</span> g</p>-->
                     <p>Total: <span id="totalGrams">0</span> g</p>
                   </div>
+                  <div id="radarChart" class="graph"></div>
                 </div>
 
 

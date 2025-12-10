@@ -171,20 +171,55 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100vh - 100px); 
+  height: calc(100vh - 20px); 
   width: 500px;
 
   background-color: #ffffff95;
   border-radius: 15px;
   padding: 20px;
   position: absolute;
-  bottom: 1%;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 110;
 }
 
 #nutrientsBox {
   flex: 1;
-  padding-bottom: 20px;
+  margin-top: -3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.top-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+h3 {
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+#nutrients {
+  align-self: flex-start;
 }
 
 
@@ -197,44 +232,37 @@ h1 {
 }
 
 .back-btn {
-  position: absolute;
-  top: 2%;
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
   z-index: 200;
-  width: 120px;
-
-  background: var(--panel);
-  padding: 10px 16px;
-  border-radius: 14px;
-  border: 2px solid black;
-
+  padding: 10px 15px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
   text-decoration: none;
   font-size: 1.2rem;
   font-weight: 500;
   color: #222;
-
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-  transition: all 0.3s ease-in-out
+  transition: all 0.3s ease-in-out;
 }
 
 .back-btn:hover {
-  background: var(--hover);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  background: rgba(0,0,0,0.1);
 }
 
 #resetBowl {
-  position: absolute;
-  z-index: 300;  
+  /* position: absolute; */
+  /* z-index: 300; */
 }
 
 .graph {
   position: absolute;
   width: 360px;
   height: 270px;
-  margin: 0 auto;
+  margin-right: 13%;
+  margin-top: 15px;
   z-index: 1500;
   padding: 5%;
 }
@@ -243,6 +271,7 @@ h1 {
   display: flex;
   gap: 8px;
   margin-bottom: 8px;
+  justify-content: center;
 }
 
 #resetContainer {
@@ -250,21 +279,19 @@ h1 {
 }
 
 .resetBtn {
-  width: 50%;
-  padding: 8px 12px;
+  padding: 10px 15px;
   border-radius: 8px;
-  background: #f0f0f0;
-  border: 1px solid #ddd;
+  background: transparent;
+  border: none;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 700;
   color: #333;
   transition: all 0.2s;
-  font-size: 13px;
+  font-size: 20px;
 }
 
 .resetBtn:hover {
-  background: #e8e8e8;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  background: rgba(0,0,0,0.1);
 }
 
 .resetBtn:active {

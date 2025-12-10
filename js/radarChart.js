@@ -81,9 +81,9 @@ export function drawRadar(bowlCereals, savedCereals, milkAmount = 0, mode = "tot
 
   const svg = chartDiv.append("svg")
     .attr("width", width)
-    .attr("height", height)
+    .attr("height", height + 60)
     .append("g")
-    .attr("transform", `translate(${width/2},${height/2})`)
+    .attr("transform", `translate(${width/2},${height/2 + 30})`)
 
   const radarLine = d3.lineRadial()
     .radius((d,i)=> d)
@@ -204,11 +204,20 @@ export function drawRadar(bowlCereals, savedCereals, milkAmount = 0, mode = "tot
   // ---------- LABELS ----------
   nutrientKeys.forEach((k,i)=>{
     const angle = i*angleSlice - Math.PI/2;
-    svg.append("text")
-      .attr("x",Math.cos(angle)*(radius+12))
-      .attr("y",Math.sin(angle)*(radius+12))
+
+    // Combined label at the end
+    const labelGroup = svg.append("text")
+      .attr("x", Math.cos(angle)*(radius+20))
+      .attr("y", Math.sin(angle)*(radius+20))
       .attr("text-anchor","middle")
       .attr("font-size","10px")
-      .text(`${nutrientLabels[i]} (max ${maxValues[k]})`)
+
+    labelGroup.append("tspan")
+      .text(nutrientLabels[i])
+
+    labelGroup.append("tspan")
+      .attr("x", Math.cos(angle)*(radius+20))
+      .attr("dy", "14")
+      .text(`(max ${maxValues[k]})`)
   })
 }
