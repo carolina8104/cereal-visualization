@@ -32,10 +32,67 @@ async function main() {
     // 4. Atualiza resumo do carrinho
     updateCartSummary()
 
-    // 5. Inicializar listeners de filtros
+    // 5. Configura botão Restart
+    const restartButton = document.querySelector("#menu1 .button-container button")
+    if (restartButton) {
+        restartButton.onclick = () => {
+            const maxMessage = document.getElementById("maxCerealMessage")
+            if (maxMessage) maxMessage.remove()
+
+            // limpa cereais
+            localStorage.setItem("savedCereals", JSON.stringify([]))
+
+            // remove caixas do carrinho
+            document.querySelectorAll(".flying-box").forEach(el => el.remove())
+            localStorage.removeItem("flyingBoxes") // limpa do storage
+
+            console.log("Cereais reiniciados: []")
+            updateCartSummary()
+            render()
+        }
+    }
+
+    // 6. Configura botão Done
+    const doneButton = document.getElementById("doneButton")
+    if (doneButton) {
+        doneButton.addEventListener("click", () => {
+            const savedCereals = JSON.parse(localStorage.getItem("savedCereals")) || []
+            let messageEl = document.getElementById("doneMessage")
+            if (!messageEl) {
+                messageEl = document.createElement("p")
+                messageEl.id = "doneMessage"
+                document.getElementById("menu1").appendChild(messageEl)
+            }
+
+            if (savedCereals.length === 0) {
+                messageEl.textContent = "First add some cereals to cart!"
+                messageEl.classList.add("error")
+            } else {
+                messageEl.style.display = "none"
+                const carrinho = document.getElementById("carrinho")
+            
+                carrinho.style.left = "-200vh"
+                carrinho.style.transition = "all 3s ease"
+                carrinho.getBoundingClientRect()
+
+
+            const flyingBoxes = document.querySelectorAll(".flying-box");
+            flyingBoxes.forEach(box => {
+                box.style.left = "0vh"
+                box.style.transition = "all 1.5s ease"
+            });
+
+                setTimeout(() => {
+                    navigateToBowl()
+                }, 1000)
+            }
+        })
+    }
+
+    // 7. Inicializar listeners de filtros
     initFilterListeners(render)
 
-    // 6. Inicializar tips
+    // 8. Inicializar tips
     initTips()    
 }
 
