@@ -78,8 +78,8 @@ async function main() {
 
             const flyingBoxes = document.querySelectorAll(".flying-box");
             flyingBoxes.forEach(box => {
-                box.style.left = "0vh"
-                box.style.transition = "all 1.5s ease"
+                box.style.left = "-200vh"
+                box.style.transition = "all 3s ease"
             });
 
                 setTimeout(() => {
