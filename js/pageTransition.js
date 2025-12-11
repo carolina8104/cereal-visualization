@@ -21,7 +21,7 @@ function createTransitionOverlay(message) {
         justify-content: center;
         z-index: 999999;
         opacity: 0;
-        transition: opacity 0.6s ease-in-out;
+        transition: opacity 1s ease-in-out;
         font-family: 'Inter', sans-serif;
     `;
     
@@ -56,7 +56,7 @@ window.navigateToBowl = function() {
     // Navigate after showing overlay
     setTimeout(() => {
         window.location.href = "bowl.html";
-    }, 1000);
+    }, 2000);
 }
 
 // Fade in on page load

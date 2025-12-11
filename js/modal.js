@@ -212,8 +212,12 @@ export function createFlyingBoxAnimation(cerealData) {
     const colorStr = colorObj ? `rgb(${colorObj.r}, ${colorObj.g}, ${colorObj.b})` : "gray";
     box.style.backgroundColor = colorStr;
 
+    // Adicionar transição suave para movimento natural
+    box.style.transition = "bottom 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)"; // Easing para queda natural, mais rápida
+
     document.body.appendChild(box);
 
+    // Pequeno delay para iniciar a animação
     setTimeout(() => {
         box.style.bottom = "17vh";
     }, 50);
