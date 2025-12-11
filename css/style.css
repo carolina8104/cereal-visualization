@@ -24,6 +24,10 @@ h2{
     font-size: 2.3rem;
 }
 
+p{
+  font-size: 3vh;
+}
+
 main {
   display: flex;                
   align-items: flex-start;                   
@@ -59,9 +63,9 @@ main {
 }
 
 #menu1{
-position: fixed;
-right: 19vh;
-top: 25vh;
+  position: fixed;
+  right: 14vh;
+  top: 23vh;
 }
 
 h2 {
@@ -70,9 +74,9 @@ h2 {
 
 .button-container {
     display: flex;
-    gap: 3rem;
-    margin-left:2vh;
-    margin-top:1vw;
+    gap: 4rem;
+    margin-left: 4vh;
+    margin-top: 1vw;
 }
 
 .button-container button{
@@ -99,12 +103,12 @@ button:hover{
 
 #carrinho {
   position: relative;
-  bottom: 53vh;
+  bottom: 41vh;
   left: 128vh;
   width: 70vh;
-  height: 70vh;
+  height: 50vh;
   z-index: 1;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .flying-box {
@@ -142,6 +146,22 @@ position: fixed;
   z-index: 2000;
   opacity: 0;
   transition: opacity 0.5s ease, top 0.5s ease;
+}
+
+#doneMessage{
+  font-size:1.6rem;
+  padding: 14px 23px;
+  background: rgba(255, 255, 255, 1);
+  border:2px solid black;
+  border-radius: 10px;
+  font-weight: bold;
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 
@@ -439,11 +459,6 @@ width: 10vh;
   right: 0vh;
 }
 
-.error{
-font-size: 3vh;
-}
-
-
 #button_content{
 position:fixed;
 top:-2vh;
@@ -547,4 +562,12 @@ border:1px solid rgb(39, 38, 38);
     0% { transform: rotate(0deg) scale(1); }
     50% { transform: rotate(180deg) scale(1.2); }
     100% { transform: rotate(360deg) scale(1); }
+}
+
+
+
+#textbox{
+  width: 50vh;
+  font-size: 1.3rem;
+  margin-top: 1vh;
 }
