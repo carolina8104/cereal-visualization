@@ -21,16 +21,16 @@ export const milkNutrition = {
 }
 
 // Max values per nutrient for scaling
-export const maxValues = {
-  calories: 400,  
-  protein: 15, 
-  fat: 10,      
-  carbo: 80,      
-  sugars: 20,       
-  sodium: 500,    
-  potass: 400,    
-  vitamins: 100    
-}
+  const maxValues = {
+    calories: 600,  
+    protein: 15,   
+    fat: 12,       
+    carbo: 90,      
+    sugars: 40,   
+    sodium: 375,     
+    potass: 600,     
+    vitamins: 150   
+  }
 
 
 export function getRecommended(cereal) {

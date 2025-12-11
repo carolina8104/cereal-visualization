@@ -361,7 +361,7 @@ function addCerealToBowl(cereal) {
     protein: 15,   
     fat: 12,       
     carbo: 90,      
-    sugars: 22.5,   
+    sugars: 40,   
     sodium: 375,     
     potass: 600,     
     vitamins: 150   
@@ -561,31 +561,17 @@ function showInitialCerealTip() {
   tipDiv.appendChild(text);
 
 
-  const handSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  handSVG.setAttribute("width", 40);
-  handSVG.setAttribute("height", 40);
-  handSVG.setAttribute("viewBox", "0 0 24 24");
-
-  const path = document.createElementNS(handSVG.namespaceURI, "path");
-  path.setAttribute("d", "M12 2C10.8954 2 10 2.89543 10 4V12.5858L8.70711 11.2929C8.31658 10.9024 7.68342 10.9024 7.29289 11.2929C6.90237 11.6834 6.90237 12.3166 7.29289 12.7071L12 17.4142L16.7071 12.7071C17.0976 12.3166 17.0976 11.6834 16.7071 11.2929C16.3166 10.9024 15.6834 10.9024 15.2929 11.2929L14 12.5858V4C14 2.89543 13.1046 2 12 2Z");
-  path.setAttribute("fill", "#ffb84d");
-  handSVG.appendChild(path);
-
-  tipDiv.appendChild(handSVG);
+  const handImg = document.createElement("img");
+  handImg.src = "click.gif";
+  handImg.alt = "Click";
+  handImg.style.width = "40px";
+  handImg.style.height = "40px";
+  tipDiv.appendChild(handImg);
 
   document.body.appendChild(tipDiv);
 
 
-  let direction = 1;
-  const interval = setInterval(() => {
-    const translateY = direction * 5;
-    handSVG.style.transform = `translateY(${translateY}px)`;
-    direction *= -1;
-  }, 400);
-
-
   setTimeout(() => {
-    clearInterval(interval);
     tipDiv.remove();
   }, 5000);
 }
