@@ -385,6 +385,7 @@ h3 {
   transition: opacity 0.5s ease, top 0.5s ease;
   transform: translate(34vh, 15vh);
   border:2px solid black;
+  color: #333;
 }
 
 .cerealWarning {
@@ -398,6 +399,7 @@ h3 {
   transition: opacity 0.5s ease, top 0.5s ease;
   transform: translate(34vh, 15vh);
   border:2px solid black;
+  color: #333;
 }
 
 .cerealTip {
@@ -408,17 +410,21 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(255, 255, 255, 0.95);
   padding: 12px 20px;
   border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
   font-size: 18px;
   font-weight: 600;
   color: #333;
   z-index: 9999;
+  pointer-events: none;
 }
 
 .cerealTip svg {
   margin-top: 8px;
   transition: transform 0.3s ease;
+}
+
+@keyframes click {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
 }
