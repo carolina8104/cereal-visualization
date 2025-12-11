@@ -3,11 +3,14 @@ document.body.style.opacity = '0';
 
 // Messages for bowl transition
 const bowlMessages = [
-    "Now let's explore!",
+    {
+        main: "Now let's explore!",
+        sub: "Now it’s time to mix your cereals and explore how they come together in your bowl!"
+    }
 ];
 
 // Create transition overlay
-function createTransitionOverlay(message) {
+function createTransitionOverlay(messages) {
     const overlay = document.createElement('div');
     overlay.style.cssText = `
         position: fixed;
@@ -17,6 +20,7 @@ function createTransitionOverlay(message) {
         height: 100%;
         background-color: #DAEFFA;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         z-index: 999999;
@@ -25,18 +29,31 @@ function createTransitionOverlay(message) {
         font-family: 'Inter', sans-serif;
     `;
     
-    const text = document.createElement('h2');
-    text.style.cssText = `
+    const mainText = document.createElement('h2');
+    mainText.style.cssText = `
         color: #000;
-        font-size: 2.5rem;
+        font-size: 2.3rem;
         font-weight: 600;
         text-align: center;
-        margin: 0;
+        margin: 0 0 1rem 0;
         letter-spacing: -0.5px;
     `;
-    text.textContent = message;
+    mainText.textContent = messages.main;
     
-    overlay.appendChild(text);
+    const subText = document.createElement('p');
+    subText.style.cssText = `
+        color: #333;
+        font-size: 1.3rem;
+        font-weight: 400;
+        text-align: center;
+        margin: 0;
+        max-width: 600px;
+        line-height: 1.4;
+    `;
+    subText.textContent = messages.sub;
+    
+    overlay.appendChild(mainText);
+    overlay.appendChild(subText);
     document.body.appendChild(overlay);
     
     // Fade in overlay
@@ -50,13 +67,13 @@ function createTransitionOverlay(message) {
 // Navigate to bowl with special transition
 window.navigateToBowl = function() {
     // Create overlay immediately
-    const message = bowlMessages[Math.floor(Math.random() * bowlMessages.length)];
-    const overlay = createTransitionOverlay(message);
+    const messages = bowlMessages[Math.floor(Math.random() * bowlMessages.length)];
+    const overlay = createTransitionOverlay(messages);
     
     // Navigate after showing overlay
     setTimeout(() => {
         window.location.href = "bowl.html";
-    }, 2000);
+    }, 4000);
 }
 
 // Fade in on page load
