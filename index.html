@@ -9,16 +9,46 @@
   <body>
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
+    <!-- Gradient defs -->
+    <svg style="position: absolute; width: 0; height: 0;">
+        <defs>
+            <linearGradient id="G-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="rgb(57,83,211)" />
+                <stop offset="100%" stop-color="rgb(224,248,45)" />
+            </linearGradient>
+            <linearGradient id="K-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="rgb(232,40,2)" />
+                <stop offset="100%" stop-color="rgb(178,214,240)" />
+            </linearGradient>
+            <linearGradient id="N-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="rgb(136,210,35)" />
+                <stop offset="100%" stop-color="rgb(12,33,171)" />
+            </linearGradient>
+            <linearGradient id="P-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="rgb(86,47,181)" />
+                <stop offset="100%" stop-color="rgb(245,209,209)" />
+            </linearGradient>
+            <linearGradient id="Q-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="rgb(252,207,58)" />
+                <stop offset="100%" stop-color="rgb(69,44,10)" />
+            </linearGradient>
+            <linearGradient id="R-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="rgb(193,39,189)" />
+                <stop offset="100%" stop-color="rgb(245,209,209)" />
+            </linearGradient>
+        </defs>
+    </svg>
+
   <div id="filters" class="hidden">
   <div class="filter-row">
-    <label>Protein <select id="proteinOp"><option value="<=">≤</option><option value=">=">≥</option><option value="=">=</option></select> <input id="proteinInput" type="number" min="0" placeholder="g"></label>
-    <label>Sugar <select id="sugarOp"><option value="<=">≤</option><option value=">=">≥</option><option value="=">=</option></select> <input id="sugarInput" type="number" min="0" placeholder="g"></label>
-    <label>Carbos <select id="carboOp"><option value="<=">≤</option><option value=">=">≥</option><option value="=">=</option></select> <input id="carboInput" type="number" min="0" placeholder="g"></label>
-    <label>Fiber <select id="fiberOp"><option value="<=">≤</option><option value=">=">≥</option><option value="=">=</option></select> <input id="fiberInput" type="number" min="0" placeholder="g"></label>
-    <label>Fat <select id="fatOp"><option value="<=">≤</option><option value=">=">≥</option><option value="=">=</option></select> <input id="fatInput" type="number" min="0" placeholder="g"></label>
-    <label>Potassium <select id="potassOp"><option value="<=">≤</option><option value=">=">≥</option><option value="=">=</option></select> <input id="potassInput" type="number" min="0" placeholder="mg"></label>
-    <label>Sodium <select id="sodiumOp"><option value="<=">≤</option><option value=">=">≥</option><option value="=">=</option></select> <input id="sodiumInput" type="number" min="0" placeholder="mg"></label>
-    <label>Calories <select id="kcalOp"><option value="<=">≤</option><option value=">=">≥</option><option value="=">=</option></select> <input id="kcalInput" type="number" min="0" placeholder="kcal"></label>
+    <label>Protein <select id="proteinOp"><option value="<=">≤</option><option value=">=">≥</option><option value="=">=</option></select> <input id="proteinInput" type="number" min="0" placeholder="g"> <small>(1-6g)</small></label>
+    <label>Sugar <select id="sugarOp"><option value="<=">≤</option><option value=">=">≥</option><option value="=">=</option></select> <input id="sugarInput" type="number" min="0" placeholder="g"> <small>(0-15g)</small></label>
+    <label>Carbos <select id="carboOp"><option value="<=">≤</option><option value=">=">≥</option><option value="=">=</option></select> <input id="carboInput" type="number" min="0" placeholder="g"> <small>(5-23g)</small></label>
+    <label>Fiber <select id="fiberOp"><option value="<=">≤</option><option value=">=">≥</option><option value="=">=</option></select> <input id="fiberInput" type="number" min="0" placeholder="g"> <small>(0-14g)</small></label>
+    <label>Fat <select id="fatOp"><option value="<=">≤</option><option value=">=">≥</option><option value="=">=</option></select> <input id="fatInput" type="number" min="0" placeholder="g"> <small>(0-5g)</small></label>
+    <label>Potassium <select id="potassOp"><option value="<=">≤</option><option value=">=">≥</option><option value="=">=</option></select> <input id="potassInput" type="number" min="0" placeholder="mg"> <small>(15-330mg)</small></label>
+    <label>Sodium <select id="sodiumOp"><option value="<=">≤</option><option value=">=">≥</option><option value="=">=</option></select> <input id="sodiumInput" type="number" min="0" placeholder="mg"> <small>(0-320mg)</small></label>
+    <label>Calories <select id="kcalOp"><option value="<=">≤</option><option value=">=">≥</option><option value="=">=</option></select> <input id="kcalInput" type="number" min="0" placeholder="kcal"> <small>(50-160kcal)</small></label>
   </div>
 
   <div class="filter-row">
@@ -54,7 +84,7 @@
     <main class="main-area">
         <div class="shelves">
 
-            <div class="shelf" id="shelf-1">
+            <div class="shelf" id="shelf-1"> 
               <div class="rail"></div>
               <div id="tip-shelf-1" class="tip">
                 <p class="hide-arrow"></p>
@@ -83,7 +113,7 @@
             <div id="menu1">
                 <h2>Pick your cereals</h2>
                 <div class="button-container">
-                    <button>Restart</button>
+                    <button>Empty</button>
                     <button id="doneButton">Done</button>
                 </div>
             </div>
@@ -117,6 +147,9 @@
         <button class="buttontop" id="info-circle">ℹ</button>
         <button class="buttontop" id="resetFilters">↻</button>
       </div>
+      <h2 id="title"><svg id="rotating-cereal" viewBox="0 0 75 75" width="20" height="20">
+        <path id="cereal-path" d="M 35.000 5.000 C 54.330 5.000 70.000 20.670 70.000 40.000 C 70.000 59.330 54.330 75.000 35.000 75.000 C 15.670 75.000 0.000 59.330 0.000 40.000 C 0.000 20.670 15.670 5.000 35.000 5.000 Z M 35.000 17.600 C 23.402 17.600 14.000 27.159 14.000 40.000 C 14.000 52.841 23.402 62.400 35.000 62.400 C 46.598 62.400 56.000 52.841 56.000 40.000 C 56.000 27.159 46.598 17.600 35.000 17.600 Z" fill="url(#G-gradient)"/>
+      </svg> Cereal Explorer</h2>
       <div id="info" >
         <img src="info.jpg" alt="Descrição da imagem">
       </div>

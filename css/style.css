@@ -360,7 +360,7 @@ width: 10vh;
   transition: max-height 0.2s ease;
   padding: 20px;
   background-color: rgba(0,0,0,0.1);
-  padding-left: 34vh;
+  padding-left: 31vh;
 }
 
 #filters.hidden {
@@ -376,7 +376,7 @@ width: 10vh;
 
 #filters input[type="number"] {
   width: 5vh; 
-  margin-bottom: 2vh;
+  margin-bottom: -1vh;
 }
 
 .filter-row {
@@ -384,6 +384,13 @@ width: 10vh;
   flex-direction: row; 
   align-items: center;
   width: 83%;
+  margin-bottom: 2vh;
+}
+
+.filter-row small {
+  font-size: 0.8em;
+  color: #666;
+  margin-left: 0.5em;
 }
 
 
@@ -427,7 +434,7 @@ width: 10vh;
   width: 68vh;
   pointer-events: none;
   position: absolute;
-  z-index: 11;
+  z-index: 1000;
   top: 0vh;
   right: 0vh;
 }
@@ -504,3 +511,40 @@ border:1px solid rgb(39, 38, 38);
 }
 
 .hide-arrow { display: none; }
+
+
+
+#title {
+    font-size: 2.3vh;
+    top: 5vh;
+    right: 14vh;
+    position: fixed;
+    font-weight: 300;
+}
+
+#filters:not(.hidden) ~ main #title {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Rotating cereal */
+#rotating-cereal {
+    margin-right: 0.2vh;
+    margin-top: 3px;
+    animation: rotate 2s linear infinite;
+}
+
+#rotating-cereal.spin-effect {
+    animation: spin 0.5s ease-in-out;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    100% { transform: rotate(360deg) scale(1); }
+}
