@@ -109,12 +109,26 @@ const infoBox = document.getElementById('info');
 
 document.getElementById('info-circle').addEventListener('click', (event) => {
     event.stopPropagation(); // Impede que o clique no "i" feche imediatamente
-    infoBox.style.display =
-        infoBox.style.display === 'block' ? 'none' : 'block';
+    if (infoBox.style.display === 'block') {
+        infoBox.classList.remove('show');
+        setTimeout(() => {
+            infoBox.style.display = 'none';
+        }, 300);
+    } else {
+        infoBox.style.display = 'block';
+        setTimeout(() => {
+            infoBox.classList.add('show');
+        }, 10);
+    }
 });
 
 document.addEventListener('click', () => {
-    infoBox.style.display = 'none';
+    if (infoBox.classList.contains('show')) {
+        infoBox.classList.remove('show');
+        setTimeout(() => {
+            infoBox.style.display = 'none';
+        }, 300);
+    }
 });
 
 

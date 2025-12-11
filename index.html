@@ -147,11 +147,74 @@
         <button class="buttontop" id="info-circle">ℹ</button>
         <button class="buttontop" id="resetFilters">↻</button>
       </div>
-      <h2 id="title"><svg id="rotating-cereal" viewBox="0 0 75 75" width="20" height="20">
+      <h2 id="title"> 
+      <svg id="rotating-cereal" viewBox="0 0 75 75" width="20" height="20">
         <path id="cereal-path" d="M 35.000 5.000 C 54.330 5.000 70.000 20.670 70.000 40.000 C 70.000 59.330 54.330 75.000 35.000 75.000 C 15.670 75.000 0.000 59.330 0.000 40.000 C 0.000 20.670 15.670 5.000 35.000 5.000 Z M 35.000 17.600 C 23.402 17.600 14.000 27.159 14.000 40.000 C 14.000 52.841 23.402 62.400 35.000 62.400 C 46.598 62.400 56.000 52.841 56.000 40.000 C 56.000 27.159 46.598 17.600 35.000 17.600 Z" fill="url(#G-gradient)"/>
       </svg> Cereal Explorer</h2>
-      <div id="info" >
-        <img src="info.jpg" alt="Descrição da imagem">
+      <div id="info">
+        <div class="info-content">
+          <h2 class="info-title">Information</h2>
+          
+          <div class="info-section">
+            <div class="info-properties">
+              <h3>Properties</h3>
+              <ul>
+                <li><strong>Color:</strong> brand</li>
+                <li><strong>Bright:</strong> sugar</li>
+                <li><strong>Width:</strong> fat</li>
+                <li><strong>Height:</strong> calories</li>
+                <li><strong>Bar:</strong> protein</li>
+              </ul>
+            </div>
+            
+            <div class="info-brands">
+              <div class="brand-item"><span class="brand-color" style="background: #90C695;"></span> Nabisco</div>
+              <div class="brand-item"><span class="brand-color" style="background: #F2D377;"></span> Quaker Oats</div>
+              <div class="brand-item"><span class="brand-color" style="background: #E57373;"></span> Kellogg's</div>
+              <div class="brand-item"><span class="brand-color" style="background: #7986CB;"></span> General Mills</div>
+              <div class="brand-item"><span class="brand-color" style="background: #BA68C8;"></span> Ralston</div>
+              <div class="brand-item"><span class="brand-color" style="background: #7B68A0;"></span> Post</div>
+              <div class="brand-item"><span class="brand-color" style="background: #81C784;"></span> American Home Food Products</div>
+            </div>
+          </div>
+          
+          <div class="info-diagram">
+            <div class="cereal-shape">
+              <div class="shape-box">
+                <div class="shape-height">
+                  <span class="arrow-up">↑</span>
+                  <span class="label-calories">Calories</span>
+                </div>
+                <div class="shape-protein">
+                  <div class="shape-label-left">Cereal Name</div>
+                  <div class="shape-protein-label">
+                    <span class="arrow-up">↑</span>
+                    <span>Protein</span>
+                  </div>
+                </div>
+                <div class="shape-width">
+                  <span class="arrow-left">←</span>
+                  <span class="label-fat">Fat</span>
+                  <span class="arrow-right">→</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="sugar-scale">
+              <div class="sugar-bar">
+                <div class="sugar-indicator sugar-less">Less sugar</div>
+                <div class="sugar-gradient"></div>
+                <div class="sugar-indicator sugar-more">More sugar</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="info-about">
+            <h3>About</h3>
+            <p>This visualization explores nutritional data from various cereal brands. Each cereal is represented as a shape where visual properties encode nutritional information: color indicates the brand, brightness shows sugar content, width represents fat, height corresponds to calories, and a bar indicates protein levels.</p>
+            <p>Use the filters to explore cereals based on specific nutritional criteria, and click on any cereal to view detailed information.</p>
+          </div>
+        </div>
       </div>
     </main>
 
