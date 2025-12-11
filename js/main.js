@@ -66,9 +66,12 @@ async function main() {
 
             if (savedCereals.length === 0) {
                 messageEl.textContent = "First add some cereals to cart!"
-                messageEl.classList.add("error")
+                messageEl.style.opacity = "1"
+                setTimeout(() => {
+                    messageEl.style.opacity = "0"
+                }, 3000)
             } else {
-                messageEl.style.display = "none"
+                messageEl.style.opacity = "0"
                 const carrinho = document.getElementById("carrinho")
             
                 carrinho.style.left = "-200vh"

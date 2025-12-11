@@ -219,7 +219,7 @@ export function createFlyingBoxAnimation(cerealData) {
 
     // Pequeno delay para iniciar a animação
     setTimeout(() => {
-        box.style.bottom = "17vh";
+        box.style.bottom = "13vh";
     }, 50);
 
     let flyingBoxes = JSON.parse(localStorage.getItem("flyingBoxes")) || [];
@@ -243,7 +243,7 @@ export function renderFlyingBoxesFromStorage() {
         box.style.width = b.width;
         box.style.height = b.height;
         box.style.left = b.left;
-        box.style.bottom = "15vh"; 
+        box.style.bottom = "13vh"; 
         box.dataset.cerealId = b.id;
 
         if (b.color) {
