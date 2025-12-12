@@ -236,9 +236,9 @@ bowlEl.addEventListener("click", (e) => {
     if (!selectedCerealId) return
 
     // --- MILK SELECTED --- //
-if (selectedCerealId === "milk" && savedMilkAmount <= 400) {
+if (selectedCerealId === "milk" && savedMilkAmount <= 300) {
   const gif = document.createElement("img");
-  gif.src = "milk.gif?" + new Date().getTime(); 
+  gif.src = "../data/milk.gif?" + new Date().getTime(); 
   gif.classList.add("milkGif");
 
   bowlEl.appendChild(gif);
@@ -255,7 +255,7 @@ if (selectedCerealId === "milk" && savedMilkAmount <= 400) {
 
 if (selectedCerealId === "milk") {
 
- if (savedMilkAmount >= 450) {
+ if (savedMilkAmount >= 350) {
 
         const msgDiv = document.createElement("div");
         msgDiv.classList.add("milkWarning");
@@ -297,7 +297,7 @@ if (selectedCerealId === "milk") {
 
     // Faz leite crescer
     setTimeout(() => {
-    const maxHeight = bowlElLocal.clientHeight * 0.9;
+    const maxHeight = bowlElLocal.clientHeight * 0.8;
     const heightPer50ml = 25;
     let newHeight = milkLiquid.clientHeight + heightPer50ml;
     if (newHeight > maxHeight) newHeight = maxHeight;
@@ -562,7 +562,7 @@ function showInitialCerealTip() {
 
 
   const handImg = document.createElement("img");
-  handImg.src = "click.gif";
+  handImg.src = "../data/click.gif";
   handImg.alt = "Click";
   handImg.style.width = "40px";
   handImg.style.height = "40px";

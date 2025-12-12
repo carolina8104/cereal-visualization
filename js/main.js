@@ -4,6 +4,7 @@ import { updateFilter, applyFilters, setBrand, setOrder, initFilterListeners, re
 import { renderShelves } from "./shelves.js"
 import { openModal } from "./modal.js"
 import { updateCartSummary } from "./cart.js"
+import { initCartDropZone } from "./shelves.js"
 
 let globalData = [] // dados carregados para todo o main.js
 
@@ -12,14 +13,13 @@ function render() {
     const filteredData = applyFilters(globalData)
     renderShelves(filteredData)
 
-    // contador de resultados
     const resultEl = document.getElementById("resultCount")
     if (resultEl) {
         resultEl.textContent = `Showing ${filteredData.length} cereals`
     }
 }
 
-async function main() {
+async function main() {    
     // 1. Carrega os dados
     globalData = await loadData()
 
@@ -28,8 +28,14 @@ async function main() {
 
     // 3. Renderiza prateleiras pela primeira vez
     render()
+    
+    // 4. Initialize cart summary and hover
+    updateCartSummary();
 
-    // 4. Atualiza resumo do carrinho
+    // 5. Initialize cart drop zone
+    initCartDropZone();
+
+    // 6. Atualiza resumo do carrinho
     updateCartSummary()
 
     // 5. Configura botão Restart
@@ -46,7 +52,6 @@ async function main() {
             document.querySelectorAll(".flying-box").forEach(el => el.remove())
             localStorage.removeItem("flyingBoxes") // limpa do storage
 
-            console.log("Cereais reiniciados: []")
             updateCartSummary()
             render()
         }

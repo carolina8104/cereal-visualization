@@ -103,7 +103,7 @@ button:hover{
 
 #carrinho {
   position: relative;
-  bottom: 41vh;
+  bottom: 54vh;
   left: 128vh;
   width: 70vh;
   height: 50vh;
@@ -130,6 +130,13 @@ button:hover{
   z-index: 1000;
 }
 
+#cartItems {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+}
+
 #popup{
 margin-left:6vh;
 position: fixed;
@@ -144,6 +151,10 @@ position: fixed;
   border-radius: 10px;
   font-weight: bold;
   z-index: 2000;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translateX(-50%);
   opacity: 0;
   transition: opacity 0.5s ease, top 0.5s ease;
 }
@@ -557,6 +568,40 @@ width: 10vh;
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+.cereal.dragging {
+    opacity: 0.7;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.6);
+    cursor: grabbing !important;
+    transform-origin: center;
+}
+
+.drag-preview.dragging {
+    opacity: 0.9 !important;
+    box-shadow: 0 16px 32px rgba(0,0,0,0.8) !important;
+    transform-origin: center !important;
+}
+
+body.dragging * {
+    cursor: grab !important;
+}
+
+#carrinho {
+    cursor: grab;
+}
+
+#carrinho:hover {
+    cursor: grabbing;
+}
+
+.cereal {
+    cursor: grab;
+    transition: transform 0.2s ease;
+}
+
+.flying-box {
+    border-radius: 3px;
 }
 
 .shape-label-left {

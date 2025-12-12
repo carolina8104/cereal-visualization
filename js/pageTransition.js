@@ -5,7 +5,7 @@ document.body.style.opacity = '0';
 const bowlMessages = [
     {
         main: "Now let's explore!",
-        sub: "Now it’s time to mix your cereals and explore how they come together in your bowl!"
+        sub: "It’s time to mix your cereals and explore how they come together in your bowl!"
     }
 ];
 

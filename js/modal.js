@@ -13,13 +13,6 @@ export function openModal(cerealData) {
         return
     }
 
-     //------------------------------------------------------------------------iNICIO DA CAIXA 
-
-
-
-     
-    //------------------------------------------------------------------------FIM DA CAIXA 
-
     cerealData = cerealData || {}
     modalName.textContent = cerealData.name || "Cereal"
 
@@ -152,14 +145,15 @@ export function openModal(cerealData) {
         maxMessage.style.display = "block";
         setTimeout(() => {
             maxMessage.style.opacity = 1;
-            maxMessage.style.top = "15%";
+            maxMessage.style.top = "45%";
         }, 10);
 
         setTimeout(() => {
             maxMessage.style.opacity = 0;
-            maxMessage.style.top = "10%";
+            maxMessage.style.top = "45%";
             setTimeout(() => maxMessage.remove(), 500);
-        }, 2000);
+        }, 3000); 
+
 
         return;
     } else {
@@ -228,7 +222,7 @@ export function createFlyingBoxAnimation(cerealData) {
         width: box.style.width,
         height: box.style.height,
         left: box.style.left,
-        bottom: box.style.bottom,
+        bottom: "13vh",  // Store final position
         color: colorObj 
     });
     localStorage.setItem("flyingBoxes", JSON.stringify(flyingBoxes));
@@ -236,6 +230,10 @@ export function createFlyingBoxAnimation(cerealData) {
 
 
 export function renderFlyingBoxesFromStorage() {
+    // Remove existing flying boxes from body
+    const existingBoxes = document.querySelectorAll(".flying-box");
+    existingBoxes.forEach(box => box.remove());
+    
     const flyingBoxes = JSON.parse(localStorage.getItem("flyingBoxes")) || [];
     flyingBoxes.forEach(b => {
         const box = document.createElement("div");
@@ -243,7 +241,7 @@ export function renderFlyingBoxesFromStorage() {
         box.style.width = b.width;
         box.style.height = b.height;
         box.style.left = b.left;
-        box.style.bottom = "13vh"; 
+        box.style.bottom = b.bottom || "13vh"; 
         box.dataset.cerealId = b.id;
 
         if (b.color) {
