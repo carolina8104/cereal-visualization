@@ -110,7 +110,7 @@ function renderList() {
   milkName.textContent = "Milk"
 
   const milkBadge = document.createElement("div")
-  milkBadge.className = "cerealMilkBadge"
+  milkBadge.className = "cerealGramBadge"
   milkBadge.textContent = `${savedMilkAmount} ml` || "0 ml"
 
   milkItem.append(milkIcon, milkName, milkBadge)
@@ -203,7 +203,7 @@ function updateCerealAmounts() {
         if (gramBadge) gramBadge.textContent = `${amount} g`
     })
 
-    const milkItem = listEl.querySelector(".cerealItem[data-id='milk'] .cerealMilkBadge")
+    const milkItem = listEl.querySelector(".cerealItem[data-id='milk'] .cerealGramBadge")
     if (milkItem) milkItem.textContent = `${savedMilkAmount} ml`
 }
   
@@ -282,7 +282,7 @@ if (selectedCerealId === "milk") {
     savedMilkAmount += 50;
 
     // Atualiza badge do leite
-    const milkItem = listEl.querySelector(".cerealItem[data-id='milk'] .cerealMilkBadge");
+    const milkItem = listEl.querySelector(".cerealItem[data-id='milk'] .cerealGramBadge");
     milkItem.textContent = `${savedMilkAmount} ml`;
 
     const bowlElLocal = document.getElementById("bowlEl");
