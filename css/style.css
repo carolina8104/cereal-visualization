@@ -19,7 +19,7 @@ p {
 }
 
 #filters {
-  font-size: 14px;
+  font-size: 0.9rem;
 }
 
 main {
@@ -31,14 +31,14 @@ main {
 .shelves {
   width: 62vw;
   flex-shrink: 0;
-  margin-top: 17vh;
+  margin-top: 13svh;
 }
 
 .shelf {
   height: 21vh;
   margin: 0vh 0vw 0vh 6vh;
   background: rgba(152, 0, 0, 0);
-  padding: 13px 10px;
+  padding: 24px 10px; 
   position: relative;
   display: flex;
   align-items: flex-end;
@@ -50,7 +50,7 @@ main {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 16px;
+  bottom: 27px;
   height: 3px;
   background: #111;
   transform: translateY(6px);
@@ -111,7 +111,7 @@ button:hover {
 
 #carrinho {
   position: relative;
-  bottom: 54vh;
+  bottom: 60vh;
   left: 64vw;
   width: 70vh;
   height: 50vh;
@@ -425,7 +425,7 @@ body.dragging * {
 }
 
 .filter-row:first-child {
-  gap: 3vh;
+  gap: 2vh;
 }
 
 #filters input[type="number"] {
@@ -908,4 +908,12 @@ body.dragging * {
   .info-about h3 {
     font-size: 18px;
   }
+}
+
+
+.nrshelf{
+  position: absolute;
+  top: 23vh;
+  right: 0vh;
+  font-size: 0.9rem;
 }
