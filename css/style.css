@@ -112,7 +112,7 @@ button:hover {
 #carrinho {
   position: relative;
   bottom: 54vh;
-  left: 128vh;
+  left: 64vw;
   width: 70vh;
   height: 50vh;
   z-index: 1;

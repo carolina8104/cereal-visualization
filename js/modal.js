@@ -195,7 +195,7 @@ export function createFlyingBoxAnimation(cerealData) {
 
     box.style.bottom = "70vh";
 
-    if (availableLefts.length === 0) availableLefts = [70, 75, 80, 85, 90];
+    if (availableLefts.length === 0) availableLefts = [75, 80, 82];
     const index = Math.floor(Math.random() * availableLefts.length);
     const leftValue = availableLefts.splice(index, 1)[0];
     box.style.left = leftValue + "vw";
