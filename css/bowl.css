@@ -257,11 +257,6 @@ h3 {
   background: rgba(0,0,0,0.1);
 }
 
-#resetBowl {
-  /* position: absolute; */
-  /* z-index: 300; */
-}
-
 .graph {
   position: absolute;
   width: 360px;
@@ -326,12 +321,14 @@ h3 {
   transition: 0.25s;
   opacity: 0.6;
   transform: scale(0.5);
+  width: 80px;
 }
 
 .cerealShapeItem.selected {
   opacity: 1;
   transform: scale(0.8);
   filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+  width: 80px;
 }
 
 .shapeIcon {

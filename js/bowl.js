@@ -88,13 +88,13 @@ function renderList() {
   listEl.innerHTML = ""
     // --- Add MILK item --- //
   const milkItem = document.createElement("div")
-  milkItem.className = "cerealItem"
+  milkItem.className = "cerealShapeItem"
   milkItem.dataset.id = "milk"
 
   const milkIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg")
   milkIcon.setAttribute("width", 36)
   milkIcon.setAttribute("height", 36)
-  milkIcon.classList.add("shapeIndicator")
+  milkIcon.classList.add("shapeIcon")
 
   // Milk drop icon
   const drop = document.createElementNS(milkIcon.namespaceURI, "path")
@@ -106,7 +106,7 @@ function renderList() {
   milkIcon.appendChild(drop)
 
   const milkName = document.createElement("div")
-  milkName.className = "cerealName"
+  milkName.className = "cerealShapeName"
   milkName.textContent = "Milk"
 
   const milkBadge = document.createElement("div")
@@ -203,7 +203,7 @@ function updateCerealAmounts() {
         if (gramBadge) gramBadge.textContent = `${amount} g`
     })
 
-    const milkItem = listEl.querySelector(".cerealItem[data-id='milk'] .cerealGramBadge")
+    const milkItem = listEl.querySelector(".cerealShapeItem[data-id='milk'] .cerealGramBadge")
     if (milkItem) milkItem.textContent = `${savedMilkAmount} ml`
 }
   
@@ -282,7 +282,7 @@ if (selectedCerealId === "milk") {
     savedMilkAmount += 50;
 
     // Atualiza badge do leite
-    const milkItem = listEl.querySelector(".cerealItem[data-id='milk'] .cerealGramBadge");
+    const milkItem = listEl.querySelector(".cerealShapeItem[data-id='milk'] .cerealGramBadge");
     milkItem.textContent = `${savedMilkAmount} ml`;
 
     const bowlElLocal = document.getElementById("bowlEl");
