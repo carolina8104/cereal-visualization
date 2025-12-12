@@ -184,7 +184,7 @@ export function openModal(cerealData) {
 }
 
 
-let availableLefts = [70, 75, 80, 82, 90];
+let availableLefts = [75, 80, 82];
 
 export function createFlyingBoxAnimation(cerealData) {
     const box = document.createElement("div");
