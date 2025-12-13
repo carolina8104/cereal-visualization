@@ -115,37 +115,6 @@ export function drawRadar(bowlCereals, savedCereals, milkAmount = 0, mode = "tot
     })
   }
 
-  // ---------- MODE: DOSE ----------
-  if (mode === "dose" && selectedId) {
-
-    if (selectedId === "milk") {
-      // Mostrar dose recomendada do leite
-      const recommendedMilk = getRecommendedMilk()
-      const scaled = scaleValues(recommendedMilk)
-
-      svg.append("path")
-        .datum(scaled)
-        .attr("d", radarLine)
-        .attr("fill","rgba(150,150,150,0.25)")
-        .attr("stroke","gray")
-        .attr("stroke-width",2)
-    } else {
-      // Mostrar dose do cereal
-      const cereal = savedCereals.find(c => c.id == selectedId);
-      if (!cereal) return;
-
-      const recommended = getRecommended(cereal)
-      const scaled = scaleValues(recommended)
-
-      svg.append("path")
-        .datum(scaled)
-        .attr("d", radarLine)
-        .attr("fill","rgba(150,150,150,0.25)")
-        .attr("stroke","gray")
-        .attr("stroke-width",2)
-    }
-  }
-
   // ---------- MODE: ALL ----------
   // if (mode === "all") {
     bowlCereals.forEach(c => {
@@ -187,6 +156,39 @@ export function drawRadar(bowlCereals, savedCereals, milkAmount = 0, mode = "tot
         .attr("stroke-width",2)
     }
   // }
+
+  // ---------- MODE: DOSE ----------
+  if (mode === "dose" && selectedId) {
+
+    if (selectedId === "milk") {
+      // Mostrar dose recomendada do leite
+      const recommendedMilk = getRecommendedMilk()
+      const scaled = scaleValues(recommendedMilk)
+
+      svg.append("path")
+        .datum(scaled)
+        .attr("d", radarLine)
+        .attr("fill","rgba(150,150,150,0.25)")
+        .attr("stroke","gray")
+        .attr("stroke-width",2)
+    } else {
+      // Mostrar dose do cereal
+      const cereal = savedCereals.find(c => c.id == selectedId);
+      if (!cereal) return;
+
+      const recommended = getRecommended(cereal)
+      const scaled = scaleValues(recommended)
+
+      svg.append("path")
+        .datum(scaled)
+        .attr("d", radarLine)
+        .attr("fill","rgba(150,150,150,0.25)")
+        .attr("stroke","gray")
+        .attr("stroke-width",2)
+    }
+  }
+
+  // ---------- MODE: TOTAL ----------
 
   // ---------- MODE: TOTAL ----------
   if (mode === "total") {

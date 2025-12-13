@@ -83,6 +83,31 @@ const totalGramsEl = document.getElementById("totalGrams")
 let bowlCereals = []
 let savedMilkAmount = 0
 
+//-------------------------------------// Mover hintDown baseado no tamanho do ecrã
+function handleHintDownPosition() {
+  const hintDown = document.querySelector('.hintDown')
+  const leftColumn = document.getElementById('leftColumn')
+  const container = document.querySelector('.container')
+  
+  if (!hintDown || !leftColumn || !container) return
+  
+  if (window.innerWidth < 1000 || window.innerHeight < 680) {
+    // Mover para fora do leftColumn
+    if (hintDown.parentElement === leftColumn) {
+      container.appendChild(hintDown)
+    }
+  } else {
+    // Mover de volta para dentro do leftColumn
+    if (hintDown.parentElement !== leftColumn) {
+      leftColumn.appendChild(hintDown)
+    }
+  }
+}
+
+// Executar ao carregar e ao redimensionar
+handleHintDownPosition()
+window.addEventListener('resize', handleHintDownPosition)
+
 //-------------------------------------// Renderiza tudo
 function renderList() {
   listEl.innerHTML = ""
@@ -348,12 +373,25 @@ const cerealWarnings = [
 //--------------------------------------------// Animação dos cerais a cair
 let positionIndex = 0
 const positions = []
-const leftLimit = bowlEl.clientWidth * 0.531
-const rightLimit = bowlEl.clientWidth * 0.763
+let leftLimit = bowlEl.clientWidth * 0.54
+let rightLimit = bowlEl.clientWidth * 0.76
+let bottomMultiplier = 0.82
+
+if (screen.width < 800) {
+  leftLimit = bowlEl.clientWidth * 0.75
+  rightLimit = bowlEl.clientWidth * 0.85
+} else if (screen.width < 1200) {
+  leftLimit = bowlEl.clientWidth * 0.7
+  rightLimit = bowlEl.clientWidth * 0.82
+} else if (screen.width < 1400) {
+  leftLimit = bowlEl.clientWidth * 0.68
+  rightLimit = bowlEl.clientWidth * 0.8
+}
+
 for (let p = leftLimit; p < rightLimit - 40; p += 30) {
   positions.push(p)
 }
-const stackHeights = new Array(positions.length).fill(bowlEl.clientHeight * 0.83)
+const stackHeights = new Array(positions.length).fill(bowlEl.clientHeight * bottomMultiplier)
 
 function addCerealToBowl(cereal) {
   assignUniqueShape(cereal)
@@ -447,11 +485,18 @@ function addCerealToBowl(cereal) {
 
   // Animate falling shapes
   const config = cereal.shape;
+  let scale = 1;
+  if (screen.width < 1600) scale = 0.85;
+  if (screen.width < 1200) scale = 0.7;
+  if (screen.width < 800) scale = 0.55;
+  const scaledSize = config.size * scale;
+
   const shapeCount = 2; // pieces per click
   for (let i = 0; i < shapeCount; i++) {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-    svg.setAttribute("width", config.size)
-    svg.setAttribute("height", config.size)
+    svg.setAttribute("width", scaledSize)
+    svg.setAttribute("height", scaledSize)
+    svg.setAttribute("viewBox", `0 0 ${config.size} ${config.size}`)
     svg.style.position = "absolute"
     svg.style.top = "-60px"
 
@@ -481,7 +526,7 @@ function addCerealToBowl(cereal) {
       if (y >= targetY) {
         y = targetY
         svg.style.top = y + "px"
-        stackHeights[columnIndex] -= config.size * 0.8
+        stackHeights[columnIndex] -= scaledSize * 0.8
 
         // bounce effect
         svg.animate(
