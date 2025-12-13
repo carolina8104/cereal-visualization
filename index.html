@@ -149,10 +149,13 @@
         <button class="buttontop" id="info-circle">ℹ</button>
         <button class="buttontop" id="resetFilters">↻</button>
       </div>
-      <h2 id="title"> 
-      <svg id="rotating-cereal" viewBox="0 0 75 75" width="20" height="20">
-        <path id="cereal-path" d="M 35.000 5.000 C 54.330 5.000 70.000 20.670 70.000 40.000 C 70.000 59.330 54.330 75.000 35.000 75.000 C 15.670 75.000 0.000 59.330 0.000 40.000 C 0.000 20.670 15.670 5.000 35.000 5.000 Z M 35.000 17.600 C 23.402 17.600 14.000 27.159 14.000 40.000 C 14.000 52.841 23.402 62.400 35.000 62.400 C 46.598 62.400 56.000 52.841 56.000 40.000 C 56.000 27.159 46.598 17.600 35.000 17.600 Z" fill="url(#G-gradient)"/>
-      </svg> Cereal Explorer</h2>
+      <span id="rotating-cereal-wrapper">
+        <span id="cereal-explorer-label">Cereal Explorer</span>
+        <svg id="rotating-cereal" viewBox="0 0 75 75" width="40" height="40" tabindex="0">
+          <path id="cereal-path" d="M 35.000 5.000 C 54.330 5.000 70.000 20.670 70.000 40.000 C 70.000 59.330 54.330 75.000 35.000 75.000 C 15.670 75.000 0.000 59.330 0.000 40.000 C 0.000 20.670 15.670 5.000 35.000 5.000 Z M 35.000 17.600 C 23.402 17.600 14.000 27.159 14.000 40.000 C 14.000 52.841 23.402 62.400 35.000 62.400 C 46.598 62.400 56.000 52.841 56.000 40.000 C 56.000 27.159 46.598 17.600 35.000 17.600 Z" fill="url(#G-gradient)"/>
+        </svg>
+      </span>
+      </h2>
       <div id="info">
         <div class="info-content">
           <h2 class="info-title">Information</h2>
@@ -221,5 +224,15 @@
 </div>
     <script type="module" src="js/main.js?v=2"></script>
     <script src="js/pageTransition.js?v=2"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var cereal = document.getElementById('rotating-cereal');
+        if (cereal) {
+          cereal.addEventListener('click', function() {
+            window.location.href = 'intro.html';
+          });
+        }
+      });
+    </script>
   </body>
 </html>

@@ -1,3 +1,6 @@
+#rotating-cereal-wrapper:hover #rotating-cereal {
+  animation-play-state: paused;
+}
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 body {
@@ -842,23 +845,61 @@ body.dragging * {
   display: none;
 }
 
-#title {
-  font-size: 2.3vh;
-  top: 5vh;
-  right: 14vh;
-  position: fixed;
-  font-weight: 300;
-}
-
-#filters:not(.hidden) ~ main #title {
+#filters:not(.hidden) ~ main #rotating-cereal {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
+
 #rotating-cereal {
-  margin-right: 0.2vh;
-  margin-top: 3px;
+  position: absolute;
+  top: -1vh;
+  right: 3vw;
   animation: rotate 2s linear infinite;
+  z-index: 10;
+}
+
+#rotating-cereal-wrapper {
+  position: absolute;
+  top: 5vh;
+  right: 3vw;
+  display: block;
+  width: 60px;
+  height: 60px;
+  z-index: 10;
+  overflow: visible;
+}
+
+#cereal-explorer-label {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 20%;
+  transform: translateY(-50%) translateX(0);
+  transition: opacity 0.4s cubic-bezier(0.4,0,0.2,1), transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  color: #111;
+  font-size: medium;
+  font-weight: 500;
+  pointer-events: none;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+#rotating-cereal-wrapper:hover #cereal-explorer-label,
+#rotating-cereal:focus ~ #cereal-explorer-label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(-9.5vw);
+}
+
+#rotating-cereal-wrapper:hover #rotating-cereal {
+  z-index: 2;
+}
+
+#rotating-cereal {
+  cursor:pointer;
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  cursor: pointer;
 }
 
 #rotating-cereal.spin-effect {
@@ -869,7 +910,6 @@ body.dragging * {
   width: 50vh;
   font-size: 0.9rem;
   margin-top: 1vh;
-
 }
 
 @keyframes rotate {
