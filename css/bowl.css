@@ -455,17 +455,15 @@ h3 {
 }
 
 #bowlEl {
-  width: 35vw;
-  height: 27vh;
-  min-width: 280px;
-  min-height: 200px;
-  aspect-ratio: 1.3 / 1;
-  border-bottom-left-radius: 200px;
-  border-bottom-right-radius: 200px;
+  width: 15rem;
+  height: auto;
+  aspect-ratio: 1.3 / 0.6;
+  border-bottom-left-radius: 11rem;
+  border-bottom-right-radius: 11rem;
   border-top: none;
-  position: relative;
-  left: 101vh;
-  top: 70vh;
+  position: fixed;
+  bottom: 3vh;
+  right: 18%;
   background: rgba(78, 75, 75, 0.5);
   z-index: 111;
   overflow: hidden; 
@@ -557,7 +555,7 @@ h3 {
 @media (max-width: 1400px) {
   #bowlEl {
     position: fixed;
-    right: 15%;
+    right: 18%;
     bottom: 3vh;
     left: auto;
     top: auto;
@@ -607,8 +605,9 @@ h3 {
   }
   
   #bowlEl {
-    right: 12%;
+    right: 18%;
     width: 33vw;
+    bottom: 3vh;
   }
 }
 
@@ -701,8 +700,11 @@ h3 {
   
   #bowlEl {
     width: 30vw;
-    height: 24vh;
+    height: auto;
     right: 10%;
+    border-bottom-left-radius: 6rem;
+    border-bottom-right-radius: 6rem;    
+    bottom: 3vh;  
   }
 }
 
@@ -734,9 +736,10 @@ h3 {
   }
   
   .graph {
-    width: 250px;
-    height: 187px;
-    margin-top: -1rem;
+    width: 300px;
+    height: 225px;
+    margin-top: 3rem;
+    scale: 0.9;
   }
   
   .top-row {
@@ -826,8 +829,10 @@ h3 {
   
   #bowlEl {
     width: 28vw;
-    height: 20vh;
-    right: 8%;
+    right: 18%;
+    border-bottom-left-radius: 4rem;
+    border-bottom-right-radius: 4rem;
+    bottom: 3vh;
   }
   
   .floatingAmount {
