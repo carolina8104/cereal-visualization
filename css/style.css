@@ -506,7 +506,7 @@ body.dragging * {
 
 .info-section {
   display: grid;
-  grid-template-columns: 0.7fr 1fr;
+  grid-template-columns: 1fr 1.3fr;
   gap: 5rem;
   margin-bottom: 40px;
 }
@@ -557,11 +557,17 @@ body.dragging * {
 }
 
 .info-diagram {
-  display: flex;
-  gap: 100px;
-  align-items: center;
   margin-bottom: 40px;
   padding: 20px 0;
+  text-align: center;
+}
+
+.info-image {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .cereal-shape {
@@ -861,8 +867,9 @@ body.dragging * {
 
 #textbox {
   width: 50vh;
-  font-size: 1.3rem;
+  font-size: 0.9rem;
   margin-top: 1vh;
+
 }
 
 @keyframes rotate {

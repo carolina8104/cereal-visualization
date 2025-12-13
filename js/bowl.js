@@ -94,6 +94,8 @@ function renderList() {
   const milkIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg")
   milkIcon.setAttribute("width", 36)
   milkIcon.setAttribute("height", 36)
+  milkIcon.setAttribute("viewBox", "0 0 36 44")
+  milkIcon.setAttribute("preserveAspectRatio", "xMidYMax meet")
   milkIcon.classList.add("shapeIcon")
 
   // Milk drop icon
@@ -138,6 +140,8 @@ function renderList() {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
     svg.setAttribute("width", c.shape.size)
     svg.setAttribute("height", c.shape.size)
+    svg.setAttribute("viewBox", `0 0 ${c.shape.size} ${c.shape.size + 18}`)
+    svg.setAttribute("preserveAspectRatio", "xMidYMax meet")
     svg.classList.add("shapeIcon")
 
     const p = document.createElementNS(svg.namespaceURI, "path")
