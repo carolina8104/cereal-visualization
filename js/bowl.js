@@ -74,6 +74,7 @@ let currentId = null
 let selectedCerealId = null
 
 const bowlEl = document.getElementById("bowlArea")
+const bowlContainer = document.getElementById("bowlEl")
 const caloriesEl = document.getElementById("calories")
 const proteinEl = document.getElementById("protein")
 const carbsEl = document.getElementById("carbs")
@@ -372,26 +373,43 @@ const cerealWarnings = [
 
 //--------------------------------------------// Animação dos cerais a cair
 let positionIndex = 0
-const positions = []
-let leftLimit = bowlEl.clientWidth * 0.54
-let rightLimit = bowlEl.clientWidth * 0.76
-let bottomMultiplier = 0.82
+let positions = []
+let stackHeights = []
 
-if (screen.width < 800) {
-  leftLimit = bowlEl.clientWidth * 0.75
-  rightLimit = bowlEl.clientWidth * 0.85
-} else if (screen.width < 1200) {
-  leftLimit = bowlEl.clientWidth * 0.7
-  rightLimit = bowlEl.clientWidth * 0.82
-} else if (screen.width < 1400) {
-  leftLimit = bowlEl.clientWidth * 0.68
-  rightLimit = bowlEl.clientWidth * 0.8
+function calculateBowlPositions() {
+  if (!bowlContainer) return
+  
+  const bowlRect = bowlContainer.getBoundingClientRect()
+  const bowlWidth = bowlRect.width
+  const bowlHeight = bowlRect.height
+  
+  // Calculate positions relative to the bowl
+  positions = []
+  const leftLimit = bowlWidth * 0.15
+  const rightLimit = bowlWidth * 0.85
+  const spacing = 30
+  
+  for (let p = leftLimit; p < rightLimit - spacing; p += spacing) {
+    positions.push(p)
+  }
+  
+  // Set stack heights relative to bowl bottom - adjust based on screen size
+  let bottomMultiplier = 0.7
+  if (window.innerWidth < 800) {
+    bottomMultiplier = 0.17
+  } else if (window.innerWidth < 1200) {
+    bottomMultiplier = 0.23
+  } else if (window.innerWidth < 1600) {
+    bottomMultiplier = 0.53
+  }
+  
+  const bottomOffset = bowlHeight * bottomMultiplier
+  stackHeights = new Array(positions.length).fill(bottomOffset)
 }
 
-for (let p = leftLimit; p < rightLimit - 40; p += 30) {
-  positions.push(p)
-}
-const stackHeights = new Array(positions.length).fill(bowlEl.clientHeight * bottomMultiplier)
+// Initialize and recalculate on resize
+calculateBowlPositions()
+window.addEventListener('resize', calculateBowlPositions)
 
 function addCerealToBowl(cereal) {
   assignUniqueShape(cereal)
@@ -486,19 +504,30 @@ function addCerealToBowl(cereal) {
   // Animate falling shapes
   const config = cereal.shape;
   let scale = 1;
-  if (screen.width < 1600) scale = 0.85;
-  if (screen.width < 1200) scale = 0.7;
-  if (screen.width < 800) scale = 0.55;
+  if (screen.width < 1600) scale = 0.8;
+  if (screen.width < 1200) scale = 0.65;
+  if (screen.width < 800) scale = 0.5;
   const scaledSize = config.size * scale;
 
   const shapeCount = 2; // pieces per click
   for (let i = 0; i < shapeCount; i++) {
+    // Recalculate positions in case of resize
+    if (positions.length === 0) calculateBowlPositions()
+    
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
     svg.setAttribute("width", scaledSize)
     svg.setAttribute("height", scaledSize)
     svg.setAttribute("viewBox", `0 0 ${config.size} ${config.size}`)
+    svg.classList.add("cerealParticle")
     svg.style.position = "absolute"
-    svg.style.top = "-60px"
+    
+    // Get bowl position relative to viewport
+    const bowlRect = bowlContainer.getBoundingClientRect()
+    const bowlAreaRect = bowlEl.getBoundingClientRect()
+    
+    // Calculate relative position
+    const bowlRelativeX = bowlRect.left - bowlAreaRect.left
+    const bowlRelativeY = bowlRect.top - bowlAreaRect.top
 
     const path = document.createElementNS(svg.namespaceURI, "path")
     path.setAttribute("d", config.path)
@@ -508,13 +537,13 @@ function addCerealToBowl(cereal) {
     bowlEl.appendChild(svg)
 
     const columnIndex = positionIndex % positions.length
-    let x = positions[columnIndex] + (Math.random() - 0.5) * 15
+    let x = bowlRelativeX + positions[columnIndex] + (Math.random() - 0.5) * 15
     positionIndex++
 
-    let y = 0
+    let y = -60 // Start from top of screen
     let rotation = Math.random() * 360
     const fallSpeed = 2 + Math.random() * 3
-    const targetY = stackHeights[columnIndex]
+    const targetY = bowlRelativeY + stackHeights[columnIndex]
 
     function animate() {
       y += fallSpeed
